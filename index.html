@@ -3,293 +3,302 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D Portfolio</title>
+    <title>Modern 3D Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
-        /* Reset some default styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
         }
 
         body {
-            font-family: 'Arial', sans-serif;
-            background: #121212;
-            color: white;
+            background: #0a0a0a;
+            color: #fff;
             overflow-x: hidden;
         }
 
-        a {
-            text-decoration: none;
-            color: inherit;
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 50px;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
         }
 
-        /* Hero Section */
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            justify-content: flex-end;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            position: relative;
+            transition: 0.3s;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #00ffff;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
         .hero {
             height: 100vh;
-            background: url('https://via.placeholder.com/1500') center/cover no-repeat;
             display: flex;
-            justify-content: center;
             align-items: center;
-            text-align: center;
+            justify-content: center;
             position: relative;
-            color: white;
-            padding: 50px;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 1;
         }
 
         .hero h1 {
             font-size: 4rem;
-            text-transform: uppercase;
-            letter-spacing: 5px;
-            animation: float 3s ease-in-out infinite;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #00ffff, #ff00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .hero p {
-            font-size: 1.5rem;
-            margin-top: 20px;
-            opacity: 0.8;
+            font-size: 1.2rem;
+            margin-bottom: 30px;
         }
 
         .cta-btn {
-            display: inline-block;
-            background: #e91e63;
-            color: white;
-            padding: 10px 20px;
-            font-size: 1.2rem;
-            margin-top: 30px;
-            border-radius: 5px;
-            transform: translateZ(0);
-            transition: transform 0.3s ease;
+            padding: 15px 40px;
+            background: linear-gradient(45deg, #00ffff, #ff00ff);
+            border: none;
+            border-radius: 30px;
+            color: #fff;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: 0.3s;
         }
 
         .cta-btn:hover {
-            transform: translateY(-5px) scale(1.1);
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
         }
 
-        /* Section Container */
-        .section {
+        section {
             padding: 100px 50px;
-            text-align: center;
+            min-height: 100vh;
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            margin: 50px;
         }
 
-        .section h2 {
+        .section-title {
             font-size: 2.5rem;
             margin-bottom: 50px;
+            text-align: center;
+            color: #00ffff;
         }
 
-        .section p {
-            font-size: 1.2rem;
-            opacity: 0.7;
-        }
-
-        /* Projects Section */
-        .projects {
+        .projects-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
-            padding: 50px;
         }
 
         .project-card {
-            background: #333;
-            border-radius: 10px;
-            overflow: hidden;
-            position: relative;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            transition: 0.3s;
+            cursor: pointer;
         }
 
         .project-card:hover {
-            transform: translateY(-10px) rotateX(5deg) rotateY(5deg);
+            transform: translateY(-10px);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
         }
 
-        .project-card img {
-            width: 100%;
-            height: auto;
-            object-fit: cover;
-            border-bottom: 2px solid #444;
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
         }
 
-        .project-card h3 {
-            font-size: 1.8rem;
+        .skill-item {
+            background: rgba(255, 255, 255, 0.1);
             padding: 20px;
-            background: #444;
-            margin: 0;
-            color: #fff;
-            text-transform: uppercase;
-        }
-
-        /* Skills Section */
-        .skills {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            gap: 40px;
-        }
-
-        .skill {
+            border-radius: 15px;
             text-align: center;
-            width: 150px;
+            transition: 0.3s;
         }
 
-        .skill i {
-            font-size: 3rem;
-            margin-bottom: 15px;
-            transition: transform 0.3s ease;
+        .skill-item:hover {
+            background: rgba(0, 255, 255, 0.1);
         }
 
-        .skill:hover i {
-            transform: rotate(20deg) scale(1.1);
-        }
-
-        /* About Me Section */
-        .about-me {
-            background: #1f1f1f;
-            padding: 80px 50px;
-        }
-
-        .about-me img {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            margin-bottom: 20px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
-        }
-
-        .about-me h3 {
-            font-size: 2rem;
-            margin-bottom: 10px;
-        }
-
-        .about-me p {
-            font-size: 1.2rem;
+        .about-content {
             max-width: 800px;
-            margin: auto;
+            margin: 0 auto;
+            line-height: 1.6;
         }
 
-        /* Contact Section */
         .contact-form {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-top: 30px;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
-        .contact-form input,
-        .contact-form textarea {
-            padding: 10px;
-            font-size: 1.1rem;
-            border: 1px solid #444;
-            background: #222;
-            color: white;
-            border-radius: 5px;
-            outline: none;
-            transition: border-color 0.3s ease;
+        .form-group {
+            margin-bottom: 20px;
         }
 
-        .contact-form input:focus,
-        .contact-form textarea:focus {
-            border-color: #e91e63;
-        }
-
-        .contact-form button {
-            padding: 10px 20px;
-            font-size: 1.2rem;
-            background: #e91e63;
-            color: white;
+        input, textarea {
+            width: 100%;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
             border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.3s ease;
+            border-radius: 10px;
+            color: #fff;
         }
 
-        .contact-form button:hover {
-            background: #d81b60;
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
         }
 
-        /* Animations */
         @keyframes float {
-            0% {
-                transform: translateY(0);
-            }
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
 
-            50% {
-                transform: translateY(-20px);
-            }
-
-            100% {
-                transform: translateY(0);
-            }
+        .floating {
+            animation: float 3s ease-in-out infinite;
         }
     </style>
 </head>
 <body>
-    <!-- Hero Section -->
-    <div class="hero">
-        <div>
-            <h1>Your Name</h1>
-            <p>Welcome to my portfolio. Explore my work and skills!</p>
-            <a href="#projects" class="cta-btn">View My Work</a>
+    <nav class="navbar">
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#projects">Projects</a>
+            <a href="#skills">Skills</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
         </div>
-    </div>
+    </nav>
 
-    <!-- Projects Section -->
-    <div id="projects" class="section projects">
-        <h2>My Projects</h2>
-        <div class="project-card">
-            <img src="https://via.placeholder.com/300" alt="Project 1">
-            <h3>Project 1</h3>
-        </div>
-        <div class="project-card">
-            <img src="https://via.placeholder.com/300" alt="Project 2">
-            <h3>Project 2</h3>
-        </div>
-        <div class="project-card">
-            <img src="https://via.placeholder.com/300" alt="Project 3">
-            <h3>Project 3</h3>
-        </div>
-    </div>
+    <div id="canvas-container"></div>
 
-    <!-- Skills Section -->
-    <div id="skills" class="section skills">
-        <h2>Skills</h2>
-        <div class="skill">
-            <i class="fas fa-code"></i>
-            <p>HTML/CSS</p>
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1 class="floating">Creative Developer</h1>
+            <p>Turning ideas into immersive digital experiences</p>
+            <button class="cta-btn">Explore My Work</button>
         </div>
-        <div class="skill">
-            <i class="fas fa-laptop-code"></i>
-            <p>JavaScript</p>
-        </div>
-        <div class="skill">
-            <i class="fas fa-database"></i>
-            <p>MySQL</p>
-        </div>
-    </div>
+    </section>
 
-    <!-- About Me Section -->
-    <div id="about" class="about-me section">
-        <img src="https://via.placeholder.com/200" alt="Your photo">
-        <h3>About Me</h3>
-        <p>I'm a passionate web developer with a love for building clean and interactive user interfaces. I enjoy exploring new technologies and constantly learning to improve my craft.</p>
-    </div>
-
-    <!-- Contact Section -->
-    <div id="contact" class="section">
-        <h2>Contact Me</h2>
-        <div class="contact-form">
-            <input type="text" placeholder="Your Name">
-            <input type="email" placeholder="Your Email">
-            <textarea rows="4" placeholder="Your Message"></textarea>
-            <button>Send Message</button>
+    <section id="projects">
+        <h2 class="section-title">Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <h3>3D Portfolio</h3>
+                <p>A modern portfolio with Three.js integration</p>
+            </div>
+            <!-- Add more project cards -->
         </div>
-    </div>
+    </section>
 
-    <!-- FontAwesome for icons -->
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <section id="skills">
+        <h2 class="section-title">Skills</h2>
+        <div class="skills-container">
+            <div class="skill-item">HTML5/CSS3</div>
+            <div class="skill-item">JavaScript</div>
+            <div class="skill-item">Three.js</div>
+            <!-- Add more skills -->
+        </div>
+    </section>
+
+    <section id="about">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-content">
+            <p>Experienced developer with passion for creating immersive web experiences...</p>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2 class="section-title">Contact</h2>
+        <form class="contact-form">
+            <div class="form-group">
+                <input type="text" placeholder="Name">
+            </div>
+            <div class="form-group">
+                <input type="email" placeholder="Email">
+            </div>
+            <div class="form-group">
+                <textarea placeholder="Message" rows="5"></textarea>
+            </div>
+            <button class="cta-btn">Send Message</button>
+        </form>
+    </section>
 
     <script>
-        // Smooth Scroll to Sections
+        // Three.js Scene Setup
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+        // Add 3D object
+        const geometry = new THREE.BoxGeometry(2, 2, 2);
+        const material = new THREE.MeshBasicMaterial({ 
+            color: 0x00ffff,
+            wireframe: true
+        });
+        const cube = new THREE.Mesh(geometry, material);
+        scene.add(cube);
+
+        camera.position.z = 5;
+
+        // Animation
+        function animate() {
+            requestAnimationFrame(animate);
+            cube.rotation.x += 0.01;
+            cube.rotation.y += 0.01;
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        // Resize handler
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -297,6 +306,31 @@
                     behavior: 'smooth'
                 });
             });
+        });
+
+        // Scroll animation
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            cube.rotation.z = scrolled * 0.005;
+        });
+
+        // Intersection Observer for section animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = 0;
+            section.style.transform = 'translateY(50px)';
+            section.style.transition = 'all 0.6s ease-out';
+            observer.observe(section);
         });
     </script>
 </body>
