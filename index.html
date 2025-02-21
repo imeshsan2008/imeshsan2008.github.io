@@ -1,67 +1,303 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Under Development</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      background: linear-gradient(to bottom, #2b5876, #4e4376);
-      color: #fff;
-      text-align: center;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Portfolio</title>
+    <style>
+        /* Reset some default styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    h1 {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    }
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #121212;
+            color: white;
+            overflow-x: hidden;
+        }
 
-    p {
-      font-size: 1.2rem;
-      margin-bottom: 2rem;
-    }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
 
-    .svg-container {
-      max-width: 400px;
-      width: 80%;
-      margin-bottom: 2rem;
-    }
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: url('https://via.placeholder.com/1500') center/cover no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            color: white;
+            padding: 50px;
+        }
 
-    footer {
-      font-size: 0.9rem;
-      color: #ccc;
-    }
+        .hero h1 {
+            font-size: 4rem;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            animation: float 3s ease-in-out infinite;
+        }
 
-    @media (max-width: 600px) {
-      h1 {
-        font-size: 2rem;
-      }
+        .hero p {
+            font-size: 1.5rem;
+            margin-top: 20px;
+            opacity: 0.8;
+        }
 
-      p {
-        font-size: 1rem;
-      }
-    }
-  </style>
+        .cta-btn {
+            display: inline-block;
+            background: #e91e63;
+            color: white;
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            margin-top: 30px;
+            border-radius: 5px;
+            transform: translateZ(0);
+            transition: transform 0.3s ease;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-5px) scale(1.1);
+        }
+
+        /* Section Container */
+        .section {
+            padding: 100px 50px;
+            text-align: center;
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+        }
+
+        .section p {
+            font-size: 1.2rem;
+            opacity: 0.7;
+        }
+
+        /* Projects Section */
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            padding: 50px;
+        }
+
+        .project-card {
+            background: #333;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px) rotateX(5deg) rotateY(5deg);
+        }
+
+        .project-card img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-bottom: 2px solid #444;
+        }
+
+        .project-card h3 {
+            font-size: 1.8rem;
+            padding: 20px;
+            background: #444;
+            margin: 0;
+            color: #fff;
+            text-transform: uppercase;
+        }
+
+        /* Skills Section */
+        .skills {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .skill {
+            text-align: center;
+            width: 150px;
+        }
+
+        .skill i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .skill:hover i {
+            transform: rotate(20deg) scale(1.1);
+        }
+
+        /* About Me Section */
+        .about-me {
+            background: #1f1f1f;
+            padding: 80px 50px;
+        }
+
+        .about-me img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .about-me h3 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .about-me p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: auto;
+        }
+
+        /* Contact Section */
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            padding: 10px;
+            font-size: 1.1rem;
+            border: 1px solid #444;
+            background: #222;
+            color: white;
+            border-radius: 5px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: #e91e63;
+        }
+
+        .contact-form button {
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            background: #e91e63;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .contact-form button:hover {
+            background: #d81b60;
+        }
+
+        /* Animations */
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
+        }
+    </style>
 </head>
 <body>
-  <h1>We're Working on It!</h1>
-  <p>This page is under development. Stay tuned for updates!</p>
-  <div class="svg-container">
-    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#fff" stroke-width="2">
-      <circle cx="50" cy="50" r="45" stroke-dasharray="5,5" />
-      <path d="M30 70 L50 30 L70 70 Z" fill="#fff" />
-    </svg>
-  </div>
-  <footer>
-    &copy; 2024. All rights reserved.
-  </footer>
+    <!-- Hero Section -->
+    <div class="hero">
+        <div>
+            <h1>Your Name</h1>
+            <p>Welcome to my portfolio. Explore my work and skills!</p>
+            <a href="#projects" class="cta-btn">View My Work</a>
+        </div>
+    </div>
+
+    <!-- Projects Section -->
+    <div id="projects" class="section projects">
+        <h2>My Projects</h2>
+        <div class="project-card">
+            <img src="https://via.placeholder.com/300" alt="Project 1">
+            <h3>Project 1</h3>
+        </div>
+        <div class="project-card">
+            <img src="https://via.placeholder.com/300" alt="Project 2">
+            <h3>Project 2</h3>
+        </div>
+        <div class="project-card">
+            <img src="https://via.placeholder.com/300" alt="Project 3">
+            <h3>Project 3</h3>
+        </div>
+    </div>
+
+    <!-- Skills Section -->
+    <div id="skills" class="section skills">
+        <h2>Skills</h2>
+        <div class="skill">
+            <i class="fas fa-code"></i>
+            <p>HTML/CSS</p>
+        </div>
+        <div class="skill">
+            <i class="fas fa-laptop-code"></i>
+            <p>JavaScript</p>
+        </div>
+        <div class="skill">
+            <i class="fas fa-database"></i>
+            <p>MySQL</p>
+        </div>
+    </div>
+
+    <!-- About Me Section -->
+    <div id="about" class="about-me section">
+        <img src="https://via.placeholder.com/200" alt="Your photo">
+        <h3>About Me</h3>
+        <p>I'm a passionate web developer with a love for building clean and interactive user interfaces. I enjoy exploring new technologies and constantly learning to improve my craft.</p>
+    </div>
+
+    <!-- Contact Section -->
+    <div id="contact" class="section">
+        <h2>Contact Me</h2>
+        <div class="contact-form">
+            <input type="text" placeholder="Your Name">
+            <input type="email" placeholder="Your Email">
+            <textarea rows="4" placeholder="Your Message"></textarea>
+            <button>Send Message</button>
+        </div>
+    </div>
+
+    <!-- FontAwesome for icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+    <script>
+        // Smooth Scroll to Sections
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
 </body>
 </html>
