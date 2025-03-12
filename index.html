@@ -1,102 +1,153 @@
-/* Resetting margin and padding */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Under Construction</title>
+    <style>
+        /* Resetting margin and padding */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #f4f4f9;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #333;
-    overflow: hidden;
-    background: linear-gradient(135deg, #6b7b8c, #333);
-}
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f9;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #333;
+            overflow: hidden;
+            background: linear-gradient(135deg, #6b7b8c, #333);
+            transition: background-color 0.5s ease;
+        }
 
-.container {
-    text-align: center;
-    perspective: 1200px;
-}
+        .container {
+            text-align: center;
+            perspective: 1200px;
+        }
 
-.wrapper {
-    width: 100%;
-    max-width: 400px;
-    padding: 20px;
-    background-color: rgba(0, 0, 0, 0.6);
-    border-radius: 10px;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
-    color: #fff;
-}
+        .wrapper {
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+            color: #fff;
+            position: relative;
+            animation: rotateWrapper 15s infinite linear;
+        }
 
-.construction-text {
-    font-size: 36px;
-    font-weight: bold;
-    color: #ffcc00;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    animation: rotateText 5s infinite linear;
-}
+        .construction-text {
+            font-size: 36px;
+            font-weight: bold;
+            color: #ffcc00;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: rotateText 5s infinite linear;
+        }
 
-/* Smooth 3D effect */
-@keyframes rotateText {
-    0% {
-        transform: rotateY(0deg);
-    }
-    50% {
-        transform: rotateY(180deg);
-    }
-    100% {
-        transform: rotateY(360deg);
-    }
-}
+        /* Smooth 3D effect */
+        @keyframes rotateText {
+            0% {
+                transform: rotateY(0deg);
+            }
+            50% {
+                transform: rotateY(180deg);
+            }
+            100% {
+                transform: rotateY(360deg);
+            }
+        }
 
-.message {
-    margin-top: 15px;
-    font-size: 18px;
-    color: #ddd;
-    line-height: 1.5;
-}
+        /* Wrapper rotation */
+        @keyframes rotateWrapper {
+            0% {
+                transform: rotateY(0deg);
+            }
+            100% {
+                transform: rotateY(360deg);
+            }
+        }
 
-.cta-button {
-    margin-top: 20px;
-    padding: 12px 25px;
-    background-color: #ffcc00;
-    color: #333;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
+        .message {
+            margin-top: 15px;
+            font-size: 18px;
+            color: #ddd;
+            line-height: 1.5;
+        }
 
-.cta-button:hover {
-    background-color: #e5a800;
-    transition: background-color 0.3s ease;
-}
+        .cta-button {
+            margin-top: 20px;
+            padding: 12px 25px;
+            background-color: #ffcc00;
+            color: #333;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
 
-/* Animation for wrapper rotation */
-@keyframes rotateWrapper {
-    0% {
-        transform: rotateY(0deg);
-    }
-    100% {
-        transform: rotateY(360deg);
-    }
-}
+        .cta-button:hover {
+            background-color: #e5a800;
+            transform: scale(1.1);
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
 
-/* Responsiveness */
-@media (max-width: 480px) {
-    .construction-text {
-        font-size: 28px;
-    }
-    .message {
-        font-size: 16px;
-    }
-    .cta-button {
-        padding: 10px 20px;
-    }
-}
+        /* Responsiveness */
+        @media (max-width: 480px) {
+            .construction-text {
+                font-size: 28px;
+            }
+            .message {
+                font-size: 16px;
+            }
+            .cta-button {
+                padding: 10px 20px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="wrapper">
+            <div class="construction-text">Under Construction</div>
+            <p class="message">We are working hard to bring you a better experience. Please check back soon.</p>
+            <button class="cta-button" id="ctaButton">Contact Support</button>
+            <p id="interactiveMessage" class="message"></p>
+        </div>
+    </div>
+
+    <script>
+        // Get DOM elements
+        const ctaButton = document.getElementById('ctaButton');
+        const interactiveMessage = document.getElementById('interactiveMessage');
+
+        // Interactivity: Show a message when button is clicked
+        ctaButton.addEventListener('click', function () {
+            interactiveMessage.textContent = 'Thank you for reaching out! We will get back to you shortly.';
+            interactiveMessage.style.color = '#00cc99';
+            setTimeout(() => {
+                interactiveMessage.textContent = ''; // Clear message after 5 seconds
+            }, 5000);
+        });
+
+        // Background color change on hover over the button
+        ctaButton.addEventListener('mouseenter', function () {
+            document.body.style.backgroundColor = '#4e5d67'; // Change background color when hovering over the button
+        });
+
+        ctaButton.addEventListener('mouseleave', function () {
+            document.body.style.backgroundColor = '#333'; // Revert back to original background color
+        });
+    </script>
+
+</body>
+</html>
