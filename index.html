@@ -14,7 +14,7 @@
 
         body {
             font-family: 'Roboto', sans-serif;
-            background: linear-gradient(135deg, #2c3e50, #34495e);
+            background: linear-gradient(135deg, #8B0000, #660000);
             height: 100vh;
             display: flex;
             justify-content: center;
@@ -36,27 +36,27 @@
         .logo {
             font-size: 48px;
             font-weight: bold;
-            color: #ffcc00;
+            color: #ff6666; /* Dark red logo color */
             margin-bottom: 20px;
         }
 
         .construction-text {
             font-size: 32px;
             font-weight: bold;
-            color: #ffcc00;
+            color: #ff6666; /* Dark red text color */
             text-transform: uppercase;
             margin-bottom: 20px;
         }
 
         .message {
             font-size: 18px;
-            color: #ccc;
+            color: #ddd;
             margin-bottom: 30px;
         }
 
         .cta-button {
             padding: 12px 25px;
-            background-color: #ffcc00;
+            background-color: #ff6666;
             color: #333;
             border: none;
             border-radius: 5px;
@@ -66,7 +66,7 @@
         }
 
         .cta-button:hover {
-            background-color: #e5a800;
+            background-color: #e55c5c;
             transform: scale(1.1);
             transition: background-color 0.3s ease, transform 0.3s ease;
         }
@@ -75,6 +75,12 @@
             font-size: 14px;
             margin-top: 20px;
             color: #ccc;
+        }
+
+        .contact-info a {
+            color: #ff6666;
+            text-decoration: none;
+            font-weight: bold;
         }
 
         /* Responsiveness */
@@ -99,7 +105,7 @@
 
     <div class="container">
         <!-- Logo or initials here -->
-        <div class="logo">YourLogo</div>
+        <div class="logo">VenomDevil</div>
 
         <!-- Text to indicate page status -->
         <div class="construction-text">Under Construction</div>
@@ -108,9 +114,9 @@
         <!-- Call to action button -->
         <button class="cta-button" id="ctaButton">Contact Me</button>
 
-        <!-- Contact information for reachout -->
+        <!-- WhatsApp contact information -->
         <div class="contact-info">
-            <p>Email me at: <a href="mailto:your.email@example.com" style="color: #ffcc00; text-decoration: none;">your.email@example.com</a></p>
+            <p>Reach me on WhatsApp: <a href="https://wa.me/94768902513" target="_blank">+94768902513</a></p>
         </div>
     </div>
 
@@ -125,11 +131,11 @@
 
         // Optional: Smooth background transition on hover over the CTA button
         ctaButton.addEventListener('mouseenter', function () {
-            document.body.style.backgroundColor = '#4e5d67'; // Change background color when hovering over the button
+            document.body.style.backgroundColor = '#5f0b0b'; // Change background color when hovering over the button
         });
 
         ctaButton.addEventListener('mouseleave', function () {
-            document.body.style.backgroundColor = '#34495e'; // Revert back to original background color
+            document.body.style.backgroundColor = '#660000'; // Revert back to original background color
         });
     </script>
 
