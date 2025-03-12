@@ -1,53 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Under Construction</title>
-</head>
-    <style>
-        * {
+/* Resetting margin and padding */
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f4f9;
     height: 100vh;
-    background: #333;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: white;
+    color: #333;
     overflow: hidden;
+    background: linear-gradient(135deg, #6b7b8c, #333);
 }
 
 .container {
-    perspective: 1000px;
+    text-align: center;
+    perspective: 1200px;
 }
 
 .wrapper {
-    width: 300px;
-    height: 100px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    animation: rotate 5s infinite linear;
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+    color: #fff;
 }
 
 .construction-text {
-    font-size: 32px;
+    font-size: 36px;
     font-weight: bold;
     color: #ffcc00;
     text-transform: uppercase;
-    letter-spacing: 4px;
-    transform: rotateY(0deg);
-    animation: 3dAnimation 5s infinite;
+    letter-spacing: 2px;
+    animation: rotateText 5s infinite linear;
 }
 
-/* 3D effect animation */
-@keyframes 3dAnimation {
+/* Smooth 3D effect */
+@keyframes rotateText {
     0% {
         transform: rotateY(0deg);
     }
@@ -59,7 +54,32 @@ body {
     }
 }
 
-@keyframes rotate {
+.message {
+    margin-top: 15px;
+    font-size: 18px;
+    color: #ddd;
+    line-height: 1.5;
+}
+
+.cta-button {
+    margin-top: 20px;
+    padding: 12px 25px;
+    background-color: #ffcc00;
+    color: #333;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+    background-color: #e5a800;
+    transition: background-color 0.3s ease;
+}
+
+/* Animation for wrapper rotation */
+@keyframes rotateWrapper {
     0% {
         transform: rotateY(0deg);
     }
@@ -68,15 +88,15 @@ body {
     }
 }
 
-    </style>
-<body>
-
-    <div class="container">
-        <div class="wrapper">
-            <div class="construction-text">Under Construction</div>
-        </div>
-    </div>
-
-    <script src="script.js"></script>
-</body>
-</html>
+/* Responsiveness */
+@media (max-width: 480px) {
+    .construction-text {
+        font-size: 28px;
+    }
+    .message {
+        font-size: 16px;
+    }
+    .cta-button {
+        padding: 10px 20px;
+    }
+}
