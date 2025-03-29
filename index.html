@@ -3,58 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio - Under Construction</title>
+    <title>VenomDevil Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Resetting margin and padding */
+        /* Reset and Base Styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            scroll-behavior: smooth;
         }
 
         body {
             font-family: 'Roboto', sans-serif;
-background: linear-gradient(135deg, #000000, #2c2c2c);
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             color: #fff;
-            text-align: center;
-            overflow: hidden;
+            background: #121212;
+            overflow-x: hidden;
         }
 
-        .container {
-            max-width: 500px;
-            width: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            border-radius: 10px;
-            padding: 40px 20px;
-            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
+        section {
+            min-height: 100vh;
+            padding: 80px 10%;
+            position: relative;
         }
 
-        .logo {
-            font-size: 48px;
-            font-weight: bold;
-            color: #ff6666; /* Dark red logo color */
-            margin-bottom: 20px;
-        }
-
-        .construction-text {
-            font-size: 32px;
-            font-weight: bold;
-            color: #ff6666; /* Dark red text color */
-            text-transform: uppercase;
-            margin-bottom: 20px;
-        }
-
-        .message {
-            font-size: 18px;
-            color: #ddd;
+        h2 {
+            font-size: 2.5rem;
             margin-bottom: 30px;
+            color: #ff6666;
+            position: relative;
+            display: inline-block;
         }
 
-        .cta-button {
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: #ff6666;
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #ddd;
+            margin-bottom: 20px;
+        }
+
+        .btn {
             padding: 12px 25px;
             background-color: #ff6666;
             color: #333;
@@ -62,82 +60,693 @@ background: linear-gradient(135deg, #000000, #2c2c2c);
             border-radius: 5px;
             font-size: 16px;
             cursor: pointer;
+            display: inline-block;
+            text-decoration: none;
+            font-weight: bold;
             transition: background-color 0.3s ease, transform 0.3s ease;
         }
 
-        .cta-button:hover {
+        .btn:hover {
             background-color: #e55c5c;
-            transform: scale(1.1);
-            transition: background-color 0.3s ease, transform 0.3s ease;
+            transform: scale(1.05);
+        }
+
+        /* Navbar Styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 10%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: 0.3s ease;
+        }
+
+        header.sticky {
+            padding: 10px 10%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #ff6666;
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+        }
+
+        .nav-menu li {
+            list-style: none;
+            margin-left: 30px;
+        }
+
+        .nav-menu li a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 500;
+            transition: 0.3s ease;
+        }
+
+        .nav-menu li a:hover,
+        .nav-menu li a.active {
+            color: #ff6666;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+
+        .bar {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px auto;
+            transition: all 0.3s ease;
+            background-color: #fff;
+        }
+
+        /* Home Section */
+        #home {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: linear-gradient(135deg, #000000, #2c2c2c);
+            padding-top: 120px;
+        }
+
+        .home-content {
+            max-width: 600px;
+        }
+
+        .home-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+
+        .home-content h1 span {
+            color: #ff6666;
+        }
+
+        .home-content h3 {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            color: #ddd;
+        }
+
+        .profile-pic {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            border: 5px solid #ff6666;
+            object-fit: cover;
+            box-shadow: 0 0 20px rgba(255, 102, 102, 0.5);
+        }
+
+        .social-icons {
+            margin-top: 30px;
+        }
+
+        .social-icons a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: #333;
+            border-radius: 50%;
+            margin-right: 15px;
+            text-align: center;
+            line-height: 40px;
+            color: #fff;
+            font-size: 18px;
+            transition: 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            background: #ff6666;
+            transform: translateY(-5px);
+        }
+
+        /* About Section */
+        #about {
+            background: #161616;
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .skills-bars {
+            flex: 1;
+        }
+
+        /* Skills Section */
+        #skills {
+            background: #1d1d1d;
+        }
+
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+
+        .skill-card {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            padding: 30px;
+            width: 300px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .skill-icon {
+            font-size: 50px;
+            margin-bottom: 20px;
+            color: #ff6666;
+        }
+
+        .skill-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        /* Projects Section */
+        #projects {
+            background: #161616;
+        }
+
+        .projects-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .project-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .project-content {
+            padding: 20px;
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .project-tech {
+            color: #ff6666;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        /* Contact Section */
+        #contact {
+            background: linear-gradient(135deg, #1a1a1a, #2c2c2c);
+        }
+
+        .contact-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 50px;
         }
 
         .contact-info {
+            flex: 1;
+        }
+
+        .contact-info-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .contact-info-icon {
+            width: 50px;
+            height: 50px;
+            background: #ff6666;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            margin-right: 20px;
+        }
+
+        .contact-form {
+            flex: 1;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 30px;
+            border-radius: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 16px;
+        }
+
+        .form-control:focus {
+            outline: 1px solid #ff6666;
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background: #000;
+            padding: 20px 10%;
+            text-align: center;
+        }
+
+        .footer-text {
             font-size: 14px;
-            margin-top: 20px;
-            color: #ccc;
+            color: #888;
         }
 
-        .contact-info a {
-            color: #ff6666;
-            text-decoration: none;
-            font-weight: bold;
+        /* Animation Classes */
+        .hidden {
+            opacity: 0;
+            filter: blur(5px);
+            transform: translateX(-100%);
+            transition: all 1s;
         }
 
-        /* Responsiveness */
-        @media (max-width: 480px) {
-            .logo {
-                font-size: 36px;
+        .show {
+            opacity: 1;
+            filter: blur(0);
+            transform: translateX(0);
+        }
+
+        .hidden-right {
+            opacity: 0;
+            filter: blur(5px);
+            transform: translateX(100%);
+            transition: all 1s;
+        }
+
+        .hidden-up {
+            opacity: 0;
+            filter: blur(5px);
+            transform: translateY(100%);
+            transition: all 1s;
+        }
+
+        /* Add delays for cascade effect */
+        .delay-1 {
+            transition-delay: 200ms;
+        }
+
+        .delay-2 {
+            transition-delay: 400ms;
+        }
+
+        .delay-3 {
+            transition-delay: 600ms;
+        }
+
+        .delay-4 {
+            transition-delay: 800ms;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            h2 {
+                font-size: 2rem;
             }
-            .construction-text {
-                font-size: 24px;
+
+            .home-content h1 {
+                font-size: 2.5rem;
             }
-            .message {
-                font-size: 16px;
+
+            .home-content h3 {
+                font-size: 1.5rem;
             }
-            .cta-button {
-                padding: 10px 20px;
+
+            .about-content,
+            .contact-container {
+                flex-direction: column;
+            }
+
+            #home {
+                flex-direction: column-reverse;
+                text-align: center;
+                padding-top: 150px;
+            }
+
+            .profile-pic {
+                margin-bottom: 30px;
+            }
+
+            .social-icons {
+                justify-content: center;
+                display: flex;
             }
         }
 
+        @media (max-width: 768px) {
+            section {
+                padding: 80px 5%;
+            }
+
+            header {
+                padding: 20px 5%;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .hamburger.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active .bar:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+
+            .hamburger.active .bar:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                gap: 0;
+                flex-direction: column;
+                background-color: rgba(0, 0, 0, 0.95);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+                padding: 20px 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-menu li {
+                margin: 16px 0;
+            }
+        }
     </style>
 </head>
 <body>
-
-    <div class="container">
-        <!-- Logo or initials here -->
-        <div class="logo">VenomDevil</div>
-
-        <!-- Text to indicate page status -->
-        <div class="construction-text">Under Construction</div>
-        <p class="message">I'm working hard to build an amazing portfolio. Stay tuned for exciting updates!</p>
-
-        <!-- Call to action button -->
-<!--         <button class="cta-button" id="ctaButton">Contact Me</button> -->
-
-        <!-- WhatsApp contact information -->
-        <div class="contact-info">
-            <p>Reach me on WhatsApp: <a href="https://wa.me/94768902513" target="_blank">+94768902513</a></p>
+    <!-- Header / Navigation -->
+    <header>
+        <a href="#" class="logo">VenomDevil</a>
+        <ul class="nav-menu">
+            <li><a href="#home" class="active">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="hamburger">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
         </div>
-    </div>
+    </header>
 
+    <!-- Home Section -->
+    <section id="home">
+        <div class="home-content hidden">
+            <h1>Hi, I'm <span>VenomDevil</span></h1>
+            <h3>Web Developer & Designer</h3>
+            <p>Passionate about creating stunning, functional websites that deliver exceptional user experiences. Let's bring your ideas to life!</p>
+            <a href="#contact" class="btn">Contact Me</a>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="https://wa.me/94768902513"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+        <img src="/api/placeholder/300/300" alt="Profile Picture" class="profile-pic hidden-right">
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2 class="hidden">About Me</h2>
+        <div class="about-content">
+            <div class="about-text hidden">
+                <p>I am a passionate web developer with a strong eye for design and attention to detail. With expertise in front-end and back-end technologies, I create responsive and user-friendly websites that not only look great but also perform exceptionally well.</p>
+                <p>My journey in web development started 5 years ago, and since then, I've worked on numerous projects ranging from simple landing pages to complex web applications. I believe in continuous learning and staying updated with the latest trends and technologies in the industry.</p>
+                <p>When I'm not coding, you can find me exploring new technologies, contributing to open-source projects, or simply enjoying a cup of coffee while brainstorming new ideas.</p>
+                <a href="#" class="btn">Download CV</a>
+            </div>
+            <div class="skills-bars hidden-right">
+                <div class="skill-progress">
+                    <h3>Professional Background</h3>
+                    <p>• Freelance Web Developer (2020-Present)<br>
+                    • Senior Developer at TechCorp (2018-2020)<br>
+                    • Junior Developer at WebSolutions (2016-2018)</p>
+                    
+                    <h3>Education</h3>
+                    <p>• BSc in Computer Science (2016)<br>
+                    • Full-Stack Web Development Certification (2017)<br>
+                    • UX/UI Design Masterclass (2019)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <h2 class="hidden">My Skills</h2>
+        <div class="skills-container">
+            <div class="skill-card hidden delay-1">
+                <div class="skill-icon">
+                    <i class="fas fa-code"></i>
+                </div>
+                <h3 class="skill-title">Frontend Development</h3>
+                <p>Expert in HTML5, CSS3, JavaScript, React, Vue.js, and responsive design principles. Creating beautiful and functional user interfaces is my passion.</p>
+            </div>
+            <div class="skill-card hidden delay-2">
+                <div class="skill-icon">
+                    <i class="fas fa-server"></i>
+                </div>
+                <h3 class="skill-title">Backend Development</h3>
+                <p>Proficient in Node.js, Express, PHP, Python, and database management with MongoDB and MySQL. Building robust server-side applications.</p>
+            </div>
+            <div class="skill-card hidden delay-3">
+                <div class="skill-icon">
+                    <i class="fas fa-paint-brush"></i>
+                </div>
+                <h3 class="skill-title">UI/UX Design</h3>
+                <p>Skilled in creating user-centered designs with tools like Figma, Adobe XD, and Photoshop. Focused on creating intuitive and engaging experiences.</p>
+            </div>
+            <div class="skill-card hidden delay-4">
+                <div class="skill-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <h3 class="skill-title">Mobile Development</h3>
+                <p>Experience with React Native and Flutter for cross-platform mobile app development. Building responsive applications for iOS and Android.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <h2 class="hidden">Recent Projects</h2>
+        <div class="projects-container">
+            <div class="project-card hidden delay-1">
+                <img src="/api/placeholder/400/200" alt="Project 1" class="project-img">
+                <div class="project-content">
+                    <h3 class="project-title">E-Commerce Platform</h3>
+                    <p class="project-tech">React, Node.js, MongoDB</p>
+                    <p>A fully-functional e-commerce platform with product management, cart functionality, and secure payment processing.</p>
+                    <a href="#" class="btn">View Project</a>
+                </div>
+            </div>
+            <div class="project-card hidden delay-2">
+                <img src="/api/placeholder/400/200" alt="Project 2" class="project-img">
+                <div class="project-content">
+                    <h3 class="project-title">Portfolio Website</h3>
+                    <p class="project-tech">HTML, CSS, JavaScript</p>
+                    <p>A creative portfolio website with smooth animations and responsive design for a digital artist.</p>
+                    <a href="#" class="btn">View Project</a>
+                </div>
+            </div>
+            <div class="project-card hidden delay-3">
+                <img src="/api/placeholder/400/200" alt="Project 3" class="project-img">
+                <div class="project-content">
+                    <h3 class="project-title">Task Management App</h3>
+                    <p class="project-tech">Vue.js, Firebase</p>
+                    <p>A collaborative task management application with real-time updates, user authentication, and team features.</p>
+                    <a href="#" class="btn">View Project</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2 class="hidden">Get In Touch</h2>
+        <div class="contact-container">
+            <div class="contact-info hidden">
+                <div class="contact-info-item">
+                    <div class="contact-info-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div>
+                        <h3>Location</h3>
+                        <p>Colombo, Sri Lanka</p>
+                    </div>
+                </div>
+                <div class="contact-info-item">
+                    <div class="contact-info-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div>
+                        <h3>Email</h3>
+                        <p>contact@venomdevil.com</p>
+                    </div>
+                </div>
+                <div class="contact-info-item">
+                    <div class="contact-info-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div>
+                        <h3>WhatsApp</h3>
+                        <p><a href="https://wa.me/94768902513" style="color: #ddd; text-decoration: none;">+94 768 902 513</a></p>
+                    </div>
+                </div>
+            </div>
+            <form class="contact-form hidden-right">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Your Name">
+                </div>
+                <div class="form-group">
+                    <input type="email" class="form-control" placeholder="Your Email">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Subject">
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control" placeholder="Your Message"></textarea>
+                </div>
+                <button type="submit" class="btn">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p class="footer-text">© 2025 VenomDevil. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Scripts -->
     <script>
-        // Get the button element
-        const ctaButton = document.getElementById('ctaButton');
+        // Mobile Menu Toggle
+        const hamburger = document.querySelector(".hamburger");
+        const navMenu = document.querySelector(".nav-menu");
+        const navLinks = document.querySelectorAll(".nav-menu li a");
 
-        // Interactivity: Show alert message when button is clicked
-        ctaButton.addEventListener('click', function () {
-            alert('Thank you for reaching out! I will get back to you shortly.');
+        hamburger.addEventListener("click", () => {
+            hamburger.classList.toggle("active");
+            navMenu.classList.toggle("active");
         });
 
-        // Optional: Smooth background transition on hover over the CTA button
-        ctaButton.addEventListener('mouseenter', function () {
-            document.body.style.backgroundColor = '#5f0b0b'; // Change background color when hovering over the button
+        navLinks.forEach(link => {
+            link.addEventListener("click", () => {
+                hamburger.classList.remove("active");
+                navMenu.classList.remove("active");
+            });
         });
 
-        ctaButton.addEventListener('mouseleave', function () {
-            document.body.style.backgroundColor = '#660000'; // Revert back to original background color
+        // Sticky Header
+        window.addEventListener("scroll", function() {
+            const header = document.querySelector("header");
+            header.classList.toggle("sticky", window.scrollY > 0);
         });
+
+        // Navigation Active Link
+        const sections = document.querySelectorAll('section');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (scrollY >= (sectionTop - sectionHeight / 3)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').substring(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Scroll Animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                } else {
+                    // Uncomment to reset animations when element is out of view
+                    // entry.target.classList.remove('show');
+                }
+            });
+        });
+
+        const hiddenElements = document.querySelectorAll('.hidden, .hidden-right, .hidden-up');
+        hiddenElements.forEach((el) => observer.observe(el));
     </script>
-
 </body>
 </html>
