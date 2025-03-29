@@ -6,70 +6,81 @@
     <title>Portfolio Under Construction</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        /* Your provided CSS goes here */
-        /* [Paste all the CSS you provided above] */
-
-        /* Additional styles specific to construction page */
-        .construction-container {
-            min-height: 100vh;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+        body {
+            background: #1e1e2e;
+            color: #fff;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 20px;
+            height: 100vh;
+            overflow: hidden;
         }
-
+        .construction-container {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease-out forwards;
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
         .construction-icon {
-            font-size: 80px;
-            color: #ff6666;
-            margin-bottom: 30px;
-        }
-
-        .construction-title {
-            font-size: 3rem;
+            width: 120px;
+            height: 120px;
             margin-bottom: 20px;
         }
-
+        .construction-title {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
         .construction-text {
             max-width: 600px;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            font-size: 1.2rem;
+            color: #fff;
+            background: linear-gradient(135deg, #ff7eb3, #ff3e6b);
+            border-radius: 8px;
+            text-decoration: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 5px 15px rgba(255, 62, 107, 0.6);
         }
     </style>
 </head>
 <body>
-    <header>
-        <a href="#" class="logo">Portfolio</a>
-        <div class="hamburger">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-        </div>
-        <ul class="nav-menu">
-            <li><a href="#" class="active">Home</a></li>
-        </ul>
-    </header>
-
     <section class="construction-container">
-        <div class="construction-icon">🚧</div>
+        <svg class="construction-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="32" cy="32" r="30" stroke="#ff3e6b" stroke-width="4"/>
+            <rect x="28" y="18" width="8" height="20" fill="#ff7eb3"/>
+            <rect x="28" y="40" width="8" height="6" fill="#ff3e6b"/>
+        </svg>
         <h2 class="construction-title">Under Construction</h2>
         <p class="construction-text">
-            My portfolio is currently being built. Please check back soon to see my projects, skills, and more!
+            My portfolio is currently being built. Stay tuned for amazing projects and updates!
         </p>
         <a href="mailto:your@email.com" class="btn">Contact Me</a>
     </section>
-
-    <footer>
-        <p class="footer-text">&copy; 2025 Your Name. All rights reserved.</p>
-    </footer>
-
-    <script>
-        const hamburger = document.querySelector('.hamburger');
-        const navMenu = document.querySelector('.nav-menu');
-
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            navMenu.classList.toggle('active');
-        });
-    </script>
 </body>
 </html>
