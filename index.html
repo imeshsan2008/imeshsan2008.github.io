@@ -1,86 +1,296 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio Under Construction</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Roboto', sans-serif;
-        }
-        body {
-            background: #1e1e2e;
-            color: #fff;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            height: 100vh;
-            overflow: hidden;
-        }
-        .construction-container {
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 1s ease-out forwards;
-        }
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        .construction-icon {
-            width: 120px;
-            height: 120px;
-            margin-bottom: 20px;
-        }
-        .construction-title {
-            font-size: 3rem;
-            margin-bottom: 10px;
-        }
-        .construction-text {
-            max-width: 600px;
-            margin-bottom: 20px;
-            font-size: 1.2rem;
-            opacity: 0.8;
-        }
-        .btn {
-            display: inline-block;
-            padding: 12px 24px;
-            font-size: 1.2rem;
-            color: #fff;
-            background: linear-gradient(135deg, #ff7eb3, #ff3e6b);
-            border-radius: 8px;
-            text-decoration: none;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0px 5px 15px rgba(255, 62, 107, 0.6);
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Imesh Sandeepa - Portfolio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #0d0d0d;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    header {
+      width: 100%;
+      background-color: #000;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #fff;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #ff4d4d;
+    }
+
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      padding: 8rem 2rem 4rem;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .hero-left {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      animation: slideInLeft 1.5s ease-in-out;
+    }
+
+    .hero-left img {
+      width: 100%;
+      max-width: 350px;
+      border-radius: 15px;
+      box-shadow: 0 0 25px #0ff;
+    }
+
+    .hero-right {
+      flex: 1;
+      padding: 2rem;
+      animation: slideInRight 1.5s ease-in-out;
+    }
+
+    .hero-right h1 {
+      font-size: 2.8rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .name {
+      color: #e63946;
+    }
+
+    .hero-right h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .role {
+      color: #ff3366;
+    }
+
+    .hero-right p {
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+      color: #ccc;
+    }
+
+    .hero-right button {
+      padding: 0.7rem 1.5rem;
+      background-color: #e63946;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    .hero-right button:hover {
+      background-color: #b71c1c;
+      transform: scale(1.05);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideInLeft {
+      from { transform: translateX(-100px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    @keyframes slideInRight {
+      from { transform: translateX(100px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        flex-direction: column;
+      }
+
+      .hero-left, .hero-right {
+        padding: 1rem;
+      }
+
+      .nav-links {
+        flex-direction: column;
+        display: none;
+        background-color: #111;
+        position: absolute;
+        top: 60px;
+        right: 2rem;
+        padding: 1rem;
+        border-radius: 8px;
+      }
+
+      .nav-links.show {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: block;
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
+    }
+
+    .menu-toggle {
+      display: none;
+      color: white;
+    }
+
+    .skills-section {
+      padding: 4rem 2rem;
+      text-align: center;
+      background-color: #121212;
+    }
+
+    .skills-section h2 {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+
+    .skills-section h2::after {
+      content: "";
+      display: block;
+      height: 3px;
+      width: 60px;
+      background: red;
+      margin: 0.5rem auto 0;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      gap: 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+      padding-top: 2rem;
+    }
+
+    .skills-grid img {
+      width: 100%;
+      max-width: 80px;
+      margin: 0 auto;
+      display: block;
+      transition: transform 0.3s;
+    }
+
+    .skills-grid img:hover {
+      transform: scale(1.1);
+    }
+
+    .skills-grid p {
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+    }
+  </style>
 </head>
 <body>
-    <section class="construction-container">
-        <svg class="construction-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="32" cy="32" r="30" stroke="#ff3e6b" stroke-width="4"/>
-            <rect x="28" y="18" width="8" height="20" fill="#ff7eb3"/>
-            <rect x="28" y="40" width="8" height="6" fill="#ff3e6b"/>
-        </svg>
-        <h2 class="construction-title">Under Construction</h2>
-        <p class="construction-text">
-            My portfolio is currently being built. Stay tuned for amazing projects and updates!
-        </p>
-        <a href="https://api.whatsapp.com/send?phone=94768902513" class="btn">Contact Me</a>
-    </section>
+  <header>
+    <div class="logo">IMESH SANDEEPA</div>
+    <div class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
+    <ul class="nav-links" id="navMenu">
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#">Services</a></li>
+      <li><a href="#skills-section">Skills</a></li>
+      <li><a href="#">Education</a></li>
+      <li><a href="#">Project</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </header>
+
+  <section class="hero">
+    <div class="hero-left">
+      <img src="assets/images/hero.jpeg" alt="Imesh Sandeepa">
+    </div>
+    <div class="hero-right">
+      <h1>Hi, It's <span class="name">Imesh</span></h1>
+      <h2>I'm a <span class="role">Web Designer</span></h2>
+      <p>I create responsive, user-friendly websites that are not only aesthetically pleasing but also optimized for performance and accessibility. My designs are crafted to ensure seamless navigation and a memorable user journey.</p>
+      <button onclick="alert('Thank you for hiring!')">Hire Me</button>
+    </div>
+  </section>
+
+
+  <section class="skills-section">
+    <h2>Skills & Tools</h2>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML"/>
+        <p>HTML</p>
+      </div>
+      <div class="skill-card">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS"/>
+        <p>CSS</p>
+      </div>
+      <div class="skill-card">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript"/>
+        <p>JavaScript</p>
+      </div>
+      <div class="skill-card">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python"/>
+        <p>Python</p>
+      </div>
+      <div class="skill-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/a/af/Adobe_Photoshop_CC_icon.svg" alt="Photoshop"/>
+        <p>Adobe Photoshop</p>
+      </div>
+      <div class="skill-card">
+        <img src="assets/images/ligthroom.png" alt="Lightroom"/>
+        <p>Adobe Lightroom</p>
+      </div>
+      <div class="skill-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/f/fb/Adobe_Illustrator_CC_icon.svg" alt="Illustrator"/>
+        <p>Adobe Illustrator</p>
+      </div>
+      <div class="skill-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f1/CorelDraw_logo.svg" alt="CorelDRAW"/>
+        <p>CorelDRAW</p>
+      </div>
+    </div>
+  </section>
+
+<center >  <footer style="position: fixed; bottom: 0; text-align: center;">Devolped by Imesh Sandeepa</footer>
+</center>  <script>
+    function toggleMenu() {
+      document.getElementById('navMenu').classList.toggle('show');
+    }
+  </script>
 </body>
 </html>
