@@ -5,221 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Imesh Sandeepa - Portfolio</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #0d0d0d;
-      color: #fff;
-      overflow-x: hidden;
-    }
-
-    header {
-      width: 100%;
-      background-color: #000;
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: fixed;
-      top: 0;
-      z-index: 1000;
-    }
-
-    .logo {
-      font-size: 1.5rem;
-      font-weight: bold;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-    }
-
-    .nav-links a {
-      text-decoration: none;
-      color: #fff;
-      transition: color 0.3s;
-    }
-
-    .nav-links a:hover {
-      color: #ff4d4d;
-    }
-
-    .hero {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-      padding: 8rem 2rem 4rem;
-      animation: fadeIn 1s ease-in-out;
-    }
-
-    .hero-left {
-      flex: 1;
-      display: flex;
-      justify-content: center;
-      animation: slideInLeft 1.5s ease-in-out;
-    }
-
-    .hero-left img {
-      width: 100%;
-      max-width: 350px;
-      border-radius: 15px;
-      box-shadow: 0 0 25px #0ff;
-    }
-
-    .hero-right {
-      flex: 1;
-      padding: 2rem;
-      animation: slideInRight 1.5s ease-in-out;
-    }
-
-    .hero-right h1 {
-      font-size: 2.8rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .name {
-      color: #e63946;
-    }
-
-    .hero-right h2 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
-
-    .role {
-      color: #ff3366;
-    }
-
-    .hero-right p {
-      font-size: 1rem;
-      line-height: 1.6;
-      margin-bottom: 1.5rem;
-      color: #ccc;
-    }
-
-    .hero-right button {
-      padding: 0.7rem 1.5rem;
-      background-color: #e63946;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: background 0.3s, transform 0.2s;
-    }
-
-    .hero-right button:hover {
-      background-color: #b71c1c;
-      transform: scale(1.05);
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    @keyframes slideInLeft {
-      from { transform: translateX(-100px); opacity: 0; }
-      to { transform: translateX(0); opacity: 1; }
-    }
-
-    @keyframes slideInRight {
-      from { transform: translateX(100px); opacity: 0; }
-      to { transform: translateX(0); opacity: 1; }
-    }
-
-    @media (max-width: 768px) {
-      .hero {
-        flex-direction: column;
-      }
-
-      .hero-left, .hero-right {
-        padding: 1rem;
-      }
-
-      .nav-links {
-        flex-direction: column;
-        display: none;
-        background-color: #111;
-        position: absolute;
-        top: 60px;
-        right: 2rem;
-        padding: 1rem;
-        border-radius: 8px;
-      }
-
-      .nav-links.show {
-        display: flex;
-      }
-
-      .menu-toggle {
-        display: block;
-        font-size: 1.5rem;
-        cursor: pointer;
-      }
-    }
-
-    .menu-toggle {
-      display: none;
-      color: white;
-    }
-
-    .skills-section {
-      padding: 4rem 2rem;
-      text-align: center;
-      background-color: #121212;
-    }
-
-    .skills-section h2 {
-      font-size: 2rem;
-      margin-bottom: 2rem;
-      position: relative;
-    }
-
-    .skills-section h2::after {
-      content: "";
-      display: block;
-      height: 3px;
-      width: 60px;
-      background: red;
-      margin: 0.5rem auto 0;
-    }
-
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-      gap: 2rem;
-      max-width: 900px;
-      margin: 0 auto;
-      padding-top: 2rem;
-    }
-
-    .skills-grid img {
-      width: 100%;
-      max-width: 80px;
-      margin: 0 auto;
-      display: block;
-      transition: transform 0.3s;
-    }
-
-    .skills-grid img:hover {
-      transform: scale(1.1);
-    }
-
-    .skills-grid p {
-      margin-top: 0.5rem;
-      font-size: 0.9rem;
-    }
-  </style>
+<link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
   <header>
@@ -227,8 +13,8 @@
     <div class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
     <ul class="nav-links" id="navMenu">
       <li><a href="#hero">Home</a></li>
-      <li><a href="#">Services</a></li>
-      <li><a href="#skills-section">Skills</a></li>
+      <li><a href="#services-section">Services</a></li>
+      <li><a href="#skills">Skills</a></li>
       <li><a href="#">Education</a></li>
       <li><a href="#">Project</a></li>
       <li><a href="#">Contact</a></li>
@@ -239,16 +25,40 @@
     <div class="hero-left">
       <img src="assets/images/hero.jpeg" alt="Imesh Sandeepa">
     </div>
+
     <div class="hero-right">
       <h1>Hi, It's <span class="name">Imesh Sandeepa</span></h1>
       <h2>I'm a <span class="role">Web Designer</span></h2>
       <p>I create responsive, user-friendly websites that are not only aesthetically pleasing but also optimized for performance and accessibility. My designs are crafted to ensure seamless navigation and a memorable user journey.</p>
-      <button onclick="alert('Thank you for hiring!')">Hire Me</button>
+      <button >Hire Me</button>
     </div>
   </section>
 
+  <section class="services-section" id="services-section">
+    <h2 class="section-title">Services</h2>
+    <p class="section-description">
+      I craft visually stunning, user-focused designs that bring brands to life through web design, UI/UX, and graphic design.
+    </p>
 
-  <section class="skills-section">
+    <div class="services-container">
+      <div class="service-card">
+        <div class="icon">🖥️</div>
+        <h3>Web Design</h3>
+        <p>Custom, responsive websites tailored to your brand and goals using modern design principles.</p>
+      </div>
+      <div class="service-card">
+        <div class="icon">🎨</div>
+        <h3>UI/UX Design</h3>
+        <p>Creating intuitive, engaging, and user-friendly experiences with wireframes and prototypes.</p>
+      </div>
+      <div class="service-card">
+        <div class="icon">✏️</div>
+        <h3>Graphic Design</h3>
+        <p>Logos, banners, and visuals that help you stand out and communicate your brand identity.</p>
+      </div>
+    </div>
+  </section>
+  <section class="skills-section" id="skills">
     <h2>Skills & Tools</h2>
     <div class="skills-grid">
       <div class="skill-card">
@@ -297,6 +107,80 @@
         <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg" alt="Tailwind"/>
         <p>Tailwind</p>
     
+    </div>
+  </section>
+  
+  <section class="education-section" id="education">
+  <center class="education-container">
+        <h2>Education</h2>
+
+     <div class="timeline">
+      <div class="line"></div>
+      <div class="dot"></div>
+
+      <div class="card">
+        <h2>2025</h2>
+        <p>Graphic Design – NVQ Level 4<br>
+        Maradana Technical College, Colombo, Sri Lanka<br>
+        <br>
+        <strong>Duration:</strong> 6 Months<br>
+        <strong>Status:</strong> In Progress</p>
+      </div>
+      <br>
+            <div class="dot"></div>
+
+      <div class="card">
+        <h2>2020</h2>
+        <p>Web Design & Development<br>
+        Self Study<br>
+        <br>
+        <!-- <strong>Duration:</strong> 6 Months<br>
+        <strong>Status:</strong> In Progress</p> -->
+      </div>
+      
+    </div>
+    
+            </div> 
+
+  </center>
+  
+  </section>
+
+<br>
+  <section class="project-section" id="project">
+    <h2>Projects</h2>
+    
+    <!-- <p>Here are some of the projects I've worked on:</p> -->
+    <div class="project-grid">
+      <div class="card">
+<div>        <img src="assets/images/OIP.webp" width="100%" height="200px" alt="Project 1">
+</div><br>
+        <h3>Portfolio Website</h3>
+        <p>A personal portfolio website showcasing my skills and projects.</p>
+<div style="display: flex; justify-content: space-between;">      <button >View</button>       <button >Source</button>
+</div>
+      </div>
+     
+  </section>
+<br>
+
+ <section class="contact-section">
+    <h1>Contact</h1>
+    <div class="contact-container">
+      <img src="assets/images/contact.svg" alt="Support Image">
+      <!-- Replace above src with your actual image -->
+      <div class="form">
+        <label for="name">Name</label>
+        <input type="text" id="name" placeholder="Enter your name">
+
+        <label for="whatsapp">Whatsapp</label>
+        <input type="text" id="whatsapp" placeholder="Enter your WhatsApp number">
+
+        <label for="message">Message</label>
+        <textarea id="message" placeholder="Enter your message"></textarea>
+
+      <button >Submit</button>
+      </div>
     </div>
   </section>
 
