@@ -439,4 +439,8 @@ button:active {
   .hero-right {
     padding: 1rem;
   }
+  .social-icons {
+    margin-top: 20px;
+  margin: 0 auto;
+  }
 }
