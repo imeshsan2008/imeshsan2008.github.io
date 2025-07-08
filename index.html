@@ -1,16 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Imesh Sandeepa - Portfolio</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<link rel="stylesheet" href="assets/css/style.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFld6Z9e8z4c5e5d5f5b5f5b5f5b5f5b5f5b5f5b5f5f5f5f5" crossorigin="anonymous">
-  
+  <link rel="stylesheet" href="assets/css/style.css">
+  <!-- AOS Scroll Animation CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+
 </head>
+
 <body>
+  <div class="imagemodal" id="imagemodal">
+  <div class="header">
+    <span class="close-btn" id="closeBtn">&times;</span>
+  </div>
+  <img id="modalImage" class="img-thumbnail"  alt="Modal Image" />
+</div>
   <header>
+    
     <div class="logo">IMESH SANDEEPA</div>
     <div class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
     <ul class="nav-links" id="navMenu">
@@ -23,7 +35,7 @@
     </ul>
   </header>
 
-  <section class="hero" id="hero">
+  <section class="hero" id="hero" data-aos="fade-up">
     <div class="hero-left">
       <img src="assets/images/hero.jpeg" alt="Imesh Sandeepa">
     </div>
@@ -31,34 +43,37 @@
     <div class="hero-right">
       <h1>Hi, It's <span class="name">Imesh Sandeepa</span></h1>
       <h2>I'm a <span class="role">Web Designer</span></h2>
-      <p>I create responsive, user-friendly websites that are not only aesthetically pleasing but also optimized for performance and accessibility. My designs are crafted to ensure seamless navigation and a memorable user journey.</p>
- <div style="display: flex; justify-content: space-between; margin-top: 20px; align-items: center;">
-      
-  
-      <div class="social-icons" style="display: flex; gap: 10px;">
-<a href="https://github.com/imeshsan2008" target="_blank" class="icon-rounded">
-  <i class="fab fa-github"></i>
-</a>
-    
-<a href="https://facebook.com/imeshsan2008" target="_blank" class="icon-rounded">
-  <i class="fab fa-facebook"></i>
-</a><a href="https://instagram.com/imeshsan2008" target="_blank" class="icon-rounded">
-  <i class="fab fa-instagram"></i>
-</a>
-<a href="https://wa.me/94768902513" target="_blank" class="icon-rounded">
-  <i class="fab fa-whatsapp"></i>
-</a>
-    </div>
-      <!-- <div class="button-group" style="display: flex; gap: 10px; ">
+      <p>I create responsive, user-friendly websites that are not only aesthetically pleasing but also optimized for
+        performance and accessibility. My designs are crafted to ensure seamless navigation and a memorable user
+        journey.</p>
+      <div style="display: flex; justify-content: space-between; margin-top: 20px; align-items: center;">
+
+
+        <div class="social-icons" style="display: flex; gap: 10px;">
+          <a href="https://github.com/imeshsan2008" target="_blank" class="icon-rounded">
+            <i class="fab fa-github"></i>
+          </a>
+
+          <a href="https://facebook.com/imeshsan2008" target="_blank" class="icon-rounded">
+            <i class="fab fa-facebook"></i>
+          </a><a href="https://instagram.com/imeshsan2008" target="_blank" class="icon-rounded">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="https://wa.me/94768902513" target="_blank" class="icon-rounded">
+            <i class="fab fa-whatsapp"></i>
+          </a>
+        </div>
+        <!-- <div class="button-group" style="display: flex; gap: 10px; ">
         <button href="#contact-section" class="btn">Contact Me</button>
         <button href="#project-section" class="btn">View Projects</button>
       </div> -->
   </section>
 
-  <section class="services-section" id="services-section">
+  <section class="services-section" id="services-section" data-aos="fade-up">
     <h2 class="section-title">Services</h2>
     <p class="section-description">
-      I craft visually stunning, user-focused designs that bring brands to life through web design, UI/UX, and graphic design.
+      I craft visually stunning, user-focused designs that bring brands to life through web design, UI/UX, and graphic
+      design.
     </p>
 
     <div class="services-container">
@@ -79,140 +94,193 @@
       </div>
     </div>
   </section>
-  
-  <section class="skills-section" id="skills">
+
+  <section class="skills-section" id="skills" data-aos="fade-up">
     <h2>Skills & Tools</h2>
     <div class="skills-grid">
       <div class="skill-card">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML"/>
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML" />
         <p>HTML</p>
       </div>
       <div class="skill-card">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS"/>
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS" />
         <p>CSS</p>
       </div>
       <div class="skill-card">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript"/>
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
+          alt="JavaScript" />
         <p>JavaScript</p>
       </div>
       <div class="skill-card">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python"/>
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" />
         <p>Python</p>
       </div>
       <div class="skill-card">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/a/af/Adobe_Photoshop_CC_icon.svg" alt="Photoshop"/>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/a/af/Adobe_Photoshop_CC_icon.svg" alt="Photoshop" />
         <p>Adobe Photoshop</p>
       </div>
       <div class="skill-card">
-        <img src="assets/images/ligthroom.png" alt="Lightroom"/>
+        <img src="assets/images/ligthroom.png" alt="Lightroom" />
         <p>Adobe Lightroom</p>
       </div>
       <div class="skill-card">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/f/fb/Adobe_Illustrator_CC_icon.svg" alt="Illustrator"/>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/f/fb/Adobe_Illustrator_CC_icon.svg"
+          alt="Illustrator" />
         <p>Adobe Illustrator</p>
       </div>
       <div class="skill-card">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f1/CorelDraw_logo.svg" alt="CorelDRAW"/>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f1/CorelDraw_logo.svg" alt="CorelDRAW" />
         <p>CorelDRAW</p>
       </div>
-   <div class="skill-card">
-        <img src="https://camo.githubusercontent.com/92a977256f3f2b4ef99e6684c1d88f1ac0394ed909893e5e56cb3539a31f2590/68747470733a2f2f63646e2e6a7364656c6976722e6e65742f67682f64657669636f6e732f64657669636f6e2f69636f6e732f7068702f7068702d6f726967696e616c2e737667" alt="php"/>
+      <div class="skill-card">
+        <img
+          src="https://camo.githubusercontent.com/92a977256f3f2b4ef99e6684c1d88f1ac0394ed909893e5e56cb3539a31f2590/68747470733a2f2f63646e2e6a7364656c6976722e6e65742f67682f64657669636f6e732f64657669636f6e2f69636f6e732f7068702f7068702d6f726967696e616c2e737667"
+          alt="php" />
         <p>Php</p>
-      </div>  
+      </div>
 
-    
+
       <div class="skill-card">
-        <img src="https://camo.githubusercontent.com/b757f08684d4442218bd04f3bb04cc0e142d0551619c678ff44304027085bb47/68747470733a2f2f63646e2e6a7364656c6976722e6e65742f67682f64657669636f6e732f64657669636f6e2f69636f6e732f626f6f7473747261702f626f6f7473747261702d6f726967696e616c2e737667" alt="Bootstrap"/>
+        <img
+          src="https://camo.githubusercontent.com/b757f08684d4442218bd04f3bb04cc0e142d0551619c678ff44304027085bb47/68747470733a2f2f63646e2e6a7364656c6976722e6e65742f67682f64657669636f6e732f64657669636f6e2f69636f6e732f626f6f7473747261702f626f6f7473747261702d6f726967696e616c2e737667"
+          alt="Bootstrap" />
         <p>Bootstrap</p>
-      </div> 
+      </div>
       <div class="skill-card">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg" alt="Tailwind"/>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg" alt="Tailwind" />
         <p>Tailwind</p>
-    
-    </div>
-  </section>
-  
-  <section class="education-section" id="education">
-  <center class="education-container">
-        <h2>Education</h2>
 
-     <div class="timeline">
-      <div class="line"></div>
-      <div class="dot"></div>
-
-      <div class="card">
-        <h2>2025</h2>
-        <p>Graphic Design – NVQ Level 4<br>
-        Maradana Technical College, Colombo, Sri Lanka<br>
-        <br>
-        <strong>Duration:</strong> 6 Months<br>
-        <strong>Status:</strong> In Progress</p>
       </div>
-      <br>
-            <div class="dot"></div>
+  </section>
 
-      <div class="card">
-        <h2>2020</h2>
-        <p>Web Design & Development<br>
-        Self Study<br>
+  <section class="education-section" id="education" data-aos="fade-up">
+    <center class="education-container">
+      <h2>Education</h2>
+
+      <div class="timeline">
+        <div class="line"></div>
+        <div class="dot"></div>
+
+        <div class="card">
+          <h2 style="color: #fff;">2025</h2>
+          <p>Graphic Design – NVQ Level 4<br>
+            Maradana Technical College, Colombo, Sri Lanka<br>
+            <br>
+            <strong>Duration:</strong> 6 Months<br>
+            <strong>Status:</strong> In Progress
+          </p>
+        </div>
         <br>
-        <!-- <strong>Duration:</strong> 6 Months<br>
+        <div class="dot"></div>
+
+        <div class="card">
+          <h2 style="color: #fff;">2020</h2>
+          <p>Web Design & Development<br>
+            Self Study<br>
+            <br>
+            <!-- <strong>Duration:</strong> 6 Months<br>
         <strong>Status:</strong> In Progress</p> -->
-      </div>
-      
-    </div>
-    
-            </div> 
+        </div>
 
-  </center>
-  
+      </div>
+
+      </div>
+
+    </center>
+
   </section>
 
-<br>
-  <section class="project-section" id="project-section">
+  <br>
+  <section class="project-section" id="project-section" data-aos="fade-up">
     <h2>Projects</h2>
-    
+
     <!-- <p>Here are some of the projects I've worked on:</p> -->
     <div class="project-grid">
-      <div class="card">
-<div>      
-    <img src="assets/images/website.jpg" width="100%" height="auto" alt="Project 1">
-</div><br>
-        <h3>Portfolio Website</h3>
-        <p>A personal portfolio website showcasing my skills and projects.</p>
-<div style="display: flex; justify-content: space-between;">      <button >View</button>       <button >Source</button>
-</div>
-      </div>
-     
-  </section>
-<br>
+    <div class="card">
+        <img src="https://github.com/imeshsan2008/AdobeShield/raw/main/Ui.png?raw=true"onclick="openimage(this.src)" width="100%" height="auto"
+          alt="Project 2">
+        <br>
+        <h3 style="margin-top: 10px; color: #fff;;">AdobeShield</h3>
+        <p style="margin-top: 10px;">AdobeShield is a simple and user-friendly desktop app that helps you block internet
+          access for Adobe programs like Photoshop, Illustrator, and InDesign.</p>
+        <div style="display: flex; justify-content: space-between;"> <button
+            onclick="window.open('https://github.com/imeshsan2008/AdobeShield/releases/download/latest/AdobeShield.exe', '_blank');">Download
+          </button> <button
+            onclick="window.open('https://github.com/imeshsan2008/AdobeShield', '_blank');">Source</button>
+       
 
- <section class="contact-section" id="contact-section">
+       
+       
+          </div>
+          <div><p class="tools"><i class="fa-brands fa-python"></i> Python</p></div>
+      </div> 
+      
+      
+      <div class="card">
+        <img src="assets/images/apisite.jpg" onclick="openimage(this.src)" width="100%" height="auto"
+          alt="Project 2" >
+        <br>
+        <h3 style="margin-top: 10px; color: #fff;;">Api Site</h3>
+        <p style="margin-top: 10px;">A fast and simple API for downloading videos from Facebook, TikTok, and YouTube. Built for easy integration, it allows seamless video extraction from popular social platforms.</p>
+        <div style="display: flex; justify-content: space-between;"> <button
+            onclick="window.open('https://venom-devils-api.koyeb.app/', '_blank');">View
+          </button> <button
+            onclick="window.open('https://github.com/imeshsan2008/venom-devils-api', '_blank');">Source</button>
+       
+
+       
+       
+          </div>
+          <div><p class="tools"><i class="fa-brands fa-node-js"></i> Node.js</p></div>
+      </div>
+
+      </div>
+
+    
+
+
+
+  </section>
+  <br>
+
+  <section class="contact-section" id="contact-section" data-aos="fade-up">
     <h1>Contact</h1>
     <br>
     <div class="contact-container">
-      <img src="assets/images/contact.svg" alt="Support Image">
+      <img src="assets/images/contact.svg" class="contact-image" alt="Support Image">
       <!-- Replace above src with your actual image -->
       <div class="form">
+        <form
+  action="https://www.formbackend.com/f/2b32399a97411fd1"
+  method="POST"
+>
         <label for="name">Name</label>
-        <input type="text" id="name" placeholder="Enter your name">
+        <input type="text" id="name" name="email" placeholder="Enter your name">
 
         <label for="whatsapp">Whatsapp</label>
-        <input type="text" id="whatsapp" placeholder="Enter your WhatsApp number">
+        <input type="text" id="whatsapp" name="whatsapp" placeholder="Enter your WhatsApp number">
 
         <label for="message">Message</label>
-        <textarea id="message" placeholder="Enter your message"></textarea>
+        <textarea id="message" name="message" placeholder="Enter your message"></textarea>
 
-<center>      <button >Submit</button>
-</center>      </div>
+        <center> <button type="submit">Submit</button>
+        </center>
+        </form>
+      </div>
     </div>
   </section>
 
-<center >  <footer style=" bottom: 0; text-align: center;">Developed by Imesh Sandeepa</footer>
-</center> 
+  <center>
+    <footer style=" bottom: 0; text-align: center;">Developed by Imesh Sandeepa</footer>
+  </center>
 
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+    crossorigin="anonymous"></script>
+  <!-- AOS Script -->
+   <script src="assets/js/script.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
   <style>
     footer {
       width: 100%;
@@ -222,10 +290,18 @@
       position: relative;
     }
   </style>
-<script>
+  <script>
+    AOS.init({
+      duration: 1000,
+      once: false, // Animation repeats
+    });
+
+
+
     function toggleMenu() {
       document.getElementById('navMenu').classList.toggle('show');
     }
   </script>
 </body>
+
 </html>
