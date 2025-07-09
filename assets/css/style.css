@@ -106,6 +106,7 @@ header {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  height: 100vh;
   padding: 8rem 2rem 4rem;
   animation: fadeIn 1s ease-in-out;
 }
@@ -118,8 +119,10 @@ header {
 
 .hero-left img {
   width: 100%;
-  max-width: 350px;
+  max-width: 500px;
   border-radius: 15px;
+  
+  margin: 0 auto;
   box-shadow: 0 0 25px #ff4d4d;
 }
 
@@ -163,7 +166,12 @@ header {
   background-color: #b71c1c;
   transform: scale(1.05);
 }
+.hero-left img:hover{
+  transform: translateY(-10px);
+  box-shadow: 0 0 25px #ff4d4d;
+  border-color: #cc0000;
 
+}
 /* ===== Animations ===== */
 @keyframes fadeIn {
   from { opacity: 0; }
@@ -185,6 +193,7 @@ header {
   text-align: center;
   background-color: #121212;
   padding: 4rem 2rem;
+  
 }
 
 .section-title {
@@ -275,7 +284,7 @@ header {
 /* ===== Education Section ===== */
 .education-section {
   background-color: #121212;
-  padding: 60px 20px;
+  padding: 4rem 2rem;
   text-align: center;
 }
 
@@ -344,7 +353,7 @@ header {
   max-width: 1000px;
   margin: 0 auto;
   text-align: center;
-  padding: 60px 20px;
+  padding: 4rem 2rem;
 }
 
 .project-grid {
@@ -363,7 +372,8 @@ header {
 /* ===== Contact Section ===== */
 .contact-section {
   text-align: center;
-  padding: 40px 20px;
+  padding: 4rem 2rem;
+  
   background-color: #121212;
 }
 
