@@ -47,7 +47,7 @@
       journey.</p>
 
     <!-- Social Icons -->
-    <div class="social-icons" style="display: flex; gap: 10px; margin-top: 20px;">
+    <div class="social-icons" style="display: flex; gap: 10px; margin-top: 20px; justify-content: center;">
       <a href="https://github.com/imeshsan2008" target="_blank" class="icon-rounded">
         <i class="fab fa-github"></i>
       </a>
@@ -63,7 +63,7 @@
     </div>
 
     <!-- Buttons Below Social Icons -->
-    <div class="button-group" style="display: flex; gap: 10px; margin-top: 20px;">
+    <div class="button-group" style="display: flex; gap: 10px; margin-top: 20px;justify-content: center;">
       <button onclick="window.location.href='#contact-section'" class="btn">Contact Me</button>
       <button onclick="window.location.href='#project-section'" class="btn">View Projects</button>
     </div>
@@ -259,13 +259,13 @@
   method="POST"
 >
         <label for="name">Name</label>
-        <input type="text" id="name" name="email" placeholder="Enter your name">
+        <input type="text" id="name" name="email" placeholder="Enter your name" required>
 
         <label for="whatsapp">Whatsapp</label>
-        <input type="text" id="whatsapp" name="whatsapp" placeholder="Enter your WhatsApp number">
+        <input type="text" id="whatsapp" name="whatsapp" placeholder="Enter your WhatsApp number" required>
 
         <label for="message">Message</label>
-        <textarea id="message" name="message" placeholder="Enter your message"></textarea>
+        <textarea id="message" name="message" placeholder="Enter your message" required></textarea>
 
         <center> <button type="submit">Submit</button>
         </center>

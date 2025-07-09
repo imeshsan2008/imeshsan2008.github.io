@@ -107,6 +107,7 @@ header {
   justify-content: center;
   align-items: center;
   height: 100vh;
+  width: 100%;
   padding: 8rem 2rem 4rem;
   animation: fadeIn 1s ease-in-out;
 }
@@ -471,6 +472,10 @@ button:active {
   .hero {
     flex-direction: column;
     text-align: center;
+    height: auto;
+
+
+    padding: 4rem 2rem;
   }
 
   .nav-links {
@@ -513,9 +518,146 @@ button:active {
     align-items: center;
   }
 }
-@media (max-width: 480px) {
+@media (max-width: 992px) {
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    height: auto;
+    padding: 6rem 2rem;
+  }
+
+  .hero-left img {
+    max-width: 80%;
+    height: auto;
+  }
+
+  .skills-grid {
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  }
+
+  .education-container {
+    gap: 30px;
+  }
+
+  .services-container {
+    gap: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    flex-direction: column;
+    display: none;
+    position: absolute;
+    top: 60px;
+    right: 2rem;
+    background-color: #111;
+    padding: 1rem;
+    border-radius: 8px;
+    width: 200px;
+  }
+
+  .nav-links.show {
+    display: flex;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .contact-container {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .form {
+    padding: 0;
+  }
+
+  .hero-left img {
+    max-width: 100%;
+    margin-bottom: 20px;
+  }
+
   .project-grid {
-    gap: 10px;
-    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .skills-grid {
+    gap: 1rem;
+    padding: 1rem 0;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 90%;
+    margin: 0 auto;
+  }
+
+  .service-card {
+    width: 90%;
+  }
+
+  .modalImage {
+    max-width: 90vw;
+    max-height: 70vh;
+  }
+
+  .imagemodal .header {
+    font-size: 1.2rem;
+  }
+
+  .close-btn {
+    font-size: 20px;
+    right: 10px;
+    top: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-right h1 {
+    font-size: 2rem;
+  }
+
+  .hero-right h2 {
+    font-size: 1.3rem;
+  }
+
+  .skills-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .section-title {
+    font-size: 22px;
+  }
+
+  .section-description {
+    font-size: 13px;
+    padding: 0 10px;
+  }
+
+  .form label {
+    font-size: 0.9rem;
+  }
+
+  .form input,
+  .form textarea {
+    font-size: 0.9em;
+  }
+
+  button {
+    font-size: 0.9em;
+    padding: 8px 16px;
+  }
+
+  .icon-rounded {
+    width: 35px;
+    height: 35px;
+  }
+
+  .icon-rounded i {
+    font-size: 24px;
   }
 }
