@@ -284,51 +284,67 @@ header {
 
 /* ===== Education Section ===== */
 .education-section {
-  background-color: #121212;
-  padding: 4rem 2rem;
-  text-align: center;
+  padding: 50px 0;
+  background-color: #f9f9f9;
 }
 
 .education-container {
-  max-width: 1000px;
-  margin: auto;
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
-  gap: 40px;
 }
 
 .timeline {
   position: relative;
-  padding-left: 100px;
-  margin-top: 50px;
+  width: 100%;
+  max-width: 800px;
 }
 
 .line {
   position: absolute;
-  left: 70px;
+  left: 50%;
   top: 0;
-  bottom: 0;
-  width: 4px;
-  background-color: #c62828;
+  height: 100%;
+  width: 2px;
+  background-color: #000;
 }
 
 .dot {
-  width: 12px;
-  height: 12px;
-  background-color: #ddd;
-  border-radius: 50%;
   position: absolute;
-  left: 65px;
+  width: 15px;
+  height: 15px;
+  background-color: #000;
+  border-radius: 50%;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .card {
-  background-color: #181818;
-  border-radius: 12px;
-  padding: 30px 20px;
-  width: 280px;
-  transition: 0.3s;
-  box-shadow: 0 0 0 transparent;
-  border: 1px solid #222;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 20px 0;
+}
+
+.card h2 {
+  color: #333;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.card p {
+  font-size: 16px;
+  color: #666;
+}
+
+.card strong {
+  font-weight: bold;
+}
+
+.card:last-child {
+  margin-bottom: 0;
 }
 
 .card:hover {
@@ -337,11 +353,6 @@ header {
   border-color: #cc0000;
 }
 
-.card h2 {
-  font-size: 1.2rem;
-  margin-bottom: 10px;
-  position: relative;
-}
 
 .card p {
   font-size: 0.9rem;
