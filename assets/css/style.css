@@ -290,42 +290,19 @@ header {
 
 .education-container {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
-.timeline {
-  position: relative;
-  width: 100%;
-  max-width: 800px;
-}
-
-.line {
-  position: absolute;
-  left: 50%;
-  top: 0;
-  height: 100%;
-  width: 2px;
-  background-color: #000;
-}
-
-.dot {
-  position: absolute;
-  width: 15px;
-  height: 15px;
-  background-color: #000;
-  border-radius: 50%;
-  left: 50%;
-  transform: translateX(-50%);
+  justify-content: space-between;
+  flex-wrap: wrap; /* Ensure cards wrap on smaller screens */
+  gap: 20px; /* Space between cards */
+  max-width: 1200px; /* Set max width for better alignment */
+  margin: 0 auto; /* Center container */
 }
 
 .card {
+  flex: 1 1 calc(33% - 20px); /* Each card takes up 33% of the width minus gap */
   background-color: #fff;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin: 20px 0;
 }
 
 .card h2 {
@@ -343,8 +320,16 @@ header {
   font-weight: bold;
 }
 
-.card:last-child {
-  margin-bottom: 0;
+@media (max-width: 768px) {
+  .card {
+    flex: 1 1 calc(50% - 20px); /* On medium screens, cards take up 50% */
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    flex: 1 1 100%; /* On small screens, cards take up 100% */
+  }
 }
 
 .card:hover {
@@ -353,6 +338,11 @@ header {
   border-color: #cc0000;
 }
 
+.card h2 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  position: relative;
+}
 
 .card p {
   font-size: 0.9rem;
