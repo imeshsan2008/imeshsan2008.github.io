@@ -331,17 +331,6 @@ header {
   border: 1px solid #222;
 }
 
-@media (max-width: 768px) {
-  .card {
-    flex: 1 1 calc(50% - 20px); /* On medium screens, cards take up 50% */
-  }
-}
-
-@media (max-width: 480px) {
-  .card {
-    flex: 1 1 100%; /* On small screens, cards take up 100% */
-  }
-}
 .card:hover {
   transform: translateY(-10px);
   box-shadow: 0 8px 20px rgba(255, 0, 0, 0.2);
