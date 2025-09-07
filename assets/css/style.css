@@ -284,40 +284,51 @@ header {
 
 /* ===== Education Section ===== */
 .education-section {
-  padding: 50px 0;
-  background-color: #f9f9f9;
+  background-color: #121212;
+  padding: 4rem 2rem;
+  text-align: center;
 }
 
 .education-container {
+  max-width: 1000px;
+  margin: auto;
   display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap; /* Ensure cards wrap on smaller screens */
-  gap: 20px; /* Space between cards */
-  max-width: 1200px; /* Set max width for better alignment */
-  margin: 0 auto; /* Center container */
+  flex-direction: column;
+  gap: 40px;
+}
+
+.timeline {
+  position: relative;
+  padding-left: 100px;
+  margin-top: 50px;
+}
+
+.line {
+  position: absolute;
+  left: 70px;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background-color: #c62828;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  background-color: #ddd;
+  border-radius: 50%;
+  position: absolute;
+  left: 65px;
 }
 
 .card {
-  flex: 1 1 calc(33% - 20px); /* Each card takes up 33% of the width minus gap */
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.card h2 {
-  color: #333;
-  font-size: 24px;
-  margin-bottom: 10px;
-}
-
-.card p {
-  font-size: 16px;
-  color: #666;
-}
-
-.card strong {
-  font-weight: bold;
+  background-color: #181818;
+  border-radius: 12px;
+  padding: 30px 20px;
+  width: 280px;
+  transition: 0.3s;
+  box-shadow: 0 0 0 transparent;
+  border: 1px solid #222;
 }
 
 @media (max-width: 768px) {
@@ -331,7 +342,6 @@ header {
     flex: 1 1 100%; /* On small screens, cards take up 100% */
   }
 }
-
 .card:hover {
   transform: translateY(-10px);
   box-shadow: 0 8px 20px rgba(255, 0, 0, 0.2);
