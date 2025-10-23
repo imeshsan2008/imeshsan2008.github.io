@@ -110,10 +110,35 @@ header {
   width: 100%;
   padding: 8rem 2rem 4rem;
   animation: fadeIn 1s ease-in-out;
+
 }
+.video-container {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.background-video {
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures the video covers the entire screen */
+  
+  z-index: -2; /* Places the video behind other content */
+}
+
 .hero-right {
   transform: scale(1.1); /* 150% bigger */
  
+
+}.hero-left{
+   
+      width: 100%;
+      height: 100%;
+
 
 }
 .hero-left,
@@ -123,12 +148,15 @@ header {
 }
 
 .hero-left img {
+filter: drop-shadow(0 0 15px #3f1b1b);
+  top: -150px;
+  position: relative;
   width: 100%;
-  max-width: 500px;
-  border-radius: 15px;
+  /* max-width: 500px; */
+  /* border-radius: 15px;*/
   
   margin: 0 auto;
-  box-shadow: 0 0 25px #ff4d4d;
+  /* box-shadow: 0 0 25px #ff4d4d;  */
 }
 
 .hero-right h1 {
@@ -172,9 +200,12 @@ header {
   transform: scale(1.05);
 }
 .hero-left img:hover{
+  transition: all 0.3s ease-in-out;
+  filter: drop-shadow(0 0 15px #913636);
+
   transform: translateY(-10px);
-  box-shadow: 0 0 25px #ff4d4d;
-  border-color: #cc0000;
+  /* box-shadow: 0 0 25px #ff4d4d; */
+  /* border-color: #cc0000; */
 
 }
 /* ===== Animations ===== */
@@ -218,7 +249,8 @@ header {
 .skills-section h2::after,
 .education-section h2::after,
 .project-section h2::after,
-.contact-section h1::after {
+.contact-section h1::after,
+.achievements-section h2::after {
   content: "";
   display: block;
   height: 3px;
@@ -446,22 +478,17 @@ header {
 }
 
 /* ===== Projects Section ===== */
-.project-section {
-  background-color: #0d0d0d;
-  max-width: 1000px;
-  margin: 0 auto;
-  text-align: center;
-  padding: 80px 10%;
-}
+
 .project-section {
   padding: 80px 10%;
-  background: #0a0a0a;
+  /* background: #0a0a0a; */
   color: #fff;
   text-align: center;
 }
 
 
 .project-grid {
+  
   margin-top: 50px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -473,7 +500,7 @@ header {
   text-align: center;
   padding: 4rem 2rem;
   
-  background-color: #121212;
+  background-color: #0d0d0d;
 }
 
 .contact-container {
@@ -498,6 +525,7 @@ header {
   min-width: 300px;
   padding: 0 20px;
 }
+
 
 .form label {
   display: block;
@@ -571,11 +599,7 @@ button:active {
   .social-icons {
     display: flex; gap: 10px; margin-top: 20px; 
   }
-  .hero-left img{
-    max-width: 100%;
-    height: 100px;
-    margin-bottom: 20px;
-}
+
 /* ===== Media Queries ===== */
 @media (max-width: 768px) {
   .hero {
@@ -703,10 +727,7 @@ button:active {
  
 
 }
-  .hero-left img {
-    max-width: 80%;
-    height: auto;
-  }
+ 
 
   .skills-grid {
     grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
@@ -720,7 +741,11 @@ button:active {
     gap: 15px;
   }
 }
+.achievements-section{
+    padding: 80px 20px;
+    
 
+}
 @media (max-width: 768px) {
   .nav-links {
     flex-direction: column;
@@ -851,6 +876,23 @@ justify-content: center;
 }
 /* Responsive for Mobile */
 @media (max-width: 768px) {
+  
+
+.hero-left img {
+  top: -0;
+  justify-items: center;
+  align-items: center;
+  text-align:   center;
+  transform: scale(1.5);
+  position: relative;
+  width: 100%;
+  /* max-width: 500px; */
+  /* border-radius: 15px;*/
+  
+  margin: 0 auto;
+  /* box-shadow: 0 0 25px #ff4d4d;  */
+}
+
   .timeline-line {
     left: 20px;
     transform: none;
