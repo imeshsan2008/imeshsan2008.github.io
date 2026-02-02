@@ -1,7 +1,7 @@
 {
   "latest_version": "4.0.2",
   "download_url": "https://example.com/app/download",
-  "release_notes": "Fixed bugs, improved performance, and added new features.",
+  "release_notes": "Fixed bugs, improsved performance, and added new features.",
   "mandatory": false,
   "release_date": "2026-02-02",
   "min_supported_version": "2.3.0",
