@@ -1,0 +1,10 @@
+{
+  "latest_version": "4.0.2",
+  "download_url": "https://example.com/app/download",
+  "release_notes": "Fixed bugs, improved performance, and added new features.",
+  "mandatory": false,
+  "release_date": "2026-02-02",
+  "min_supported_version": "2.3.0",
+  "file_size": "25MB",
+  "checksum": "a1b2c3d4e5f67890" 
+}
