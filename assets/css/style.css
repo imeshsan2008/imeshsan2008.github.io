@@ -219,6 +219,13 @@ filter: drop-shadow(0 0 15px #3f1b1b);
   to { transform: translateX(0); opacity: 1; }
 }
 
+/* ===== About Section ===== */
+.about-section {
+  text-align: center;
+  background-color: #0d0d0d;
+  padding: 4rem 2rem;
+}
+
 /* ===== Services Section ===== */
 .services-section {
   text-align: center;
@@ -240,6 +247,7 @@ filter: drop-shadow(0 0 15px #3f1b1b);
   color: #ccc;
 }
 
+.about-section h2::after,
 .services-section h2::after,
 .skills-section h2::after,
 .education-section h2::after,
@@ -826,7 +834,37 @@ button:active {
     top: 10px;
   }
 }
+.category-title{
+margin-top:40px;
+margin-bottom:15px;
+color:#e63946;
+font-weight:600;
+}
 
+.skills-grid{
+display:flex;
+flex-wrap:wrap;
+gap:20px;
+}
+
+.skill-card{
+width:120px;
+text-align:center;
+background:#111;
+padding:15px;
+border-radius:10px;
+transition:0.3s;
+}
+
+.skill-card:hover{
+transform:translateY(-5px);
+box-shadow:0 0 15px #e63946;
+}
+
+.skill-card img{
+width:40px;
+height:40px;
+}
 
 @media (max-width: 480px) {
   .button-group {
