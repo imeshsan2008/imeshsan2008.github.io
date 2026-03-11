@@ -13,6 +13,7 @@ body {
   background-color: #0d0d0d;
   color: #fff;
   overflow-x: hidden;
+  
 }
   .imagemodal {
     display: none;
@@ -421,9 +422,16 @@ filter: drop-shadow(0 0 15px #3f1b1b);
 
 .card {
   flex: 1 1 calc(33% - 20px); /* Each card takes up 33% of the width minus gap */
-  background-color: #0d0d0d;
+  background-color: #202020d3;
   padding: 20px;
   box-shadow: 0 4px 6px rgba(133, 2, 2, 0.1);
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+}
+
+.card img {
+  border-radius: 8px;
 }
 
 .card h2 {
@@ -585,7 +593,12 @@ button:active {
   font-size: 30px;
 }
 .tools {
-  margin-top: 20px; background-color: rgb(148, 0, 0); border-radius: 20px;
+  display: inline-block;
+  margin-top: 15px;
+  background-color: rgb(148, 0, 0);
+  border-radius: 20px;
+  padding: 5px 15px;
+  font-size: 0.85rem;
 }
 .button-group {
     display: flex; gap: 10px; margin-top: 20px;
