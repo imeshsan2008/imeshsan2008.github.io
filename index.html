@@ -1,584 +1,884 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Imesh Sandeepa - Portfolio</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imesh Sandeepa | Full Stack Developer & Web Designer</title>
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="assets/css/style.css">
-  <!-- AOS Scroll Animation CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
-<meta property="og:title" content="Imesh Sandeepa Portfolio">
-<meta property="og:description" content="Web Developer Portfolio">
-<meta property="og:image" content="hero.png">
+    <script src="https://cdn.tailwindcss.com"></script>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Plus+Jakarta+Sans:wght@200..800&display=swap" rel="stylesheet">
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        jakarta: ['Plus Jakarta Sans', 'sans-serif']
+                    },
+                    colors: {
+                        brandGlow: '#ff3333',
+                        brandRed: '#CC0000',
+                        darkBg: '#070B0A',
+                        darkCard: '#0d1312'
+                    },
+                    animation: {
+                        float: 'float 6s ease-in-out infinite',
+                        glow: 'glow 3s ease-in-out infinite alternate',
+                        spinSlow: 'spin 25s linear infinite'
+                    },
+                    keyframes: {
+                        float: {
+                            '0%,100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-15px)' }
+                        },
+                        glow: {
+                            from: { boxShadow: '0 0 20px rgba(204,0,0,.2)' },
+                            to: { boxShadow: '0 0 50px rgba(204,0,0,.5)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: #070B0A;
+            overflow-x: hidden;
+        }
+
+        .glass {
+            background: rgba(255,255,255,.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,.08);
+        }
+
+        .glow-border {
+            box-shadow:
+                0 0 25px rgba(204,0,0,.15),
+                inset 0 0 15px rgba(255,255,255,.02);
+            transition: all 0.3s ease;
+        }
+        
+        .glow-border:hover {
+            box-shadow:
+                0 0 35px rgba(204,0,0,.3),
+                inset 0 0 15px rgba(255,255,255,.05);
+            border-color: rgba(204,0,0,0.5);
+        }
+
+        .brand-text {
+            background: linear-gradient(90deg, #ffffff, #CC0000);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-grid {
+            background-image:
+                linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+            background-size: 80px 80px;
+        }
+
+        .noise {
+            position: fixed;
+            inset: 0;
+            opacity: .03;
+            pointer-events: none;
+            background-image: radial-gradient(#fff 1px, transparent 1px);
+            background-size: 4px 4px;
+        }
+
+        .gradient-blob {
+            filter: blur(100px);
+            position: absolute;
+            border-radius: 999px;
+            z-index: -1;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #070B0A; }
+        ::-webkit-scrollbar-thumb { background: #1a1a1a; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #CC0000; }
+
+        /* Preloader */
+        #preloader {
+            position: fixed;
+            inset: 0;
+            background: #070B0A;
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+        }
+        .loader-text {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: 0.1em;
+            display: flex;
+            align-items: center;
+            gap: 2px;
+        }
+        .loader-text span {
+            display: inline-block;
+            color: #ffffff;
+            animation: loaderBounce 1s infinite alternate;
+        }
+        .loader-text span:nth-child(1) { animation-delay: 0.0s; }
+        .loader-text span:nth-child(2) { animation-delay: 0.1s; }
+        .loader-text span:nth-child(3) { animation-delay: 0.2s; }
+        .loader-text span:nth-child(4) { animation-delay: 0.3s; }
+        .loader-text span:nth-child(5) { animation-delay: 0.4s; }
+        .loader-text .dot {
+            color: #CC0000;
+            animation-delay: 0.5s;
+        }
+        @keyframes loaderBounce {
+            0% { transform: translateY(0); text-shadow: 0 0 10px rgba(255,255,255,0.2); }
+            100% { transform: translateY(-15px); text-shadow: 0 0 20px rgba(204,0,0,0.6); }
+        }
+    </style>
 </head>
-<style>
 
+<body class="text-white font-sans relative">
 
-
-
-
-</style>
-
-<body>
-
-  <div class="imagemodal" id="imagemodal">
-    <div class="header">
-      <span class="close-btn" id="closeBtn">&times;</span>
+<!-- Preloader -->
+<div id="preloader">
+    <div class="loader-text">
+        <span>I</span><span>M</span><span>E</span><span>S</span><span>H</span><span class="dot">.</span>
     </div>
-    <img id="modalImage" class="img-thumbnail" alt="Modal Image" />
-  </div>
-
-  <header>
-
-
-
-    <div class="logo" style="color: #cc0000;"><a href="#" style="color: #cc0000; text-decoration: none;">IMESH SANDEEPA</a></div>
-    <div class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
-
-    <ul class="nav-links" id="navMenu">
-      <li><a href="#hero">Home</a></li>
-      <li><a href="#about-section">About</a></li>
-      <li><a href="#services-section">Services</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#education">Education</a></li>
-      <li><a href="#achievements">Achievements</a></li>
-      <li><a href="#project-section">Project</a></li>
-      <li><a href="#contact-section">Contact</a></li>
-    </ul>
-  </header>
-
-
-  <section class="hero" id="hero" data-aos="fade-up" data-aos-anchor-placement="top-center">
-    <div class="mobbanner">
-      <p>Magic Frame - Vision V1.0 is now available! <a href="https://imeshsan2008.github.io/magicframe/"
-          style="color: #fff;">Click here to View</a></p>
-
-      <br>
-    </div>
-    <!-- <video autoplay muted loop class="background-video">
-      <source src="assets/images/portfolioback.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video> -->
-    <div class="hero-left" data-aos="fade-right">
-
-      <img src="hero.png" alt="Imesh Sandeepa">
-    </div>
-
-    <div class="hero-right">
-
-      <!-- 
-<div class="slider-container">
-  <div class="slider" id="slider"></div>
-  
- <div class="pnbtn"> 
-  <button id="prev">&#10094;</button>
-  <button id="next">&#10095;</button></div>
-</div><br> -->
-      <!-- Lightbox -->
-      <!-- <div id="lightbox">
-  <span id="close">&times;</span>
-  <img src="" id="lightbox-img" style="margin-top: 100px;" >
 </div>
-<br> -->
 
-      <h1>Hi, It's <span class="name">Imesh Sandeepa</span></h1>
-      <h2>I'm a <span class="role">Full Stack Developer & Web Designer</span></h2>
-      <p>A passionate web developer focused on building modern web applications.
-I enjoy creating tools, dashboards and SaaS applications.
-Currently learning JavaScript, cloud and DevOps.</p>
+<div class="noise"></div>
 
-      <!-- Social Icons -->
-      <div class="social-icons">
-        <a href="https://github.com/imeshsan2008" target="_blank" class="icon-rounded">
-          <i class="fab fa-github"></i>
-        </a>
-        <a href="https://facebook.com/imeshsan2008" target="_blank" class="icon-rounded">
-          <i class="fab fa-facebook"></i>
-        </a>
-        <a href="https://instagram.com/imeshsan2008" target="_blank" class="icon-rounded">
-          <i class="fab fa-instagram"></i>
-        </a>
-        <a href="https://wa.me/94768902513" target="_blank" class="icon-rounded">
-          <i class="fab fa-whatsapp"></i>
-        </a>
-      </div>
+<div class="gradient-blob w-[500px] h-[500px] bg-red-600/20 top-0 left-0"></div>
+<div class="gradient-blob w-[450px] h-[450px] bg-[#CC0000]/10 top-[30%] right-0"></div>
 
-      <!-- Buttons Below Social Icons -->
-      <div class="button-group">
-        <button onclick="window.location.href='#contact-section'" class="btn">Contact Me</button>
-        <button onclick="window.location.href='#'" class="btn" style="border: 1px solid #fff; background-color: #121212;" >
-          Download Resume
+<header class="fixed top-5 left-1/2 -translate-x-1/2 z-50 w-[92%] max-w-7xl">
+    <nav class="glass glow-border rounded-full px-6 py-4 flex items-center justify-between relative">
+
+        <div class="font-bold text-xl ml-2">
+            Imesh<span class="text-[#CC0000]">.</span>
+        </div>
+
+        <ul class="hidden md:flex items-center gap-8 text-sm text-gray-300">
+            <li><a href="#home" class="hover:text-[#CC0000] transition">Home</a></li>
+            <li><a href="#services" class="hover:text-[#CC0000] transition">Services</a></li>
+            <li><a href="#skills" class="hover:text-[#CC0000] transition">Skills</a></li>
+            <li><a href="#projects" class="hover:text-[#CC0000] transition">Projects</a></li>
+            <li><a href="#contact" class="hover:text-[#CC0000] transition">Contact</a></li>
+        </ul>
+
+        <button class="hidden md:block px-6 py-2.5 rounded-full bg-gradient-to-r from-red-500 to-[#CC0000] font-semibold text-white hover:scale-105 transition" onclick="window.open('https://wa.me/940768902513')">
+            Hire Me →
         </button>
-      </div>
+
+        <button id="mobile-menu-btn" class="md:hidden text-white mr-2 hover:text-[#CC0000] transition">
+            <i data-lucide="menu"></i>
+        </button>
+        
+        <div id="mobile-menu" class="hidden absolute top-[70px] left-0 w-full glass glow-border rounded-3xl flex-col items-center py-6 gap-6 md:hidden">
+            <a href="#home" class="mobile-link hover:text-[#CC0000] transition">Home</a>
+            <a href="#services" class="mobile-link hover:text-[#CC0000] transition">Services</a>
+            <a href="#skills" class="mobile-link hover:text-[#CC0000] transition">Skills</a>
+            <a href="#projects" class="mobile-link hover:text-[#CC0000] transition">Projects</a>
+            <a href="#contact" class="mobile-link hover:text-[#CC0000] transition">Contact</a>
+            <button class="px-6 py-2.5 rounded-full bg-gradient-to-r from-red-500 to-[#CC0000] font-semibold text-white">
+                Hire Me →
+            </button>
+        </div>
+
+    </nav>
+</header>
+
+<section id="home" class="min-h-screen relative hero-grid flex items-center justify-center px-8 pt-20">
+
+    <div class="hidden lg:block absolute left-24 top-52 glass p-4 rounded-2xl animate-float">
+        <i data-lucide="code" class="text-red-400"></i>
+    </div>
+    <div class="hidden lg:block absolute right-24 top-40 glass p-4 rounded-2xl animate-float" style="animation-delay:1s">
+        <i data-lucide="database" class="text-red-400"></i>
+    </div>
+    <div class="hidden lg:block absolute left-32 bottom-40 glass p-4 rounded-2xl animate-float" style="animation-delay:2s">
+        <i data-lucide="monitor" class="text-red-400"></i>
+    </div>
+    <div class="hidden lg:block absolute right-40 bottom-32 glass p-4 rounded-2xl animate-float" style="animation-delay:3s">
+        <i data-lucide="layout-dashboard" class="text-red-400"></i>
+    </div>
+
+    <div class="max-w-5xl mx-auto text-center" data-aos="zoom-in" data-aos-duration="1000">
+<br>
+        <div class="inline-flex items-center gap-3 px-5 py-3 rounded-full border border-red-500/30 bg-red-500/10 text-sm text-red-300 mb-8 cursor-pointer hover:bg-red-500/20 transition">
+            ✨ Magic Frame - Vision V1.0 is now available!
+        </div>
+
+        <div class="relative w-32 h-32 md:w-40 md:h-40 mx-auto mb-8 rounded-full border-4 border-[#CC0000] p-1 shadow-[0_0_30px_rgba(204,0,0,0.4)] hover:scale-105 transition-transform duration-500">
+            <img src="https://scontent-ams2-1.xx.fbcdn.net/v/t39.30808-1/689023246_122249039894255754_6785014216517944670_n.jpg?stp=dst-jpg_tt6&cstp=mx640x640&ctp=s200x200&_nc_cat=106&ccb=1-7&_nc_sid=1d2534&_nc_eui2=AeG3KoeD23Qfd3mSmyk30_XvzWm_HI-3xrHNab8cj7fGsY3jXKY8mXt1QlapOOclxz6QxT26LdfFnFMYImLJsDrf&_nc_ohc=2UED_MmmFKYQ7kNvwEXXtpC&_nc_oc=AdobIvJHv3pZ_zNIsQyuWeGQzjboa2ZqGD7Fhf0RYJkByhGKB05Q1OcmdnitwLVhBPg&_nc_zt=24&_nc_ht=scontent-ams2-1.xx&_nc_gid=o4P1iZs0V4mLRMQWl3o8kw&_nc_ss=792a8&oh=00_Af-Vf_lvi1oux60FKxqRjj95axcxwKkCCXNbBrXUkmi-uw&oe=6A360DB2" alt="Imesh Sandeepa" class="w-full h-full object-cover rounded-full">
+            <div class="absolute bottom-2 right-2 w-4 h-4 bg-green-500 border-2 border-darkBg rounded-full animate-pulse shadow-[0_0_10px_rgba(34,197,94,0.8)]"></div>
+        </div>
+
+        <h1 class="font-jakarta font-extrabold text-5xl md:text-8xl leading-tight">
+            Hi, It's
+            <span class="brand-text">Imesh Sandeepa</span>
+        </h1>
+
+        <h2 class="mt-6 text-2xl md:text-3xl text-gray-300 font-semibold">
+            Full Stack Developer & Web Designer
+        </h2>
+
+        <p class="max-w-3xl mx-auto mt-8 text-gray-400 text-lg leading-8">
+            I craft premium web experiences, scalable SaaS applications, and beautiful user interfaces with modern technologies. Turning ideas into high-performance digital products that users love.
+        </p>
+
+        <div class="mt-12 flex justify-center gap-5 flex-wrap">
+            <button class="px-8 py-4 rounded-full bg-gradient-to-r from-red-500 to-[#CC0000] text-white font-bold hover:scale-105 hover:shadow-[0_0_20px_rgba(204,0,0,0.4)] transition" onclick="document.getElementById('projects').scrollIntoView({ behavior: 'smooth' });">
+                View Projects
+            </button>
+            <button class="glass glow-border px-8 py-4 rounded-full hover:border-[#CC0000] transition" onclick="window.open('/Imesh Sandeepa CV.pdf', '_blank');">
+                Download CV
+            </button>
+        </div>
+
+        <div class="flex justify-center gap-6 mt-14">
+            <a href="https://github.com/imeshsan2008" class="glass p-4 rounded-full hover:text-[#CC0000] hover:-translate-y-1 transition duration-300"><i class="bi bi-github"></i></a>
+            <a href="https://www.linkedin.com/in/imeshsan2008" class="glass p-4 rounded-full hover:text-[#CC0000] hover:-translate-y-1 transition duration-300"><i class="bi bi-linkedin"></i></a>
+            <a href="https://www.instagram.com/imeshsan2008/" class="glass p-4 rounded-full hover:text-[#CC0000] hover:-translate-y-1 transition duration-300"><i class="bi bi-instagram"></i></a>
+            <a href="https://www.facebook.com/imeshsan2008/" class="glass p-4 rounded-full hover:text-[#CC0000] hover:-translate-y-1 transition duration-300 "><i class="bi bi-facebook"></i></a>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6 mt-20" data-aos="fade-up" data-aos-delay="200">
+            <div class="glass glow-border rounded-3xl p-8 hover:-translate-y-2 transition">
+                <h3 class="text-4xl font-bold text-[#CC0000]" data-from="0" data-to="10" data-duration="1000">0+</h3>
+                <p class="text-gray-400 mt-2">Projects Completed</p>
+            </div>
+            <div class="glass glow-border rounded-3xl p-8 hover:-translate-y-2 transition">
+                <h3 class="text-4xl font-bold text-[#CC0000]" data-from="0" data-to="5" data-duration="1000">0+</h3>
+                <p class="text-gray-400 mt-2">Years Experience</p>
+            </div>
+            <div class="glass glow-border rounded-3xl p-8 hover:-translate-y-2 transition">
+                <h3 class="text-4xl font-bold text-[#CC0000]" data-from="0" data-to="100" data-duration="1000">0%</h3>
+                <p class="text-gray-400 mt-2">Client Satisfaction</p>
+            </div>
+        </div>
 
     </div>
-  </section>
-
-  <!-- <section class="about-section" id="about-section" data-aos="fade-up" data-aos-anchor-placement="top-center">
-    <h2 class="section-title">About Me</h2>
-    <p class="section-description">
-      I am a dedicated Full Stack Developer and Web Designer with a track record of building intuitive SaaS applications, robust automation tools, and scalable web platforms. Combining a strong aesthetic sensibility with modern development practices, I specialize in transforming complex requirements into elegant, user-centric solutions. From frontend interfaces to backend logic, I am driven by a passion for continuous learning and delivering impactful digital experiences.
-    </p>
-  </section> -->
-
-
-  <section class="services-section" id="services-section" data-aos="fade-up" data-aos-anchor-placement="top-center">
-    <h2 class="section-title">Services</h2>
-    <p class="section-description">
-      I craft visually stunning, user-focused designs that bring brands to life through web design, UI/UX, and graphic
-      design.
-    </p>
-
-    <div class="services-container">
-      <div class="service-card">
-        <div class="icon">🖥️</div>
-        <h3>Web Design</h3>
-        <p>Custom, responsive websites tailored to your brand and goals using modern design principles.</p>
-      </div>
-      <div class="service-card">
-        <div class="icon">🎨</div>
-        <h3>UI/UX Design</h3>
-        <p>Creating intuitive, engaging, and user-friendly experiences with wireframes and prototypes.</p>
-      </div>
-      <div class="service-card">
-        <div class="icon">✏️</div>
-        <h3>Graphic Design</h3>
-        <p>Logos, banners, and visuals that help you stand out and communicate your brand identity.</p>
-      </div>
-    </div>
-  </section>
-<section class="skills-section" id="skills">
-
-<h2>Skills & Tools</h2>
-
-<!-- Programming -->
-<h3 class="category-title">Programming</h3>
-<div class="skills-grid">
-
-<div class="skill-card">
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg">
-<p>HTML</p>
-</div>
-
-<div class="skill-card">
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg">
-<p>CSS</p>
-</div>
-
-<div class="skill-card">
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg">
-<p>JavaScript</p>
-</div>
-
-<div class="skill-card">
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg">
-<p>Python</p>
-</div>
-
-</div>
-
-
-<!-- Frameworks -->
-<h3 class="category-title">Frameworks</h3>
-<div class="skills-grid">
-
-<div class="skill-card">
-<img src="https://getbootstrap.com/docs/5.3/assets/brand/bootstrap-logo-shadow.png">
-<p>Bootstrap</p>
-</div>
-
-<div class="skill-card">
-<img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg">
-<p>Tailwind</p>
-</div>
-
-</div>
-
-
-<!-- Development Tools -->
-<h3 class="category-title">Development Tools</h3>
-<div class="skills-grid">
-
-<div class="skill-card">
-<img src="assets/images/github.png">
-<p>GitHub</p>
-</div>
-
-<div class="skill-card">
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg">
-<p>VS Code</p>
-</div>
-
-<div class="skill-card">
-<img src="https://c.clc2l.com/t/g/o/google-antigravity-tqj5OH.png">
-<p>Antigravity</p>
-</div>
-</div>
-
 </section>
 
-  <section class="education-section" id="education" data-aos="fade-up" data-aos-anchor-placement="top-center">
-    <h2 style="color:#fff; margin: 0 0 0 0 ;  text-align: center;
-">Education & Experience</h2>
-    <br>
-    <div class="education-container">
-
-
-      <div class="timeline">
-        <div class="timeline-line"></div>
-
-        <!-- Card 1 -->
-        <div class="timeline-item" data-aos="zoom-in">
-          <div class="timeline-dot"></div>
-          <div class="timeline-card" style="text-align: center;">
-
-            <h3>2025</h3>
-            <hr>
-
-            <p>Graphic Design – NVQ Level 4
-              Maradana Technical College, Colombo, Sri Lanka</p>
-            <b>Duration: 6 Months <br>
-              Status: completed</b>
-          </div>
+<section id="services" class="py-32 px-8 relative">
+    <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-20" data-aos="fade-up">
+            <span class="text-[#CC0000] uppercase tracking-[0.3em] text-sm font-bold">SERVICES</span>
+            <h2 class="text-5xl md:text-6xl font-bold mt-4 font-jakarta">
+                What I <span class="brand-text">Do</span>
+            </h2>
+            <p class="text-gray-400 max-w-2xl mx-auto mt-6">
+                Building modern digital experiences with a focus on performance, aesthetics, and scalability.
+            </p>
         </div>
 
-        <!-- Card 2 -->
-        <div class="timeline-item" data-aos="zoom-in">
-          <div class="timeline-dot"></div>
-          <div class="timeline-card" style="text-align: center;">
-            <h3>2025</h3>
-            <hr>
-            <p>
-              Graphic Design Intern | National Productivity Secretariat
-
-            </p><b>Duration: 6 Months <br>
-              Status: Completed</b>
-          </div>
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="glass glow-border rounded-[32px] p-10 hover:-translate-y-3 hover:border-red-500/50 transition duration-500" data-aos="fade-up" data-aos-delay="100">
+                <div class="w-16 h-16 rounded-2xl bg-red-500/10 flex items-center justify-center text-red-500 mb-8">
+                    <i data-lucide="monitor-smartphone"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-4">Web Design</h3>
+                <p class="text-gray-400 leading-8">Modern responsive websites with premium aesthetics, high performance, and conversion-focused layouts.</p>
+            </div>
+            <div class="glass glow-border rounded-[32px] p-10 hover:-translate-y-3 hover:border-red-500/50 transition duration-500" data-aos="fade-up" data-aos-delay="200">
+                <div class="w-16 h-16 rounded-2xl bg-red-500/10 flex items-center justify-center text-red-500 mb-8">
+                    <i data-lucide="layout-template"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-4">UI/UX Design</h3>
+                <p class="text-gray-400 leading-8">User-centered interfaces that balance visual beauty with usability and accessibility.</p>
+            </div>
+            <div class="glass glow-border rounded-[32px] p-10 hover:-translate-y-3 hover:border-red-500/50 transition duration-500" data-aos="fade-up" data-aos-delay="300">
+                <div class="w-16 h-16 rounded-2xl bg-red-500/10 flex items-center justify-center text-red-500 mb-8">
+                    <i data-lucide="pen-tool"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-4">Graphic Design</h3>
+                <p class="text-gray-400 leading-8">Branding, social media assets, and premium visual experiences for modern businesses.</p>
+            </div>
         </div>
-
-        <!-- Card 3 -->
-        <!-- <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-card">
-          <h3>2024</h3>
-          <p>Freelance graphic designer specializing in branding and UI/UX.</p>
-        </div>
-      </div> -->
-
-        <!-- Card 4 -->
-        <!-- <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-card">
-          <h3>2025</h3>
-          <p>Launched full portfolio website showcasing all projects.</p>
-        </div>
-      </div>
-    </div> -->
-      </div>
-  </section>
-  <br>
-
-
-  <section class="achievements-section" id="achievements" data-aos="fade-up" data-aos-anchor-placement="top-center">
-    <h2 style="color:#fff; margin: 0 0 0 0 ;  text-align: center;
-">Achievements & Certifications</h2>
-    <br>
-    <div class="achievements-container">
-
-
-      <div class="timeline">
-        <div class="timeline-line"></div>
-
-        <!-- Card 1 -->
-        <div class="timeline-item" data-aos="zoom-in">
-          <div class="timeline-dot"></div>
-          <div class="timeline-card" style="text-align: center;">
-
-            <h3>2025</h3>
-            <hr>
-
-            <p>Professional Benchmarking Certification (Global Benchmarking Network)</p>
-            <img src="https://certopus.s3.ap-south-1.amazonaws.com/images/16606e9b4abc4f02b920a0714599395f.jpeg"
-              onclick="openimage(this.src)" width="100%" alt="" srcset="">
-          </div>
-        </div>
-
-
-      </div>
-
     </div>
-  </section>
+</section>
 
-  <br>
-  <section class="project-section" id="project-section" data-aos="fade-up" data-aos-anchor-placement="top-center">
-    <h2>Projects</h2>
-    <!-- <p>Here are some of the projects I've worked on:</p> -->
-    <div class="project-grid" data-aos="flip-left">
-
-      <div class="card" data-aos="zoom-in">
-        <img src="assets/images/Qr.png" onclick="openimage(this.src)" width="100%" height="auto" alt="Project 5">
-        <h3 style="margin-top: 15px; color: #fff;">VenomQR Studio</h3>
-        <p style="margin-top: 10px;">VenomQR Studio is a modern web-based QR code generator that allows users to create
-          QR codes for text, URLs, and uploaded files. It integrates with Google Drive to upload files (PDF, images,
-          videos) and generate QR codes that link directly to those files. The app features a sleek glassmorphism UI,
-          file previews, upload progress tracking, and easy QR code download.</p>
-        <div style="margin-top: auto; padding-top: 15px;">
-          <button style="width: 100%;"
-            onclick="window.open('https://imeshsan2008.github.io/qr/', '_blank');">Live Demo</button>
-          <p class="tools">
-            <i class="fa-brands fa-python"></i> Python
-          </p>
+<section id="skills" class="py-32 px-8">
+    <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-20" data-aos="fade-up">
+            <span class="text-[#CC0000] uppercase tracking-[0.3em] text-sm font-bold">SKILLS & TOOLS</span>
+            <h2 class="text-5xl md:text-6xl font-bold mt-4 font-jakarta">
+                My <span class="brand-text">Tech Stack</span>
+            </h2>
         </div>
-      </div>
 
-      <div class="card">
-        <img src="assets/images/mediax.png" onclick="openimage(this.src)" width="100%" height="auto" alt="Project 2">
-        <h3 style="margin-top: 15px; color:#fff;">MediaX</h3>
-        <p style="margin-top: 10px;">
-          YouTube, Facebook, or TikTok video link to quickly download
-          high-quality videos without watermarks. MediaX delivers fast
-          processing, a simple interface, and smooth performance across
-          both desktop and mobile devices.
-        </p>
-        <div style="margin-top: auto; padding-top: 15px;">
-          <button style="width:100%;" onclick="window.open('https://imeshsan2008.github.io/mediax/', '_blank');">
-            Live Demo
-          </button>
-          <p class="tools">
-            <i class="fa-brands fa-html5"></i> HTML ,
-            <i class="fa-brands fa-css3-alt"></i> CSS
-          </p>
-        </div>
-      </div>
+        <div class="grid grid-cols-12 gap-6">
+            <div class="col-span-12 md:col-span-5 glass glow-border rounded-[32px] p-8 min-h-[240px]" data-aos="zoom-in" data-aos-delay="100">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <h3 class="text-3xl font-bold">Frontend</h3>
+                        <p class="text-gray-400 mt-2">Modern web technologies</p>
+                    </div>
+                    <div class="w-16 h-16 rounded-2xl bg-red-500/10 flex items-center justify-center text-red-500">
+                        <i class="bi bi-code-slash text-3xl"></i>
+                    </div>
+                </div>
+                <div class="flex flex-wrap gap-4 mt-10">
+                    <span class="glass px-4 py-3 rounded-2xl border-white/5 hover:border-[#CC0000]/50 transition">HTML5</span>
+                    <span class="glass px-4 py-3 rounded-2xl border-white/5 hover:border-[#CC0000]/50 transition">CSS3</span>
+                    <span class="glass px-4 py-3 rounded-2xl border-white/5 hover:border-[#CC0000]/50 transition">JavaScript</span>
+                    <span class="glass px-4 py-3 rounded-2xl border-white/5 hover:border-[#CC0000]/50 transition">Tailwind CSS</span>
+                    <span class="glass px-4 py-3 rounded-2xl border-white/5 hover:border-[#CC0000]/50 transition">MVC Arch</span>
+                </div>
+            </div>
 
-      <div class="card">
-        <img src="assets/images/frameMagic.png" onclick="openimage(this.src)" width="100%" height="auto" alt="Project 2">
-        <h3 style="margin-top: 15px; color: #fff;">Magic Frame</h3>
-        <p style="margin-top: 10px;">Upload your photo and customize text to create a personalized birthday frame easily. Use
-          touch gestures or mouse interactions to move, resize, and rotate elements.
-        </p>
-        <div style="margin-top: auto; padding-top: 15px;">
-          <button style="width: 100%;"
-            onclick="window.open('https://imeshsan2008.github.io/magicframe/', '_blank');">Live Demo</button>
-          <p class="tools">
-            <i class="fa-brands fa-html5"></i> HTML ,
-            <i class="fa-brands fa-css3-alt"></i> CSS ,
-            <i class="fa-brands fa-js"></i> JavaScript
-          </p>
-        </div>
-      </div>
+            <div class="col-span-12 md:col-span-3 glass glow-border rounded-[32px] p-8 min-h-[240px]" data-aos="zoom-in" data-aos-delay="200">
+                <div class="w-16 h-16 rounded-2xl bg-red-500/10 flex items-center justify-center text-red-500 mb-8">
+                    <i class="bi bi-cpu text-3xl"></i>
+                </div>
+                <h3 class="text-3xl font-bold">Node.js</h3>
+                <p class="text-gray-400 mt-4 leading-8">Backend APIs, utilities, AI integrations, and applications.</p>
+            </div>
 
-      <div class="card" data-aos="zoom-in">
-        <img src="assets/images/Trainify.png" onclick="openimage(this.src)" width="100%" height="auto" alt="Project 5">
-        <h3 style="margin-top: 15px; color: #fff;">Trainify</h3>
-        <p style="margin-top: 10px;">Trainify is a training management app designed to streamline learning and skill
-          development. It helps users organize their training schedules, track progress, and manage tasks effectively.
-        </p>
-        <div style="margin-top: auto; padding-top: 15px;">
-          <button style="width: 100%;"
-            onclick="window.open('https://github.com/imeshsan2008/Trainify/releases/download/latest/Trainify.v2.0.0.exe', '_blank');">Download</button>
-          <p class="tools">
-            <i class="fa-brands fa-python"></i> Python
-          </p>
-        </div>
-      </div>
+            <div class="col-span-12 md:col-span-3 glass glow-border rounded-[32px] p-8 min-h-[240px]" data-aos="zoom-in" data-aos-delay="200">
+                <div class="w-16 h-16 rounded-2xl bg-red-500/10 flex items-center justify-center text-red-500 mb-8">
+                    <i class="bi bi-filetype-py text-3xl"></i>
+                </div>
+                <h3 class="text-3xl font-bold">Python</h3>
+                <p class="text-gray-400 mt-4 leading-8">Backend APIs, utilities, AI integrations, and applications.</p>
+            </div>
 
-      <div class="card">
-        <img src="assets/images/ai_1.png" onclick="openimage(this.src)" width="100%" height="auto" alt="Project 4">
-        <h3 style="margin-top: 15px; color: #fff;">AI Image Detector - BlackMamba Vision</h3>
-        <p style="margin-top: 10px;">Quickly identify whether an image is AI-generated or authentic. Upload JPG or PNG
-          images and get instant, accurate results powered by advanced AI.</p>
-        <div style="margin-top: auto; padding-top: 15px;">
-          <button style="width: 100%;"
-            onclick="window.open('https://imeshsan2008.github.io/ai/', '_blank');">Live Demo</button>
-          <p class="tools">
-            <i class="fa-brands fa-python"></i> Python ,
-            <i class="fa-brands fa-html5"></i> HTML ,
-            <i class="fa-brands fa-css3-alt"></i> CSS
-          </p>
-        </div>
-      </div>
+            <div class="col-span-12 md:col-span-4 glass glow-border rounded-[32px] p-8 min-h-[240px]" data-aos="zoom-in" data-aos-delay="300">
+                <div class="w-16 h-16 rounded-2xl bg-red-500/10 flex items-center justify-center text-red-500 mb-8">
+                    <i class="bi bi-database text-3xl"></i>
+                </div>
+                <h3 class="text-3xl font-bold">PostgreSQL</h3>
+                <p class="text-gray-400 mt-4 leading-8">Relational database design, architecture, and secure management.</p>
+            </div>
 
-      <div class="card">
-        <img src="assets/images/image.png" onclick="openimage(this.src)" width="100%" height="auto" alt="Project 3">
-        <h3 style="margin-top: 15px; color: #fff;">ShareBox</h3>
-        <p style="margin-top: 10px;">ShareBox is a simple, fast, and secure file sharing application that allows you to
-          share files with your friends and family over Wi-Fi without the need for an internet connection.</p>
-        <div style="margin-top: auto; padding-top: 15px;">
-          <button style="width: 100%;"
-            onclick="window.open('https://github.com/imeshsan2008/ShareBox/releases/download/latest/ShareBox.exe', '_blank');">Download</button>
-          <p class="tools">
-            <i class="fa-brands fa-python"></i> Python
-          </p>
-        </div>
-      </div>
+            <div class="col-span-12 md:col-span-3 glass glow-border rounded-[32px] p-8 group hover:border-[#CC0000] transition" data-aos="fade-up" data-aos-delay="100">
+                <div class="w-16 h-16 rounded-2xl bg-red-500/10 flex items-center justify-center text-red-500 mb-8">
+                    <i class="bi bi-github text-3xl"></i>
+                </div>                
+                <h3 class="text-3xl font-bold">GitHub</h3>
+                <p class="text-gray-400 mt-4 leading-8">Version control, collaboration, and code management.</p>
+            </div>
 
-      <div class="card">
-        <img src="https://github.com/imeshsan2008/AdobeShield/blob/main/ui.png?raw=true" onclick="openimage(this.src)" width="100%" height="auto" alt="Project 2">
-        <h3 style="margin-top: 15px; color: #fff;">AdobeShield</h3>
-        <p style="margin-top: 10px;">AdobeShield is a simple and user-friendly desktop app that helps you block internet
-          access for Adobe programs like Photoshop, Illustrator, and InDesign.</p>
-        <div style="margin-top: auto; padding-top: 15px;">
-          <button style="width: 100%;"
-            onclick="window.open('https://github.com/imeshsan2008/AdobeShield/releases/download/latest/AdobeShield_V2.0.exe', '_blank');">Download</button>
-          <p class="tools">
-            <i class="fa-brands fa-python"></i> Python
-          </p>
-        </div>
-      </div>
+            <div class="col-span-12 md:col-span-3 glass glow-border rounded-[32px] p-8 group hover:border-[#CC0000] transition" data-aos="fade-up" data-aos-delay="200">
+                <div class="w-16 h-16 rounded-2xl bg-red-500/10 flex items-center justify-center text-red-500 mb-8">
+                    <i class="bi bi-file-earmark-code text-3xl"></i>
+                </div>
+                <h3 class="text-3xl font-bold">Antigravity</h3>
+                <p class="text-gray-400 mt-4 leading-8">Integrated development environment for web development.</p>
+            </div>
 
-      <div class="card">
-        <img src="assets/images/apisite.jpg" onclick="openimage(this.src)" width="100%" height="auto" alt="Project 1">
-        <h3 style="margin-top: 15px; color: #fff;">Api Site</h3>
-        <p style="margin-top: 10px;">A fast and simple API for downloading videos from Facebook, TikTok, and YouTube.
-          Built for easy integration, it allows seamless video extraction from popular social platforms.</p>
-        <div style="margin-top: auto; padding-top: 15px;">
-          <button style="width: 100%;"
-            onclick="window.open('https://venom-devils-api.koyeb.app/', '_blank');">Live Demo</button>
-          <p class="tools">
-            <i class="fa-brands fa-node-js"></i> Node.js
-          </p>
+            <div class="col-span-12 md:col-span-6 glass glow-border rounded-[32px] p-8" data-aos="fade-left" data-aos-delay="300">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="text-2xl font-bold">Cloud Deployment</h3>
+                        <p class="text-gray-400 mt-3">DigitalOcean • Koyeb • Production Servers</p>
+                    </div>
+                    <div class="w-16 h-16 rounded-2xl bg-red-500/10 flex items-center justify-center text-red-500">
+                        <i class="bi bi-cloud text-3xl"></i>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </section>
-  <br>
+</section>
+<section id="experience" class="py-32 px-8">
+    <div class="max-w-5xl mx-auto">
+        <div class="text-center mb-20" data-aos="fade-up">
+            <span class="text-[#CC0000] uppercase tracking-[0.3em] text-sm font-bold">EXPERIENCE</span>
+            <h2 class="text-5xl md:text-6xl font-bold mt-4 font-jakarta">
+                Journey & <span class="brand-text">Education</span>
+            </h2>
+        </div>
 
-  <section class="contact-section" id="contact-section" data-aos="fade-up">
-    <h1>Contact</h1>
-    <br>
-    <div class="contact-container">
-      <img src="assets/images/contact.svg" class="contact-image" alt="Support Image">
-      <!-- Replace above src with your actual image -->
-      <div class="form">
-        <form action="https://www.formbackend.com/f/2b32399a97411fd1" method="POST">
-          <label for="name">Name</label>
-          <input type="text" id="name" name="name">
-          <label for="whatsapp">Whatsapp</label>
-          <input type="text" id="whatsapp" name="whatsapp" placeholder="Enter your WhatsApp number" required>
+        <div class="relative">
+            <div class="absolute left-6 top-0 bottom-0 w-[2px] bg-gradient-to-b from-[#CC0000] to-transparent"></div>
 
-          <label for="message">Message</label>
-          <textarea id="message" name="message" placeholder="Enter your message" required></textarea>
+            <div class="relative pl-20 mb-16" data-aos="fade-right" data-aos-delay="100">
+                <div class="absolute left-0 top-2 w-12 h-12 rounded-full bg-[#CC0000] shadow-[0_0_20px_rgba(204,0,0,.6)] flex items-center justify-center border-4 border-darkBg"></div>
+                <div class="glass glow-border rounded-[32px] p-8 relative overflow-hidden">
+                    <div class="absolute -right-10 -top-10 w-32 h-32 bg-red-500/10 rounded-full blur-2xl"></div>
+                    <span class="inline-block px-3 py-1 bg-red-500/20 text-red-400 rounded-full text-sm font-bold mb-3">2025</span>
+                    <h3 class="text-2xl font-bold">Graphic Design Intern</h3>
+                    <p class="text-gray-400 mt-2 font-medium">National Productivity Secretariat</p>
+                    <p class="text-gray-500 mt-4">Worked on branding, official document layouts, UI assets, and digital visual design systems.</p>
+                </div>
+            </div>
 
-          <center> <button type="submit">Submit</button>
-          </center>
-        </form>
-      </div>
+            <div class="relative pl-20 mb-16" data-aos="fade-right" data-aos-delay="200">
+                <div class="absolute left-0 top-2 w-12 h-12 rounded-full bg-[#CC0000] shadow-[0_0_20px_rgba(204,0,0,.6)] flex items-center justify-center border-4 border-darkBg"></div>
+                <div class="glass glow-border rounded-[32px] p-8 relative overflow-hidden">
+                    <div class="absolute -right-10 -top-10 w-32 h-32 bg-red-500/10 rounded-full blur-2xl"></div>
+                    <span class="inline-block px-3 py-1 bg-red-500/20 text-red-400 rounded-full text-sm font-bold mb-3">2025</span>
+                    <h3 class="text-2xl font-bold">NVQ Level 4 Graphic Design</h3>
+                    <p class="text-gray-400 mt-2 font-medium">Maradana Technical College</p>
+                    <p class="text-gray-500 mt-4">Comprehensive study and specialized training in digital graphics, typography, and visual communication.</p>
+                </div>
+            </div>
+
+            <div class="relative pl-20" data-aos="fade-right" data-aos-delay="300">
+                <div class="absolute left-0 top-2 w-12 h-12 rounded-full bg-[#CC0000] shadow-[0_0_20px_rgba(204,0,0,.6)] flex items-center justify-center border-4 border-darkBg"></div>
+                <div class="glass glow-border rounded-[32px] p-8 relative overflow-hidden">
+                    <div class="absolute -right-10 -top-10 w-32 h-32 bg-red-500/10 rounded-full blur-2xl"></div>
+                    <span class="inline-block px-3 py-1 bg-red-500/20 text-red-400 rounded-full text-sm font-bold mb-3">Certification</span>
+                    <h3 class="text-2xl font-bold">Professional Benchmarking</h3>
+                    <p class="text-gray-400 mt-2 font-medium">Global Benchmarking Network</p>
+                    <p class="text-gray-500 mt-4">Demonstrated professional competency, industry readiness, and high-level design standards.</p>
+                </div>
+            </div>
+        </div>
     </div>
-  </section>
+</section>
 
-  <center>
-    <footer style=" bottom: 0; text-align: center;">Developed by Imesh Sandeepa</footer>
-  </center>
-  <!-- Banner -->
-  <!-- <center style="
-  width: 100%;
-  opacity: 0.9;
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    background: rgba(0,0,0,0.7);
-    color: white;
-    margin: 0 auto;
-    padding: 5px 10px;
-    font-size: 14px;
-    font-weight: bold;
-    border-top-left-radius: 8px;
-  ">
-<marquee behavior="" direction="">Ai Image Detector - BlackMamba Vision V1.0 is now available! <a href="https://imeshsan2008.github.io/ai/" style="color: #fff;">Click here to View</a>
-:  Magic Frame - Vision V1.0 is now available! <a href="https://imeshsan2008.github.io/magicframe/" style="color: #fff;">Click here to View</a>. 
+<section id="projects" class="py-32 px-8 relative">
+    <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-20" data-aos="fade-up">
+            <span class="text-[#CC0000] uppercase tracking-[0.3em] text-sm font-bold">PROJECTS</span>
+            <h2 class="text-5xl md:text-6xl font-bold mt-4 font-jakarta">
+                Selected <span class="brand-text">Works</span>
+            </h2>
+            <p class="text-gray-400 max-w-2xl mx-auto mt-6">
+                A collection of premium web apps, Python utilities, and creative digital systems.
+            </p>
+        </div>
 
-</marquee>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
 
-</center> -->
+            <div class="group glass glow-border rounded-[32px] overflow-hidden flex flex-col" data-aos="zoom-in" data-aos-delay="100">
+                <div class="h-[250px] bg-[url('https://github.com/imeshsan2008/AdobeShield/blob/main/ui.png?raw=true')] bg-cover bg-center relative overflow-hidden">
+                    <div class="absolute top-4 right-4 z-30 bg-[#CC0000] text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">V2.0 Live</div>
+                    <div class="absolute inset-0 bg-darkBg/80 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col items-center justify-center gap-4 z-20">
 
+                        <button class="px-6 py-2.5 bg-[#CC0000] text-white rounded-full font-bold flex items-center gap-2 hover:scale-105 transition shadow-[0_0_15px_rgba(204,0,0,0.5)]"><i data-lucide="download" class="w-4 h-4 fill-current"></i> Download</button>
+                        <!-- <button class="px-6 py-2.5 border border-white/30 bg-white/10 text-white rounded-full font-b                                                                                                                   old flex items-center gap-2 hover:bg-white/20 transition"><i data-lucide="github" class="w-4 h-4"></i> Source Code</button> -->
+                    </div>
+                </div>
+                <div class="p-8 flex-1 bg-darkBg relative z-10 border-t border-white/5">
+                    <div class="flex gap-2 mb-3">
+                        <span class="px-2 py-1 bg-red-500/20 text-red-400 rounded text-xs font-bold">Python</span>
+                    </div>
+                    <h3 class="text-2xl font-bold">AdobeShield</h3>
+                    <p class="text-gray-400 mt-3 text-sm">Desktop utility to securely manage network access and firewall rules for creative assets.</p>
+                </div>
+            </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
-    crossorigin="anonymous"></script>
-  <!-- AOS Script -->
-  <script src="assets/js/script.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-  <style>
-    footer {
-      width: 100%;
-      background-color: #121212;
-      color: #fff;
-      padding: 10px 0;
-      position: relative;
-    }
-  </style>
-  <script>
+            <div class="group glass glow-border rounded-[32px] overflow-hidden flex flex-col" data-aos="zoom-in" data-aos-delay="200">
+                <div class="absolute top-4 right-4 z-30 bg-[#CC0000] text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">V1.0 Live</div>
+                <div class="h-[250px] bg-[url('https://imeshsan2008.is-a.dev/assets/images/mediax.png')] bg-cover bg-center relative overflow-hidden">
+                    <div class="absolute inset-0 bg-darkBg/80 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col items-center justify-center gap-4 z-20">
+                        <button onclick="window.open('mediax/', '_blank')" class="px-6 py-2.5 bg-[#CC0000] text-white rounded-full font-bold flex items-center gap-2 hover:scale-105 transition shadow-[0_0_15px_rgba(204,0,0,0.5)]"><i data-lucide="play" class="w-4 h-4 fill-current"></i> Live Demo</button>
+                    </div>
+                </div>
+                <div class="p-8 flex-1 bg-darkBg relative z-10 border-t border-white/5">
+                    <div class="flex gap-2 mb-3">
+                        <span class="px-2 py-1 bg-red-500/20 text-red-400 rounded text-xs font-bold">HTML, CSS, JS</span>
+                    </div>
+                    <h3 class="text-2xl font-bold">MediaX</h3>
+                    <p class="text-gray-400 mt-3 text-sm">Download fast, watermark-free videos from YouTube, TikTok, and Facebook on any device.</p>
+                </div>
+            </div>
+
+            <div class="group glass glow-border rounded-[32px] overflow-hidden flex flex-col" data-aos="zoom-in" data-aos-delay="300">
+                      <div class="absolute top-4 right-4 z-30 bg-[#CC0000] text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">V2.0 Live</div>
+          
+                <div class="h-[250px] bg-[url('https://imeshsan2008.is-a.dev/assets/images/Qr.png')] bg-cover bg-center relative overflow-hidden">
+                    <div class="absolute inset-0 bg-darkBg/80 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col items-center justify-center gap-4 z-20">
+                        <button onclick="window.open('qr/', '_blank')" class="px-6 py-2.5 bg-[#CC0000] text-white rounded-full font-bold flex items-center gap-2 hover:scale-105 transition shadow-[0_0_15px_rgba(204,0,0,0.5)]"><i data-lucide="play" class="w-4 h-4 fill-current"></i> Live Demo</button>
+                    </div>
+                </div>
+                <div class="p-8 flex-1 bg-darkBg relative z-10 border-t border-white/5">
+                    <div class="flex gap-2 mb-3">
+                        <span class="px-2 py-1 bg-red-500/20 text-red-400 rounded text-xs font-bold">HTML, CSS, JS</span>
+                    </div>
+                    <h3 class="text-2xl font-bold">VenomQR Studio</h3>
+                    <p class="text-gray-400 mt-3 text-sm">Modern web-based QR generator platform with native Google Drive integration.</p>
+                </div>
+            </div>
+
+            <div class="group glass glow-border rounded-[32px] overflow-hidden flex flex-col" data-aos="zoom-in" data-aos-delay="400">
+                <div class="absolute top-4 right-4 z-30 bg-[#CC0000] text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">V2.0 Live</div>
+                <div class="h-[250px] bg-[url('https://imeshsan2008.is-a.dev/assets/images/Trainify.png')] bg-cover bg-center relative overflow-hidden">
+                    <div class="absolute inset-0 bg-darkBg/80 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col items-center justify-center gap-4 z-20">
+                        <button onclick="window.open('https://github.com/imeshsan2008/Trainify/releases/download/latest/Trainify.v2.0.0.exe', '_blank');" class="px-6 py-2.5 bg-[#CC0000] text-white rounded-full font-bold flex items-center gap-2 hover:scale-105 transition shadow-[0_0_15px_rgba(204,0,0,0.5)]"><i data-lucide="download" class="w-4 h-4 fill-current"></i> Download</button>
+                    </div>
+                </div>
+                <div class="p-8 flex-1 bg-darkBg relative z-10 border-t border-white/5">
+                    <div class="flex gap-2 mb-3">
+                        <span class="px-2 py-1 bg-red-500/20 text-red-400 rounded text-xs font-bold">Python App</span>
+                    </div>
+                    <h3 class="text-2xl font-bold">Trainify</h3>
+                    <p class="text-gray-400 mt-3 text-sm">Streamline your learning and track your progress with AI-powered training management.</p>
+                </div>
+            </div>
+
+            <div class="group glass glow-border rounded-[32px] overflow-hidden flex flex-col" data-aos="zoom-in" data-aos-delay="500">
+                <div class="absolute top-4 right-4 z-30 bg-[#CC0000] text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">V1.0 Live</div>
+                <div class="h-[250px] bg-[url('https://imeshsan2008.is-a.dev/assets/images/ai_1.png')] bg-cover bg-center relative overflow-hidden">
+                    <div class="absolute inset-0 bg-darkBg/80 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col items-center justify-center gap-4 z-20">
+                        <button class="px-6 py-2.5 bg-[#CC0000] text-white rounded-full font-bold flex items-center gap-2 hover:scale-105 transition shadow-[0_0_15px_rgba(204,0,0,0.5)]"><i data-lucide="play" class="w-4 h-4 fill-current"></i> Try AI</button>
+                    </div>
+                </div>
+                <div class="p-8 flex-1 bg-darkBg relative z-10 border-t border-white/5">
+                    <div class="flex gap-2 mb-3">
+                        <span class="px-2 py-1 bg-red-500/20 text-red-400 rounded text-xs font-bold">Python AI</span>
+                    </div>
+                    <h3 class="text-2xl font-bold">BlackMamba Vision</h3>
+                    <p class="text-gray-400 mt-3 text-sm">AI Image Detector to intelligently differentiate AI-generated vs. authentic images.</p>
+                </div>
+            </div>
+
+            <div class="group glass glow-border rounded-[32px] p-8 flex flex-col justify-center relative overflow-hidden" data-aos="zoom-in" data-aos-delay="600">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-[#CC0000]/10 rounded-bl-full -z-10"></div>
+                <h3 class="text-2xl font-bold mb-6">More Systems</h3>
+                <ul class="space-y-5">
+                    <li class="border-b border-white/10 pb-3 group/item" onclick="window.open('https://venom-devils-api.koyeb.app/', '_blank');" style="cursor: pointer;" title="Click to View">  
+                        <div class="flex justify-between items-center text-sm" title="Click to View">
+                            <span class="font-bold text-white group-hover/item:text-[#CC0000] transition">Api Site</span>
+                            <span class="text-red-400 text-xs bg-red-500/10 px-2 py-1 rounded" title="Click to View">Node.js</span>
+                        </div>
+                        <p class="text-gray-400 text-xs mt-2" title="Click to View">A fast, simple video extraction API built for seamless social media integration.</p>
+                    </li>
+                    <li class="border-b border-white/10 pb-3 group/item" onclick="window.open('magicframe', '_blank');" style="cursor: pointer;" title="Click to Download exe" >
+                        <div class="flex justify-between items-center text-sm" title="Click to Download exe">
+                            <span class="font-bold text-white group-hover/item:text-[#CC0000] transition">Magic Frame</span>
+                            <span class="text-red-400 text-xs bg-red-500/10 px-2 py-1 rounded" title="Click to Download exe">HTML, CSS, JS</span>
+                        </div>
+                        <p class="text-gray-400 text-xs mt-2">Upload, customize, and design the perfect personalized birthday frame in seconds.</p>
+                    </li>
+                    <li class="pb-1 group/item" onclick="window.open('https://github.com/imeshsan2008/ShareBox/releases/download/latest/ShareBox.exe', '_blank');" style="cursor: pointer;" title="Click to Download exe" >
+                        <div class="flex justify-between items-center text-sm" title="Click to Download exe">
+                            <span class="font-bold text-white group-hover/item:text-[#CC0000] transition">ShareBox</span>
+                            <span class="text-red-400 text-xs bg-red-500/10 px-2 py-1 rounded" title="Click to Download exe">Python</span>
+                        </div>
+                        <p class="text-gray-400 text-xs mt-2" title="Click to Download exe">Fast, secure, and simple file sharing over Wi-Fi—no internet required.</p>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section id="contact" class="py-32 px-8 relative">
+    <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-20" data-aos="fade-up">
+            <span class="text-[#CC0000] uppercase tracking-[0.3em] text-sm font-bold">CONTACT</span>
+            <h2 class="text-5xl md:text-6xl font-bold mt-4 font-jakarta">
+                Let's <span class="brand-text">Work Together</span>
+            </h2>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div class="glass glow-border rounded-[32px] p-10" data-aos="fade-right">
+              <form class="space-y-6">
+    <input type="text" id="name" placeholder="Your Name"
+        class="w-full px-6 py-4 rounded-2xl bg-white/5 border border-white/10 focus:border-[#CC0000] focus:shadow-[0_0_15px_rgba(204,0,0,0.3)] transition outline-none text-white placeholder-gray-500">
+    
+    <input type="email" id="email" placeholder="Email Address"
+        class="w-full px-6 py-4 rounded-2xl bg-white/5 border border-white/10 focus:border-[#CC0000] focus:shadow-[0_0_15px_rgba(204,0,0,0.3)] transition outline-none text-white placeholder-gray-500">
+    
+    <input type="text" id="subject" placeholder="Subject"
+        class="w-full px-6 py-4 rounded-2xl bg-white/5 border border-white/10 focus:border-[#CC0000] focus:shadow-[0_0_15px_rgba(204,0,0,0.3)] transition outline-none text-white placeholder-gray-500">
+    
+    <textarea id="message" rows="6" placeholder="Message"
+        class="w-full px-6 py-4 rounded-2xl bg-white/5 border border-white/10 focus:border-[#CC0000] focus:shadow-[0_0_15px_rgba(204,0,0,0.3)] transition outline-none resize-none text-white placeholder-gray-500"></textarea>
+    
+    <button type="button" onclick="contactform()" class="w-full py-4 rounded-2xl bg-gradient-to-r from-red-500 to-[#CC0000] text-white font-bold hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(204,0,0,0.4)] transition flex items-center justify-center gap-2">
+        Send Message <i data-lucide="send" class="w-4 h-4"></i>
+    </button>
+</form>
+            </div>
+
+            <div class="flex items-center justify-center relative" data-aos="fade-left">
+                <div class="w-[420px] h-[420px] rounded-full bg-[#CC0000]/20 blur-3xl absolute -z-10"></div>
+                <div class="glass glow-border w-full max-w-[420px] h-[420px] rounded-[40px] flex items-center justify-center relative overflow-hidden group">
+                    <div class="text-center p-8">
+                        <div class="w-24 h-24 rounded-full bg-red-500/10 mx-auto flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-[#CC0000]/20 transition-all duration-500">
+                            <i data-lucide="headphones" class="text-[#CC0000] w-12 h-12"></i>
+                        </div>
+                        <h3 class="text-3xl font-bold mt-6">Support Available</h3>
+                        <p class="text-gray-400 mt-3 text-lg">24/7 Communication & Project Assistance</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="py-12 px-8 border-t border-white/10 relative z-10">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+        <p class="text-gray-400 text-sm">
+            Developed by <span class="text-[#CC0000] font-bold">Imesh Sandeepa</span> © 2026. All rights reserved.
+        </p>
+        <div class="flex gap-6">
+            <a href="#" class="text-gray-400 hover:text-[#CC0000] hover:-translate-y-1 transition"><i data-lucide="github"></i></a>
+            <a href="#" class="text-gray-400 hover:text-[#CC0000] hover:-translate-y-1 transition"><i data-lucide="linkedin"></i></a>
+            <a href="#" class="text-gray-400 hover:text-[#CC0000] hover:-translate-y-1 transition"><i data-lucide="instagram"></i></a>
+        </div>
+    </div>
+</footer>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+<script>
+    // Initialize Icons
+    lucide.createIcons();
+
+    // Initialize Scroll Animations
     AOS.init({
-      duration: 1000,
-      once: false, // Animation repeats
+        duration: 800,
+        easing: 'ease-in-out',
+        once: false,
+        mirror: true,
+        offset: 50
     });
-    let slider = document.getElementById('slider');
-    let currentIndex = 0;
-    let images = [];
 
-    // Load images from JSON
-    fetch("images.json")
-      .then(res => res.json())
-      .then(data => {
-        images = data;
-        images.forEach(img => {
-          let image = document.createElement('img');
-          image.src = "./assets/mycreations/" + img;
-          image.alt = img;
+    // Mobile Menu Toggle Logic
+    const mobileBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
 
-          // Lightbox on click
-          image.addEventListener('click', () => {
-            document.getElementById('lightbox').style.display = 'flex';
-            document.getElementById('lightbox-img').src = image.src;
-          });
+    mobileBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+        mobileMenu.classList.toggle('flex');
+    });
 
-          slider.appendChild(image);
+    // Close menu when a link is clicked
+    mobileLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+            mobileMenu.classList.remove('flex');
         });
-        updateSlider();
-      });
+    });
+    document.addEventListener('DOMContentLoaded', () => {
+    // Select all elements that have the 'data-to' attribute
+    const counters = document.querySelectorAll('[data-to]');
 
-    // Buttons
-    document.getElementById('prev').addEventListener('click', () => {
-      currentIndex = (currentIndex - 1 + images.length) % images.length;
-      updateSlider();
+    const animateCounter = (el) => {
+        const from = parseInt(el.getAttribute('data-from') || 0, 10);
+        const to = parseInt(el.getAttribute('data-to') || 0, 10);
+        const duration = parseInt(el.getAttribute('data-duration') || 1000, 10);
+        
+        // Extract the suffix (like '+' or '%') from the initial HTML
+        const suffix = el.innerText.replace(/[0-9]/g, '').trim(); 
+
+        let startTime = null;
+
+        const step = (timestamp) => {
+            if (!startTime) startTime = timestamp;
+            
+            // Calculate progress (from 0 to 1)
+            const progress = Math.min((timestamp - startTime) / duration, 1);
+            
+            // Calculate current number using an ease-out effect (optional, currently linear)
+            const currentNum = Math.floor(progress * (to - from) + from);
+
+            // Update the DOM
+            el.innerText = currentNum + suffix;
+
+            // Continue animation if not reached 100%
+            if (progress < 1) {
+                window.requestAnimationFrame(step);
+            } else {
+                // Ensure the final number matches exactly
+                el.innerText = to + suffix; 
+            }
+        };
+
+        window.requestAnimationFrame(step);
+    };
+
+    // Set up the Intersection Observer to trigger on scroll
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateCounter(entry.target);
+                // Unobserve so it only animates once per page load
+                observer.unobserve(entry.target); 
+            }
+        });
+    }, { 
+        threshold: 0.5 // Triggers when 50% of the element is visible
     });
 
-    document.getElementById('next').addEventListener('click', () => {
-      currentIndex = (currentIndex + 1) % images.length;
-      updateSlider();
-    });
+    // Attach observer to all counter elements
+    counters.forEach(counter => observer.observe(counter));
+});
 
-    function updateSlider() {
-      slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+function contactform() {
+    // 1. Get the input elements
+    const nameInput = document.getElementById("name");
+    const emailInput = document.getElementById("email");
+    const subjectInput = document.getElementById("subject");
+    const messageInput = document.getElementById("message");
+
+    const name = nameInput.value;
+    const email = emailInput.value;
+    const subject = subjectInput.value;
+    const message = messageInput.value;
+
+    // Stop the function if the user hasn't filled out the basics
+    if (!name || !message) {
+        alert("Please fill out your name and message before sending.");
+        return;
     }
 
-    // Touch support
-    let startX = 0;
-    slider.addEventListener('touchstart', e => { startX = e.touches[0].clientX; });
-    slider.addEventListener('touchend', e => {
-      let endX = e.changedTouches[0].clientX;
-      if (endX < startX - 50) currentIndex = (currentIndex + 1) % images.length;
-      else if (endX > startX + 50) currentIndex = (currentIndex - 1 + images.length) % images.length;
-      updateSlider();
+    // 2. Format and open the WhatsApp link
+    const link = "https://wa.me/940768902513?text=";
+    const rawText = `*New Contact Form Submission*
+Name: ${name}
+Email: ${email}
+Subject: ${subject}
+
+Message:
+${message}`;
+
+    const encodedText = encodeURIComponent(rawText);
+    window.open(link + encodedText, "_blank");
+
+    // 3. Clear the form fields completely
+    nameInput.value = "";
+    emailInput.value = "";
+    subjectInput.value = "";
+    messageInput.value = "";
+
+    // 4. Show the custom theme alert
+    const alertBox = document.getElementById("custom-alert");
+    
+    // Slide it up and fade it in
+    alertBox.classList.remove("translate-y-32", "opacity-0");
+    alertBox.classList.add("translate-y-0", "opacity-100");
+
+    // Initialize the lucide icon inside the alert just in case
+    lucide.createIcons();
+
+    // 5. Hide the alert automatically after 4 seconds
+    setTimeout(() => {
+        alertBox.classList.remove("translate-y-0", "opacity-100");
+        alertBox.classList.add("translate-y-32", "opacity-0");
+    }, 4000);
+}
+
+
+</script>
+
+<!-- Custom Success Alert -->
+<div id="custom-alert" class="fixed bottom-10 right-10 glass glow-border px-6 py-4 rounded-2xl flex items-center gap-4 transform transition-all duration-500 translate-y-32 opacity-0 z-[100] border-[#CC0000]/50 pointer-events-none">
+    <div class="w-10 h-10 rounded-full bg-red-500/10 flex items-center justify-center text-[#CC0000]">
+        <i data-lucide="check-circle" class="w-6 h-6"></i>
+    </div>
+    <div>
+        <h4 class="font-bold text-white text-base">Message Sent!</h4>
+        <p class="text-sm text-gray-400">Thanks for contacting me.</p>
+    </div>
+</div>
+<!-- Theme Mode Script -->
+<script>
+    // Custom Cursor Initialization
+    document.addEventListener('DOMContentLoaded', () => {
+        const cursorStyle = document.createElement('style');
+        cursorStyle.innerHTML = `
+            * {
+                cursor: none !important;
+            }
+            .custom-cursor-dot {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 8px;
+                height: 8px;
+                background-color: #CC0000;
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 10000;
+                transform: translate(-50%, -50%);
+                transition: width 0.2s, height 0.2s;
+                box-shadow: 0 0 10px #CC0000;
+            }
+            .custom-cursor-ring {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 36px;
+                height: 36px;
+                border: 2px solid rgba(204, 0, 0, 0.5);
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 9999;
+                transform: translate(-50%, -50%);
+                transition: width 0.2s, height 0.2s, background-color 0.2s;
+            }
+        `;
+        document.head.appendChild(cursorStyle);
+
+        const dot = document.createElement('div');
+        dot.className = 'custom-cursor-dot';
+        document.body.appendChild(dot);
+
+        const ring = document.createElement('div');
+        ring.className = 'custom-cursor-ring';
+        document.body.appendChild(ring);
+
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
+        let ringX = mouseX;
+        let ringY = mouseY;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            dot.style.transform = `translate(calc(${mouseX}px - 50%), calc(${mouseY}px - 50%))`;
+        });
+
+        const renderCursor = () => {
+            ringX += (mouseX - ringX) * 0.15;
+            ringY += (mouseY - ringY) * 0.15;
+            ring.style.transform = `translate(calc(${ringX}px - 50%), calc(${ringY}px - 50%))`;
+            requestAnimationFrame(renderCursor);
+        };
+        requestAnimationFrame(renderCursor);
+
+        // Hover effects for cursor
+        const interactiveElements = document.querySelectorAll('a, button, input, textarea, .cursor-pointer, i');
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                ring.style.width = '50px';
+                ring.style.height = '50px';
+                ring.style.backgroundColor = 'rgba(204, 0, 0, 0.1)';
+            });
+            el.addEventListener('mouseleave', () => {
+                ring.style.width = '36px';
+                ring.style.height = '36px';
+                ring.style.backgroundColor = 'transparent';
+            });
+        });
     });
 
-    // Close lightbox
-    document.getElementById('close').addEventListener('click', () => {
-      document.getElementById('lightbox').style.display = 'none';
+    window.addEventListener('load', () => {
+        const preloader = document.getElementById('preloader');
+        if (preloader) {
+            preloader.style.opacity = '0';
+            preloader.style.visibility = 'hidden';
+            setTimeout(() => {
+                preloader.remove();
+            }, 500);
+        }
     });
-    document.getElementById('lightbox').addEventListener('click', e => {
-      if (e.target.id === 'lightbox') document.getElementById('lightbox').style.display = 'none';
-    });
-    function toggleMenu() {
-      document.getElementById('navMenu').classList.toggle('show');
-    }
-  </script>
+</script>
 </body>
-
 </html>
