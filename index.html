@@ -50,7 +50,10 @@
     </script>
 
     <style>
-        html { scroll-behavior: smooth; }
+        html { 
+            scroll-behavior: smooth; 
+            overflow-x: hidden;
+        }
 
         body {
             background: #070B0A;
@@ -202,7 +205,7 @@
             <i data-lucide="menu"></i>
         </button>
         
-        <div id="mobile-menu" class="hidden absolute top-[70px] left-0 w-full glass glow-border rounded-3xl flex-col items-center py-6 gap-6 md:hidden">
+        <div id="mobile-menu" class="hidden absolute top-[70px] left-0 w-full glass glow-border rounded-3xl flex-col items-center py-6 gap-6 md:hidden" style="backdrop-filter: blur(40px); background: rgba(7, 11, 10, 0.7);">
             <a href="#home" class="mobile-link hover:text-[#CC0000] transition">Home</a>
             <a href="#services" class="mobile-link hover:text-[#CC0000] transition">Services</a>
             <a href="#skills" class="mobile-link hover:text-[#CC0000] transition">Skills</a>
@@ -783,7 +786,8 @@
     const mobileMenu = document.getElementById('mobile-menu');
     const mobileLinks = document.querySelectorAll('.mobile-link');
 
-    mobileBtn.addEventListener('click', () => {
+    mobileBtn.addEventListener('click', (e) => {
+        e.stopPropagation(); // Prevent document click from immediately closing
         mobileMenu.classList.toggle('hidden');
         mobileMenu.classList.toggle('flex');
     });
@@ -794,6 +798,14 @@
             mobileMenu.classList.add('hidden');
             mobileMenu.classList.remove('flex');
         });
+    });
+
+    // Close menu when clicking outside of it
+    document.addEventListener('click', (e) => {
+        if (!mobileMenu.classList.contains('hidden') && !mobileMenu.contains(e.target) && !mobileBtn.contains(e.target)) {
+            mobileMenu.classList.add('hidden');
+            mobileMenu.classList.remove('flex');
+        }
     });
     document.addEventListener('DOMContentLoaded', () => {
     // Select all elements that have the 'data-to' attribute
@@ -1013,8 +1025,9 @@ ${message}`;
                 pointer-events: none;
                 z-index: 10000;
                 transform: translate(-50%, -50%);
-                transition: width 0.2s, height 0.2s;
+                transition: width 0.2s, height 0.2s, opacity 0.3s ease;
                 box-shadow: 0 0 10px #CC0000;
+                opacity: 0;
             }
             .custom-cursor-ring {
                 position: fixed;
@@ -1027,7 +1040,8 @@ ${message}`;
                 pointer-events: none;
                 z-index: 9999;
                 transform: translate(-50%, -50%);
-                transition: width 0.2s, height 0.2s, background-color 0.2s;
+                transition: width 0.2s, height 0.2s, background-color 0.2s, opacity 0.3s ease;
+                opacity: 0;
             }
         `;
         document.head.appendChild(cursorStyle);
@@ -1044,12 +1058,35 @@ ${message}`;
         let mouseY = window.innerHeight / 2;
         let ringX = mouseX;
         let ringY = mouseY;
+        let cursorHideTimeout;
+
+        const showCursor = () => {
+            dot.style.opacity = '1';
+            ring.style.opacity = '1';
+            clearTimeout(cursorHideTimeout);
+            
+            // Auto hide after 2 seconds on mobile view
+            if (window.innerWidth <= 768) {
+                cursorHideTimeout = setTimeout(() => {
+                    dot.style.opacity = '0';
+                    ring.style.opacity = '0';
+                }, 2000);
+            }
+        };
 
         document.addEventListener('mousemove', (e) => {
             mouseX = e.clientX;
             mouseY = e.clientY;
             dot.style.transform = `translate(calc(${mouseX}px - 50%), calc(${mouseY}px - 50%))`;
+            showCursor();
         });
+
+        document.addEventListener('touchstart', (e) => {
+            mouseX = e.touches[0].clientX;
+            mouseY = e.touches[0].clientY;
+            dot.style.transform = `translate(calc(${mouseX}px - 50%), calc(${mouseY}px - 50%))`;
+            showCursor();
+        }, {passive: true});
 
         const renderCursor = () => {
             ringX += (mouseX - ringX) * 0.15;
