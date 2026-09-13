@@ -1,0 +1,1840 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#070b12" />
+  <title>Vexora IT Solutions — Digital Future Launch</title>
+
+  <!-- Reveal.js local files: keep these paths if you already have Reveal.js installed -->
+  <link rel="stylesheet" href="dist/reset.css" />
+  <link rel="stylesheet" href="dist/reveal.css" />
+  <link rel="stylesheet" href="dist/theme/black.css" />
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+    :root {
+      --bg: #070b12;
+      --bg-2: #0b111a;
+      --surface: rgba(255,255,255,.045);
+      --surface-2: rgba(255,255,255,.075);
+      --line: rgba(255,255,255,.10);
+      --text: #f7fafc;
+      --muted: #97a3b2;
+      --brand: #0096a6;
+      --brand-dark: #007987;
+      --brand-soft: #46dce8;
+      --success: #42d392;
+      --shadow: 0 30px 90px rgba(0,0,0,.45);
+    }
+
+    html, body {
+      background: var(--bg);
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+
+    .reveal {
+      color: var(--text);
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 12% 15%, rgba(0,150,166,.12), transparent 25%),
+        radial-gradient(circle at 85% 80%, rgba(70,220,232,.08), transparent 22%),
+        linear-gradient(180deg, #060a11 0%, #080d15 100%);
+    }
+
+    .reveal .slides {
+      height: 100%;
+    }
+
+    .reveal .slides section {
+      box-sizing: border-box;
+      padding: 0.35rem 3.5rem 4rem;
+      text-align: left;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      overflow: hidden;
+    }
+
+    .reveal .slides section::before {
+      content: "";
+      position: absolute;
+      inset: -8%;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 52px 52px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,.72), transparent 92%);
+      z-index: -2;
+    }
+
+    .reveal .slides section::after {
+      content: "";
+      position: absolute;
+      width: 34rem;
+      height: 34rem;
+      right: -12rem;
+      top: -13rem;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,150,166,.14), transparent 68%);
+      filter: blur(12px);
+      z-index: -3;
+      pointer-events: none;
+    }
+
+    .reveal h1,
+    .reveal h2,
+    .reveal h3,
+    .reveal h4 {
+      font-family: "Space Grotesk", Inter, sans-serif;
+      text-transform: none;
+      letter-spacing: -.035em;
+      margin: 0;
+    }
+
+    .reveal h1 {
+      font-size: 2.65em;
+      font-weight: 700;
+      line-height: .98;
+    }
+
+    .reveal h2 {
+      font-size: 1.65em;
+      font-weight: 700;
+      line-height: 1.05;
+    }
+
+    .reveal p,
+    .reveal li {
+      color: var(--muted);
+      font-size: .72em;
+      line-height: 1.65;
+    }
+
+    .reveal strong {
+      color: var(--text);
+    }
+
+    .teal { color: var(--brand-soft); }
+    .white { color: var(--text); }
+    .muted { color: var(--muted); }
+
+    /* ---------- shared ---------- */
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+      padding: .42rem .72rem;
+      border: 1px solid rgba(70,220,232,.18);
+      background: rgba(0,150,166,.08);
+      color: #b9f6fb;
+      border-radius: 999px;
+      font-size: .38em;
+      font-weight: 700;
+      letter-spacing: .11em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--brand-soft);
+      box-shadow: 0 0 14px rgba(70,220,232,.7);
+    }
+
+    .section-head {
+      margin: 0 0 1rem;
+      max-width: 900px;
+    }
+
+    .section-head .sub {
+      margin: .5rem 0 0;
+      max-width: 800px;
+      font-size: .58em;
+      color: #aeb8c5;
+    }
+
+    .rule {
+      height: 1px;
+      background: linear-gradient(90deg, rgba(70,220,232,.7), rgba(255,255,255,.08), transparent);
+      margin: .8rem 0 1rem;
+    }
+
+    .footerline {
+      position: absolute;
+      left: 3.55rem;
+      right: 3.55rem;
+      bottom: .95rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: center;
+      color: rgba(255,255,255,.36);
+      font-size: .34em;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      z-index: 10;
+    }
+
+    .footerline .dot {
+      display: inline-block;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      margin: 0 .45rem;
+      background: var(--brand-soft);
+      vertical-align: middle;
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,.065), rgba(255,255,255,.025));
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+    }
+
+    /* ---------- title ---------- */
+    .hero {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+
+    .hero-copy {
+      max-width: 800px;
+    }
+
+    .hero-logo {
+      width: 84px;
+      height: 84px;
+      display: grid;
+      place-items: center;
+      border-radius: 22px;
+      margin-bottom: 1.5rem;
+     
+      border: 1px solid rgba(70,220,232,.45);
+      box-shadow:
+        0 18px 60px rgba(0,150,166,.22),
+        inset 0 0 30px rgba(255,255,255,.08);
+      font: 700 2.2em "Space Grotesk", sans-serif;
+      color: #fff;
+    }
+
+    .hero h1 {
+      max-width: 760px;
+      margin-top: 1rem;
+    }
+
+    .hero .lead {
+      max-width: 660px;
+      font-size: .72em;
+      margin: 1.25rem 0 0;
+      color: #bdc7d3;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .55rem 1.2rem;
+      margin-top: 1.8rem;
+      color: rgba(255,255,255,.48);
+      font-size: .4em;
+      letter-spacing: .04em;
+    }
+
+    .orb {
+      position: absolute;
+      right: 1%;
+      top: 8%;
+      width: 27rem;
+      height: 27rem;
+      border-radius: 50%;
+      border: 1px solid rgba(70,220,232,.16);
+      box-shadow:
+        inset 0 0 90px rgba(0,150,166,.09),
+        0 0 120px rgba(0,150,166,.08);
+    }
+
+    .orb::before,
+    .orb::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(70,220,232,.10);
+    }
+
+    .orb::before {
+      inset: 12%;
+    }
+
+    .orb::after {
+      inset: 26%;
+    }
+
+    .orb-line {
+      position: absolute;
+      width: 72%;
+      height: 1px;
+      left: 14%;
+      top: 50%;
+      background: linear-gradient(90deg, transparent, rgba(70,220,232,.55), transparent);
+      transform: rotate(-28deg);
+    }
+
+    .orb-dot {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--brand-soft);
+      box-shadow: 0 0 30px rgba(70,220,232,.8);
+      top: 31%;
+      left: 68%;
+    }
+
+    /* ---------- values ---------- */
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: .8rem;
+    }
+
+    .value-card {
+      padding: 1rem 1.15rem;
+    }
+
+    .value-no {
+      font-size: .38em;
+      color: rgba(255,255,255,.32);
+      letter-spacing: .12em;
+      font-weight: 700;
+    }
+
+    .value-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      margin: .6rem 0 .5rem;
+      background: rgba(0,150,166,.10);
+      border: 1px solid rgba(70,220,232,.16);
+      color: var(--brand-soft);
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 700;
+      font-size: .54em;
+    }
+
+    .value-card h3 {
+      font-size: .78em;
+      margin-bottom: .3rem;
+    }
+
+    .value-card p {
+      font-size: .44em;
+      margin: 0;
+      color: #9ca8b6;
+    }
+
+    /* ---------- services ---------- */
+    .service-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .9rem;
+      margin-top: 1rem;
+    }
+
+    .service {
+      display: flex;
+      gap: .95rem;
+      padding: .9rem 1rem;
+      align-items: flex-start;
+    }
+
+    .service-badge {
+      min-width: 34px;
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(70,220,232,.18);
+      background: rgba(0,150,166,.08);
+      color: var(--brand-soft);
+      font-size: .44em;
+      font-weight: 700;
+    }
+
+    .service h3 {
+      font-size: .64em;
+      margin: 0 0 .25rem;
+    }
+
+    .service p {
+      margin: 0;
+      font-size: .42em;
+      line-height: 1.45;
+    }
+
+    /* ---------- reveal ---------- */
+    .reveal-title {
+      height: 100%;
+      display: grid;
+      align-items: center;
+      text-align: center;
+      justify-items: center;
+    }
+
+    .reveal-title .tiny {
+      font-size: .4em;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.38);
+    }
+
+    .reveal-title h2 {
+      font-size: 2.55em;
+      max-width: 1000px;
+      margin-top: 1rem;
+    }
+
+    .reveal-title .glow-word {
+      color: var(--brand-soft);
+      text-shadow: 0 0 30px rgba(70,220,232,.18);
+    }
+
+    .reveal-title .mini-rule {
+      width: 110px;
+      height: 2px;
+      margin: 1.25rem auto 0;
+      background: linear-gradient(90deg, transparent, var(--brand-soft), transparent);
+    }
+
+    /* ---------- website ---------- */
+    .browser {
+      margin-top: .8rem;
+      overflow: hidden;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: #eff3f5;
+      box-shadow: 0 36px 90px rgba(0,0,0,.42);
+    }
+
+    .browser-top {
+      height: 34px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 0 12px;
+      background: #0c121a;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+
+    .browser-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.23);
+    }
+
+    .browser-url {
+      margin-left: 10px;
+      font-size: .32em;
+      color: rgba(255,255,255,.48);
+      letter-spacing: .02em;
+    }
+
+    .browser-body {
+      display: grid;
+      grid-template-columns: 1.25fr 1fr;
+      align-items: stretch;
+      background:
+        radial-gradient(circle at 70% 20%, rgba(0,150,166,.12), transparent 30%),
+        linear-gradient(130deg, #f6f8f9, #e9eef1);
+      color: #10202b;
+    }
+
+    .browser-copy {
+      padding: 1.5rem 2rem;
+    }
+
+    .browser-copy .mini {
+      font-size: .32em;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: #52707a;
+      font-weight: 800;
+    }
+
+    .browser-copy h3 {
+      font-size: .9em;
+      margin: .5rem 0 .4rem;
+      color: #14232c;
+    }
+
+    .browser-copy p {
+      margin: 0;
+      max-width: 440px;
+      color: #5e6e77;
+      font-size: .39em;
+      line-height: 1.55;
+    }
+
+    .browser-visual {
+      position: relative;
+      margin: 1rem;
+      border-radius: 14px;
+      background: linear-gradient(145deg, #071117, #0d2530);
+      border: 1px solid rgba(0,150,166,.25);
+      overflow: hidden;
+      box-shadow: inset 0 0 40px rgba(0,150,166,.08);
+      min-height: 180px;
+    }
+
+    .browser-visual .ring {
+      position: absolute;
+      width: 170px;
+      height: 170px;
+      border-radius: 50%;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      border: 1px solid rgba(70,220,232,.18);
+      box-shadow: 0 0 90px rgba(0,150,166,.10);
+    }
+
+    .browser-visual .ring::before,
+    .browser-visual .ring::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(70,220,232,.1);
+    }
+
+    .browser-visual .ring::before { inset: 18%; }
+    .browser-visual .ring::after { inset: 36%; }
+
+    .browser-visual .center-mark {
+      position: absolute;
+      inset: 50% auto auto 50%;
+      transform: translate(-50%, -50%);
+      width: 55px;
+      height: 55px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(145deg, #0096a6, #007987);
+      color: white;
+      font: 700 1.1em "Space Grotesk", sans-serif;
+      box-shadow: 0 18px 50px rgba(0,150,166,.26);
+    }
+
+    .launch-link {
+      display: inline-flex;
+      margin-top: .8rem;
+      text-decoration: none;
+      padding: .5rem .75rem;
+      border-radius: 10px;
+      background: #0c1b22;
+      color: #dffcff;
+      font-size: .36em;
+      border: 1px solid rgba(0,150,166,.3);
+    }
+
+    /* ---------- products ---------- */
+    .product-layout {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 1.1rem;
+      margin-top: 1rem;
+    }
+
+    .product-hero {
+      padding: 1.2rem 1.35rem;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .product-kicker {
+      font-size: .38em;
+      text-transform: uppercase;
+      letter-spacing: .16em;
+      color: rgba(255,255,255,.35);
+      font-weight: 800;
+    }
+
+    .product-hero h3 {
+      font-size: 1.04em;
+      margin-top: .5rem;
+    }
+
+    .product-hero .tagline {
+      margin: .4rem 0 0;
+      font-size: .54em;
+      color: #b6c0cb;
+      max-width: 470px;
+    }
+
+    .tap-card {
+      position: absolute;
+      right: 7%;
+      bottom: 9%;
+      width: 320px;
+      height: 180px;
+
+      transform: rotate(-8deg);
+    }
+
+ 
+
+   
+
+    .nfc-wave {
+      position: absolute;
+      right: 22px;
+      top: 38px;
+      width: 55px;
+      height: 36px;
+      border-right: 2px solid var(--brand-soft);
+      border-radius: 50%;
+      opacity: .7;
+    }
+
+    .nfc-wave::before,
+    .nfc-wave::after {
+      content: "";
+      position: absolute;
+      right: 8px;
+      top: 6px;
+      width: 38px;
+      height: 24px;
+      border-right: 2px solid var(--brand-soft);
+      border-radius: 50%;
+    }
+
+    .nfc-wave::after {
+      right: 15px;
+      top: 11px;
+      width: 24px;
+      height: 14px;
+    }
+
+    .feature-stack {
+      display: grid;
+      gap: .7rem;
+    }
+
+    .feature-item {
+      padding: .8rem 1rem;
+    }
+
+    .feature-item h4 {
+      font-size: .58em;
+      margin-bottom: .25rem;
+    }
+
+    .feature-item p {
+      font-size: .39em;
+      margin: 0;
+    }
+
+    /* ---------- ecosystem ---------- */
+    .ecosystem {
+      position: relative;
+      height: 340px;
+      margin-top: .4rem;
+    }
+
+    .eco-center {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      background: radial-gradient(circle at 35% 30%, #123b44, #08161b 72%);
+      border: 1px solid rgba(70,220,232,.38);
+      box-shadow: 0 0 90px rgba(0,150,166,.12);
+      font: 700 .68em "Space Grotesk", sans-serif;
+      z-index: 2;
+    }
+
+    .eco-node {
+      position: absolute;
+      width: 140px;
+      padding: .65rem .7rem;
+      text-align: center;
+      font-size: .45em;
+    }
+
+    .eco-node strong {
+      display: block;
+      font: 700 .95em "Space Grotesk", sans-serif;
+      margin-bottom: .18rem;
+    }
+
+    .eco-node span {
+      color: #8e9aa9;
+    }
+
+    .eco-a { left: 10%; top: 12%; }
+    .eco-b { right: 10%; top: 12%; }
+    .eco-c { left: 10%; bottom: 12%; }
+    .eco-d { right: 10%; bottom: 12%; }
+
+    .eco-line {
+      position: absolute;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(70,220,232,.45), transparent);
+      transform-origin: left center;
+      left: 50%;
+      top: 50%;
+      width: 26%;
+    }
+
+    .line-a { transform: translateY(-50px) rotate(205deg); }
+    .line-b { transform: translateY(-50px) rotate(-25deg); }
+    .line-c { transform: translateY(50px) rotate(155deg); }
+    .line-d { transform: translateY(50px) rotate(25deg); }
+
+    /* ---------- roadmap ---------- */
+    .roadmap {
+      margin-top: 1rem;
+      position: relative;
+    }
+
+    .roadmap-line {
+      position: absolute;
+      top: 42px;
+      left: 6%;
+      right: 6%;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(70,220,232,.08), rgba(70,220,232,.55), rgba(70,220,232,.08));
+    }
+
+    .roadmap-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: .9rem;
+      position: relative;
+    }
+
+    .road-card {
+      padding: .9rem 1rem;
+      position: relative;
+    }
+
+    .road-dot {
+      width: 30px;
+      height: 30px;
+      margin-bottom: .6rem;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #0b1118;
+      border: 1px solid rgba(70,220,232,.45);
+      color: var(--brand-soft);
+      font-size: .4em;
+      font-weight: 800;
+      box-shadow: 0 0 24px rgba(0,150,166,.13);
+    }
+
+    .road-card h3 {
+      font-size: .64em;
+      margin-bottom: .25rem;
+    }
+
+    .road-card p {
+      margin: 0;
+      font-size: .4em;
+    }
+
+    .road-card .phase {
+      position: absolute;
+      right: .9rem;
+      top: .9rem;
+      color: rgba(255,255,255,.28);
+      font-size: .3em;
+      text-transform: uppercase;
+      letter-spacing: .13em;
+    }
+
+    /* ---------- final ---------- */
+    .closing {
+      height: 100%;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding-bottom: 2rem;
+    }
+
+    .closing h2 {
+      font-size: 2.5em;
+      max-width: 980px;
+    }
+
+    .closing h2 span {
+      display: block;
+      color: var(--brand-soft);
+      text-shadow: 0 0 30px rgba(70,220,232,.18);
+    }
+
+    .closing p {
+      margin: .75rem auto 0;
+      max-width: 610px;
+      font-size: .48em;
+    }
+
+    .contact-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: .5rem .85rem;
+      margin-top: 1.1rem;
+    }
+
+    .contact-pill {
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.03);
+      color: rgba(255,255,255,.65);
+      border-radius: 999px;
+      padding: .45rem .75rem;
+      font-size: .35em;
+    }
+
+    .s-mark {
+      width: 68px;
+      height: 68px;
+      margin: 0 auto 1.2rem;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(145deg, #0096a6, #007987);
+      color: #fff;
+      font: 700 1.2em "Space Grotesk", sans-serif;
+      box-shadow: 0 18px 60px rgba(0,150,166,.22);
+    }
+    
+    .hero-logo svg {
+      width: 65%;
+      height: auto;
+    }
+
+    /* ---------- animations ---------- */
+    .reveal .slides section.present .hero-logo {
+      animation: floatLogo 5s ease-in-out infinite;
+    }
+
+    .reveal .slides section.present .orb {
+      animation: orbDrift 10s ease-in-out infinite alternate;
+    }
+
+    @keyframes floatLogo {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    @keyframes orbDrift {
+      from { transform: translate3d(0,0,0) scale(1); }
+      to { transform: translate3d(-12px,8px,0) scale(1.035); }
+    }
+
+    /* ---------- responsive ---------- */
+    @media (max-width: 900px) {
+      .reveal .slides section {
+        padding-left: 2rem;
+        padding-right: 2rem;
+      }
+      .grid-3,
+      .roadmap-grid,
+      .product-layout {
+        grid-template-columns: 1fr;
+      }
+      .service-list {
+        grid-template-columns: 1fr;
+      }
+      .orb {
+        opacity: .35;
+        right: -9rem;
+      }
+      .tap-card {
+        width: 210px;
+        height: 122px;
+      }
+      .ecosystem {
+        height: 330px;
+      }
+    }
+
+    /* ---------- founder ---------- */
+
+.founder-layout {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 2rem;
+  align-items: stretch;
+  margin-top: .7rem;
+  flex: 1;
+  min-height: 0;
+}
+
+.founder-photo {
+  position: relative;
+  min-height: 390px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(circle at 50% 35%, rgba(0,150,166,.20), transparent 42%),
+    linear-gradient(145deg, rgba(255,255,255,.07), rgba(255,255,255,.025));
+}
+
+.founder-photo::before {
+  content: "";
+  position: absolute;
+  inset: 22px;
+  border: 1px solid rgba(70,220,232,.18);
+  border-radius: 18px;
+}
+
+.founder-photo::after {
+  content: "";
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  border: 1px solid rgba(70,220,232,.14);
+  box-shadow:
+    0 0 70px rgba(0,150,166,.13),
+    inset 0 0 40px rgba(70,220,232,.05);
+}
+
+.founder-placeholder {
+  position: relative;
+  z-index: 2;
+  width: 145px;
+  height: 145px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background:
+    linear-gradient(145deg, rgba(0,150,166,.95), rgba(0,121,135,.9));
+  border: 2px solid rgba(70,220,232,.55);
+  box-shadow:
+    0 20px 70px rgba(0,150,166,.28),
+    inset 0 0 35px rgba(255,255,255,.10);
+  font: 700 2.5em "Space Grotesk", sans-serif;
+  color: #fff;
+  letter-spacing: -.06em;
+}
+
+.founder-placeholder span {
+  position: absolute;
+  bottom: -3.2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font: 700 .34em Inter, sans-serif;
+  letter-spacing: .16em;
+  color: rgba(255,255,255,.38);
+  text-transform: uppercase;
+}
+
+.founder-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.founder-name {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1.75em;
+  font-weight: 700;
+  line-height: 1;
+  margin: .25rem 0 .25rem;
+}
+
+.founder-role {
+  color: var(--brand-soft);
+  font-size: .55em;
+  font-weight: 700;
+  letter-spacing: .04em;
+}
+
+.founder-description {
+  max-width: 700px;
+  margin: 1rem 0 1.1rem;
+  font-size: .52em;
+  line-height: 1.65;
+  color: #b5c0cb;
+}
+
+.profile-list {
+  display: grid;
+  gap: .65rem;
+}
+
+.profile-item {
+  display: grid;
+  grid-template-columns: 46px 1fr;
+  align-items: center;
+  padding: .72rem .9rem;
+}
+
+.profile-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  display: grid;
+  place-items: center;
+  background: rgba(0,150,166,.10);
+  border: 1px solid rgba(70,220,232,.16);
+  color: var(--brand-soft);
+  font: 700 .38em "Space Grotesk", sans-serif;
+}
+
+.profile-item h4 {
+  margin: 0 0 .12rem;
+  font-size: .48em;
+  color: #f1f6f8;
+}
+
+.profile-item p {
+  margin: 0;
+  font-size: .37em;
+  color: #8f9ba9;
+}
+
+.founder-note {
+  margin-top: .8rem;
+  padding: .75rem 1rem;
+  border-left: 2px solid var(--brand-soft);
+  background: rgba(0,150,166,.055);
+  color: #9eabb8;
+  font-size: .38em;
+  line-height: 1.5;
+}
+
+
+/* ---------- vision ---------- */
+
+.vision-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: .8rem;
+}
+
+.vision-card {
+  padding: 1.15rem 1.3rem;
+}
+
+.vision-card h3 {
+  font-size: .72em;
+  margin-bottom: .35rem;
+}
+
+.vision-card p {
+  margin: 0;
+  font-size: .43em;
+  line-height: 1.55;
+}
+
+.vision-quote {
+  margin-top: .9rem;
+  padding: 1.2rem 1.4rem;
+  text-align: center;
+}
+
+.vision-quote p {
+  margin: 0;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: .76em;
+  line-height: 1.4;
+  color: #edf9fb;
+}
+
+.vision-quote span {
+  color: var(--brand-soft);
+}
+
+
+/* ---------- website improvements ---------- */
+
+.browser {
+  flex-shrink: 0;
+}
+
+.browser-body {
+  min-height: 250px;
+}
+
+.website-features {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: .7rem;
+  margin-top: .8rem;
+}
+
+.website-feature {
+  padding: .65rem .8rem;
+}
+
+.website-feature h4 {
+  font-size: .47em;
+  margin-bottom: .15rem;
+}
+
+.website-feature p {
+  margin: 0;
+  font-size: .35em;
+  line-height: 1.4;
+}
+
+
+/* ---------- final ---------- */
+
+.closing {
+  height: 100%;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding-bottom: 2rem;
+}
+
+.closing h2 {
+  font-size: 2.5em;
+  max-width: 980px;
+}
+
+.closing h2 span {
+  display: block;
+  color: var(--brand-soft);
+  text-shadow: 0 0 30px rgba(70,220,232,.18);
+}
+
+.closing p {
+  margin: .75rem auto 0;
+  max-width: 610px;
+  font-size: .48em;
+}
+
+.contact-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: .5rem .85rem;
+  margin-top: 1.1rem;
+}
+
+.contact-pill {
+  border: 1px solid rgba(255,255,255,.08);
+  background: rgba(255,255,255,.03);
+  color: rgba(255,255,255,.65);
+  border-radius: 999px;
+  padding: .45rem .75rem;
+  font-size: .35em;
+}
+
+.s-mark {
+  width: 68px;
+  height: 68px;
+  margin: 0 auto 1.2rem;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(145deg, #0096a6, #007987);
+  color: #fff;
+  font: 700 1.2em "Space Grotesk", sans-serif;
+  box-shadow: 0 18px 60px rgba(0,150,166,.22);
+}
+
+
+/* ---------- animations ---------- */
+
+.reveal .slides section.present .hero-logo {
+  animation: floatLogo 5s ease-in-out infinite;
+}
+
+.reveal .slides section.present .orb {
+  animation: orbDrift 10s ease-in-out infinite alternate;
+}
+
+.reveal .slides section.present .founder-placeholder {
+  animation: founderFloat 5s ease-in-out infinite;
+}
+
+@keyframes floatLogo {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes orbDrift {
+  from {
+    transform: translate3d(0,0,0) scale(1);
+  }
+  to {
+    transform: translate3d(-12px,8px,0) scale(1.035);
+  }
+}
+
+@keyframes founderFloat {
+  0%,100% {
+    transform: translateY(0);
+    box-shadow: 0 20px 70px rgba(0,150,166,.28);
+  }
+
+  50% {
+    transform: translateY(-7px);
+    box-shadow: 0 28px 85px rgba(0,150,166,.38);
+  }
+}
+
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 900px) {
+
+  .reveal .slides section {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .grid-3 {
+    grid-template-columns: 1fr;
+  }
+
+  .service-list {
+    grid-template-columns: 1fr;
+  }
+
+  .founder-layout {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .founder-photo {
+    min-height: 230px;
+  }
+
+  .vision-layout,
+  .website-features {
+    grid-template-columns: 1fr;
+  }
+
+  .orb {
+    opacity: .35;
+    right: -9rem;
+  }
+}
+  </style>
+</head>
+
+<body>
+<div class="reveal">
+  <div class="slides">
+
+    <!-- 01 — Opening -->
+    <section data-transition="fade">
+      <div class="hero">
+        <div class="hero-copy">
+          <div class="eyebrow">Official Digital Launch</div>
+
+          <div class="hero-logo" aria-label="Vexora logo">
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 270.64 158.64">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#linear-gradient-2);
+      }
+
+      .cls-2 {
+        fill: url(#linear-gradient-4);
+      }
+
+      .cls-3 {
+        fill: url(#linear-gradient-3);
+      }
+
+      .cls-4 {
+        fill: url(#linear-gradient-5);
+      }
+
+      .cls-5 {
+        fill: url(#linear-gradient-8);
+      }
+
+      .cls-6 {
+        fill: url(#linear-gradient-7);
+      }
+
+      .cls-7 {
+        fill: url(#linear-gradient-6);
+      }
+
+      .cls-8 {
+        fill: url(#linear-gradient);
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="35.35" y1="-20.41" x2="128.47" y2="140.89" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#02bbb5"/>
+      <stop offset=".91" stop-color="#057c9a"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="112.68" y1="79.32" x2="270.64" y2="79.32" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff33b"/>
+      <stop offset=".04" stop-color="#fee62d"/>
+      <stop offset=".12" stop-color="#fdd51b"/>
+      <stop offset=".2" stop-color="#fdca0f"/>
+      <stop offset=".28" stop-color="#fdc70c"/>
+      <stop offset=".67" stop-color="#f3903f"/>
+      <stop offset=".89" stop-color="#ed683c"/>
+      <stop offset="1" stop-color="#e93e3a"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-3" x1="73.21" y1="98.2" x2="105.51" y2="154.14" xlink:href="#linear-gradient"/>
+    <linearGradient id="linear-gradient-4" x1="18" y1="-10.39" x2="65.57" y2="72" xlink:href="#linear-gradient"/>
+    <linearGradient id="linear-gradient-5" x1="191.32" y1="20.94" y2="20.94" xlink:href="#linear-gradient-2"/>
+    <linearGradient id="linear-gradient-6" y1="137.7" x2="191.66" y2="137.7" xlink:href="#linear-gradient-2"/>
+    <linearGradient id="linear-gradient-7" x1="142.31" y1="117.29" x2="270.64" y2="117.29" gradientUnits="userSpaceOnUse">
+      <stop offset=".49" stop-color="#02bbb5"/>
+      <stop offset=".91" stop-color="#057c9a"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-8" x1="176.92" y1="111.97" x2="236.06" y2="146.55" gradientUnits="userSpaceOnUse">
+      <stop offset=".19" stop-color="#02bbb5"/>
+      <stop offset=".75" stop-color="#057c9a"/>
+    </linearGradient>
+  </defs>
+  <g id="Layer_1-2" data-name="Layer 1">
+    <g>
+      <path class="cls-8" d="M0,0l81.02,157.28h19.06l49.36-78.64-28.26-41.87c-9.42,16.68-18.84,33.36-28.26,50.04C77.96,57.87,62.98,28.94,48,0H0Z"/>
+      <polygon class="cls-1" points="112.68 0 166.81 0 191.32 41.87 216.17 0 270.64 0 220.94 78.64 270.64 157.28 217.87 157.28 191.66 116.77 166.13 157.28 112.68 158.64 163.06 79.32 112.68 0"/>
+      <polygon class="cls-3" points="92.94 86.81 69.79 135.47 81.02 157.28 100.09 157.28 112.68 137.21 92.94 86.81"/>
+      <polygon class="cls-2" points="0 0 80.74 63.25 48 0 0 0"/>
+      <polygon class="cls-4" points="191.32 41.87 270.64 0 216.17 0 191.32 41.87"/>
+      <polygon class="cls-7" points="112.68 158.64 166.13 157.28 191.66 116.77 112.68 158.64"/>
+      <path class="cls-6" d="M203.88,85.71c44.92,18.56,62.71,61.09,66.76,71.56h-52.77c-4.81-7.44-9.63-14.88-14.44-22.32-5.76-8.9-8.64-13.35-8.66-13.38-3.03-4.7-3-4.66-3.11-4.8-6.76-9.21-19.71-11.14-21.73-11.43-14.02-2.08-24.8,4.75-27.62,6.66,1.3-2.15,3.34-5.5,5.95-9.57,3.11-4.85,3.03-4.5,5.27-8.09,6.03-9.66,6.88-11.12,7.07-11.4s2.43-3.64,2.47-3.62-1.29-2.02-1.29-2.02c11.12.11,26.05,1.79,42.1,8.42Z"/>
+      <path class="cls-5" d="M234.93,157.28c.46-19.68-9.25-37.98-25.53-47.68-19.52-11.62-39.68-5.65-42.97-4.62,5.35-.2,17.01.14,28.41,7.42,22.54,14.4,23.03,42.51,23.03,44.87h17.05Z"/>
+    </g>
+  </g>
+</svg></div>
+
+          <h1>
+            Vexora IT Solutions
+            <br />
+            <span class="teal">Building the Digital Future.</span>
+          </h1>
+
+          <p class="lead">
+            A technology startup focused on creating practical, scalable,
+            and connected digital experiences for modern businesses.
+          </p>
+
+          <div class="hero-meta">
+            <span>WWW.VEXORAIT.COM</span>
+            <span>•</span>
+            <span>WEB LAUNCH 2026</span>
+            <span>•</span>
+            <span>VEXORA IT SOLUTIONS</span>
+          </div>
+        </div>
+
+        <div class="orb" aria-hidden="true">
+          <div class="orb-line"></div>
+          <div class="orb-dot"></div>
+        </div>
+      </div>
+
+      <div class="footerline">
+        <!-- <span>Vexora IT Solutions</span> -->
+        <!-- <span>01 <span class="dot"></span> The Beginning</span> -->
+      </div>
+    </section>
+
+    <!-- 02 — The Beginning -->
+    <section data-transition="slide">
+      <div class="section-head">
+        <div class="eyebrow">01 / The Beginning</div>
+        <h2 style="margin-top:.6rem;">
+          More than an IT company.
+          <span class="teal">A digital ecosystem.</span>
+        </h2>
+        <p class="sub">
+          Vexora is being built around one simple idea:
+          technology should be useful, connected, and designed to move businesses forward.
+        </p>
+      </div>
+
+      <div class="rule"></div>
+
+      <div class="grid-3">
+        <div class="card value-card fragment">
+          <div class="value-no">01</div>
+          <div class="value-icon">I</div>
+          <h3>Innovation</h3>
+          <p>Turning ideas into modern digital products with purpose, clarity, and measurable value.</p>
+        </div>
+
+        <div class="card value-card fragment">
+          <div class="value-no">02</div>
+          <div class="value-icon">R</div>
+          <h3>Reliability</h3>
+          <p>Building dependable solutions that businesses can trust every day, at every scale.</p>
+        </div>
+
+        <div class="card value-card fragment">
+          <div class="value-no">03</div>
+          <div class="value-icon">S</div>
+          <h3>Scalability</h3>
+          <p>Designing foundations that can evolve from a first launch into a long-term platform.</p>
+        </div>
+      </div>
+
+      <div class="footerline">
+        <span>Vexora IT Solutions</span>
+        <span>02 <span class="dot"></span> Who We Are</span>
+      </div>
+    </section>
+
+    <!-- 03 — Mission -->
+    <section data-transition="slide">
+      <div class="section-head">
+        <div class="eyebrow">02 / Our Mission</div>
+        <h2 style="margin-top:.6rem;">Make digital technology <span class="teal">work better.</span></h2>
+      </div>
+
+      <div class="card" style="padding:1.4rem 1.8rem; margin-top:.8rem; max-width:1000px;">
+        <p style="margin:0; font-family:'Space Grotesk',sans-serif; font-size:1.02em; line-height:1.45; color:#f2f8fa;">
+          “To deliver innovative, reliable, and scalable IT solutions that empower businesses
+          to grow, optimize operations, and achieve digital excellence.”
+        </p>
+      </div>
+
+      <div class="grid-3" style="margin-top:.8rem;">
+        <div class="card value-card fragment">
+          <div class="value-icon">01</div>
+          <h3>Build</h3>
+          <p>Useful products with clean foundations and strong user experiences.</p>
+        </div>
+        <div class="card value-card fragment">
+          <div class="value-icon">02</div>
+          <h3>Connect</h3>
+          <p>Bring services, customers, teams, and workflows into one experience.</p>
+        </div>
+        <div class="card value-card fragment">
+          <div class="value-icon">03</div>
+          <h3>Scale</h3>
+          <p>Keep technology ready for the next customer, product, and opportunity.</p>
+        </div>
+      </div>
+
+      <div class="footerline">
+        <span>Vexora IT Solutions</span>
+        <span>03 <span class="dot"></span> Mission</span>
+      </div>
+    </section>
+
+    <!-- 04 — Services -->
+    <section data-transition="slide">
+      <div class="section-head">
+        <div class="eyebrow">03 / What We Build</div>
+        <h2 style="margin-top:.6rem;">Core services. <span class="teal">Built for momentum.</span></h2>
+        <p class="sub">A focused service stack for businesses that want to move from idea to execution.</p>
+      </div>
+
+      <div class="service-list">
+        <div class="card service fragment">
+          <div class="service-badge">01</div>
+          <div>
+            <h3>Web Development</h3>
+            <p>Modern, responsive websites and web applications designed for performance and conversion.</p>
+          </div>
+        </div>
+
+        <div class="card service fragment">
+          <div class="service-badge">02</div>
+          <div>
+            <h3>Web Hosting</h3>
+            <p>Fast, secure, continuously available infrastructure for mission-critical digital platforms.</p>
+          </div>
+        </div>
+
+        <div class="card service fragment">
+          <div class="service-badge">03</div>
+          <div>
+            <h3>Graphic & Brand Design</h3>
+            <p>Corporate identity systems, logos, promotional creative, and social media design assets.</p>
+          </div>
+        </div>
+
+        <div class="card service fragment">
+          <div class="service-badge">04</div>
+          <div>
+            <h3>Digital Products</h3>
+            <p>Purpose-built tools and SaaS-style platforms that solve specific operational problems.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="footerline">
+        <span>Vexora IT Solutions</span>
+        <span>04 <span class="dot"></span> Services</span>
+      </div>
+    </section>
+
+    <!-- 05 — Reveal -->
+    <!-- <section data-transition="fade">
+      <div class="reveal-title">
+        <div>
+          <div class="tiny">The moment</div>
+          <h2>Our digital home<br /><span class="glow-word">is ready.</span></h2>
+          <div class="mini-rule"></div>
+        </div>
+      </div>
+
+      <div class="footerline">
+        <span>Vexora IT Solutions</span>
+        <span>05 <span class="dot"></span> The Reveal</span>
+      </div>
+    </section> -->
+
+    <!-- 06 — Website -->
+    <section data-transition="slide">
+      <div class="section-head">
+        <div class="eyebrow">04 / The Flagship Launch</div>
+        <h2 style="margin-top:.6rem;">Meet the new <span class="teal">Vexora web platform.</span></h2>
+        <p class="sub">Our public-facing digital home — designed to represent the brand, products, and ecosystem.</p>
+      </div>
+
+      <div class="browser fragment">
+        <div class="browser-top">
+          <span class="browser-dot"></span>
+          <span class="browser-dot"></span>
+          <span class="browser-dot"></span>
+          <span class="browser-url">https://www.vexorait.com</span>
+        </div>
+
+        <div class="browser-body">
+          <div class="browser-copy">
+            <div class="mini">Vexora IT Solutions</div>
+            <h3>Technology with purpose.</h3>
+            <p>
+              A modern digital presence designed around trust, clarity,
+              performance, and the next generation of Vexora products.
+            </p>
+            <a class="launch-link" href="https://www.vexorait.com" target="_blank" rel="noopener">
+              Open vexorait.com ↗
+            </a>
+          </div>
+
+          <div class="browser-visual" aria-hidden="true">
+            <div class="ring"></div>
+            <div class="center-mark">V</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footerline">
+        <span>Vexora IT Solutions</span>
+        <span>06 <span class="dot"></span> Website Launch</span>
+      </div>
+    </section>
+
+    <!-- 07 — VexoraTap -->
+    <section data-transition="slide">
+      <div class="section-head">
+        <div class="eyebrow">05 / Product Reveal</div>
+        <h2 style="margin-top:.6rem;"><span class="teal">VexoraTap</span></h2>
+        <p class="sub">The smarter way to share your professional identity — launching today.</p>
+      </div>
+
+      <div class="product-layout">
+        <div class="card product-hero">
+          <div class="product-kicker">Smart Business Cards</div>
+          <h3>One tap.<br />Your digital identity.</h3>
+          <p class="tagline">
+            Replace traditional paper cards with an NFC-powered profile
+            that is easier to share, easier to update, and built for modern networking.
+          </p>
+
+         <div class="tap-card fragment" aria-label="VexoraTap NFC card illustration">
+            
+		<img src="./activate.svg" alt="" srcset="">
+		</div>
+        </div>
+
+        <div class="feature-stack">
+          <div class="card feature-item fragment">
+            <h4>Instant sharing</h4>
+            <p>Share your profile, contacts, links, and professional information with a simple tap.</p>
+          </div>
+          <div class="card feature-item fragment">
+            <h4>Always up to date</h4>
+            <p>Update your digital profile without replacing the physical card.</p>
+          </div>
+          <div class="card feature-item fragment">
+            <h4>Available Today</h4>
+            <p>The flagship physical and digital release featured at today's launch event.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="footerline">
+        <span>VexoraTap</span>
+        <span>07 <span class="dot"></span> Smart Networking</span>
+      </div>
+    </section>
+
+    <!-- 08 — VexoraQR -->
+    <section data-transition="slide">
+      <div class="section-head">
+        <div class="eyebrow">06 / Future Product Roadmap</div>
+        <h2 style="margin-top:.6rem;"><span class="teal">VexoraQR</span> — coming next.</h2>
+        <p class="sub">A flexible QR platform designed around modular business and event needs (upcoming release).</p>
+      </div>
+
+      <div class="grid-3">
+        <div class="card value-card fragment">
+          <div class="value-icon">01</div>
+          <h3>Custom Plugins</h3>
+          <p>Enable only the capabilities a business or event actually needs.</p>
+        </div>
+        <div class="card value-card fragment">
+          <div class="value-icon">02</div>
+          <h3>Flexible Pricing</h3>
+          <p>Modular pricing based on selected functionality instead of fixed bundles.</p>
+        </div>
+        <div class="card value-card fragment">
+          <div class="value-icon">03</div>
+          <h3>Unified Identity</h3>
+          <p>Connect a VexoraTap profile with QR-based experiences in one seamless system.</p>
+        </div>
+      </div>
+
+      <div class="card fragment" style="margin-top:.8rem; padding:.8rem 1.2rem;">
+        <p style="margin:0; font-size:.44em; color:#c2ccd5;">
+          <strong>Upcoming Expansion:</strong> Scheduled for future rollout following the initial VexoraTap and Web platform release.
+        </p>
+      </div>
+
+      <div class="footerline">
+        <span>VexoraQR</span>
+        <span>08 <span class="dot"></span> Future Roadmap</span>
+      </div>
+    </section>
+
+    <!-- 09 — Ecosystem -->
+    <section data-transition="slide">
+      <div class="section-head">
+        <div class="eyebrow">07 / One Ecosystem</div>
+        <h2 style="margin-top:.6rem;">Products that <span class="teal">work together.</span></h2>
+        <p class="sub">The long-term vision: connecting today's launch with tomorrow's expanding solutions.</p>
+      </div>
+
+      <div class="ecosystem">
+        <div class="card eco-center">VEXORA<br /><span style="font-size:.55em;color:#8ca1ab;">ECOSYSTEM</span></div>
+
+        <div class="eco-line line-a"></div>
+        <div class="eco-line line-b"></div>
+        <div class="eco-line line-c"></div>
+        <div class="eco-line line-d"></div>
+
+        <div class="card eco-node eco-a fragment">
+          <strong>Vexora Web</strong>
+          <span>Live Today</span>
+        </div>
+
+        <div class="card eco-node eco-b fragment">
+          <strong>VexoraTap</strong>
+          <span>Live Today</span>
+        </div>
+
+        <div class="card eco-node eco-c fragment">
+          <strong>VexoraQR</strong>
+          <span>Coming Next</span>
+        </div>
+
+        <div class="card eco-node eco-d fragment">
+          <strong>Future Products</strong>
+          <span>In Development</span>
+        </div>
+      </div>
+
+      <div class="footerline">
+        <span>Vexora IT Solutions</span>
+        <span>09 <span class="dot"></span> The Ecosystem</span>
+      </div>
+    </section>
+
+    <!-- 10 — Roadmap -->
+    <section data-transition="slide">
+      <div class="section-head">
+        <div class="eyebrow">08 / The Road Ahead</div>
+        <h2 style="margin-top:.6rem;">Today is the launch.<br /><span class="teal">Tomorrow is the expansion.</span></h2>
+      </div>
+
+      <div class="roadmap">
+        <div class="roadmap-line"></div>
+
+        <div class="roadmap-grid">
+          <div class="card road-card fragment">
+            <div class="road-dot">01</div>
+            <div class="phase">TODAY</div>
+            <h3>Vexora Web + VexoraTap</h3>
+            <p>Official public release of the core web platform and flagship VexoraTap smart cards.</p>
+          </div>
+
+          <div class="card road-card fragment">
+            <div class="road-dot">02</div>
+            <div class="phase">NEXT</div>
+            <h3>VexoraQR Ecosystem</h3>
+            <p>Expanding the identity network with advanced modular QR codes and analytics tracking.</p>
+          </div>
+
+          <div class="card road-card fragment">
+            <div class="road-dot">03</div>
+            <div class="phase">FUTURE</div>
+            <h3>File Sphere + Storixa</h3>
+            <p>Rolling out secure file management workflows and dedicated specialized platforms.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card fragment" style="margin-top:.8rem; padding:.8rem 1.2rem;">
+        <p style="margin:0; font-size:.44em; color:#bcc6d1;">
+          <strong>Strategy:</strong> Deliver a polished, robust core release today, then scale into an interconnected suite of tools.
+        </p>
+      </div>
+
+      <div class="footerline">
+        <span>Vexora IT Solutions</span>
+        <span>10 <span class="dot"></span> Roadmap</span>
+      </div>
+    </section>
+
+    <!-- 11 — Closing -->
+    <section data-transition="fade">
+      <div class="closing">
+        <div>
+          <div class="s-mark">
+<svg id="Layer_2_s" data-name="Layer 2 s" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 270.64 158.64" style="width: 70%; height: auto;">
+  <defs>
+    <style>
+      .cls-s-1 { fill: url(#lg-s-2); }
+      .cls-s-2 { fill: url(#lg-s-4); }
+      .cls-s-3 { fill: url(#lg-s-3); }
+      .cls-s-4 { fill: url(#lg-s-5); }
+      .cls-s-5 { fill: url(#lg-s-8); }
+      .cls-s-6 { fill: url(#lg-s-7); }
+      .cls-s-7 { fill: url(#lg-s-6); }
+      .cls-s-8 { fill: url(#lg-s-1); }
+    </style>
+    <linearGradient id="lg-s-1" x1="35.35" y1="-20.41" x2="128.47" y2="140.89" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#02bbb5"/>
+      <stop offset=".91" stop-color="#057c9a"/>
+    </linearGradient>
+    <linearGradient id="lg-s-2" x1="112.68" y1="79.32" x2="270.64" y2="79.32" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff33b"/>
+      <stop offset=".04" stop-color="#fee62d"/>
+      <stop offset=".12" stop-color="#fdd51b"/>
+      <stop offset=".2" stop-color="#fdca0f"/>
+      <stop offset=".28" stop-color="#fdc70c"/>
+      <stop offset=".67" stop-color="#f3903f"/>
+      <stop offset=".89" stop-color="#ed683c"/>
+      <stop offset="1" stop-color="#e93e3a"/>
+    </linearGradient>
+    <linearGradient id="lg-s-3" x1="73.21" y1="98.2" x2="105.51" y2="154.14" xlink:href="#lg-s-1"/>
+    <linearGradient id="lg-s-4" x1="18" y1="-10.39" x2="65.57" y2="72" xlink:href="#lg-s-1"/>
+    <linearGradient id="lg-s-5" x1="191.32" y1="20.94" y2="20.94" xlink:href="#lg-s-2"/>
+    <linearGradient id="lg-s-6" y1="137.7" x2="191.66" y2="137.7" xlink:href="#lg-s-2"/>
+    <linearGradient id="lg-s-7" x1="142.31" y1="117.29" x2="270.64" y2="117.29" gradientUnits="userSpaceOnUse">
+      <stop offset=".49" stop-color="#02bbb5"/>
+      <stop offset=".91" stop-color="#057c9a"/>
+    </linearGradient>
+    <linearGradient id="lg-s-8" x1="176.92" y1="111.97" x2="236.06" y2="146.55" gradientUnits="userSpaceOnUse">
+      <stop offset=".19" stop-color="#02bbb5"/>
+      <stop offset=".75" stop-color="#057c9a"/>
+    </linearGradient>
+  </defs>
+  <g id="Layer_1_s" data-name="Layer 1 s">
+    <g>
+      <path class="cls-s-8" d="M0,0l81.02,157.28h19.06l49.36-78.64-28.26-41.87c-9.42,16.68-18.84,33.36-28.26,50.04C77.96,57.87,62.98,28.94,48,0H0Z"/>
+      <polygon class="cls-s-1" points="112.68 0 166.81 0 191.32 41.87 216.17 0 270.64 0 220.94 78.64 270.64 157.28 217.87 157.28 191.66 116.77 166.13 157.28 112.68 158.64 163.06 79.32 112.68 0"/>
+      <polygon class="cls-s-3" points="92.94 86.81 69.79 135.47 81.02 157.28 100.09 157.28 112.68 137.21 92.94 86.81"/>
+      <polygon class="cls-s-2" points="0 0 80.74 63.25 48 0 0 0"/>
+      <polygon class="cls-s-4" points="191.32 41.87 270.64 0 216.17 0 191.32 41.87"/>
+      <polygon class="cls-s-7" points="112.68 158.64 166.13 157.28 191.66 116.77 112.68 158.64"/>
+      <path class="cls-s-6" d="M203.88,85.71c44.92,18.56,62.71,61.09,66.76,71.56h-52.77c-4.81-7.44-9.63-14.88-14.44-22.32-5.76-8.9-8.64-13.35-8.66-13.38-3.03-4.7-3-4.66-3.11-4.8-6.76-9.21-19.71-11.14-21.73-11.43-14.02-2.08-24.8,4.75-27.62,6.66,1.3-2.15,3.34-5.5,5.95-9.57,3.11-4.85,3.03-4.5,5.27-8.09,6.03-9.66,6.88-11.12,7.07-11.4s2.43-3.64,2.47-3.62-1.29-2.02-1.29-2.02c11.12.11,26.05,1.79,42.1,8.42Z"/>
+      <path class="cls-s-5" d="M234.93,157.28c.46-19.68-9.25-37.98-25.53-47.68-19.52-11.62-39.68-5.65-42.97-4.62,5.35-.2,17.01.14,28.41,7.42,22.54,14.4,23.03,42.51,23.03,44.87h17.05Z"/>
+    </g>
+  </g>
+</svg></div>
+          <h2>
+            This is only
+            <span>the beginning.</span>
+          </h2>
+
+          <p>
+            Thank you to our guests, mentors, partners, friends, and everyone
+            who has been part of the Vexora journey.
+          </p>
+
+          <div class="contact-row">
+            <div class="contact-pill">www.vexorait.com</div>
+            <div class="contact-pill">076 113 2270</div>
+            <div class="contact-pill">hello@vexorait.com</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footerline">
+        <span>Vexora IT Solutions</span>
+        <span>11 <span class="dot"></span> Thank You</span>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<script src="dist/reveal.js"></script>
+<script>
+  Reveal.initialize({
+    hash: true,
+    slideNumber: "c/t",
+    controls: true,
+    progress: true,
+    center: false,
+    width: 1366,
+    height: 768,
+    margin: 0.035,
+    minScale: 0.2,
+    maxScale: 1.6,
+    transition: "fade",
+    transitionSpeed: "fast",
+    backgroundTransition: "fade",
+    controlsLayout: "bottom-right",
+    navigationMode: "linear",
+    keyboard: true,
+    touch: true,
+    overview: true
+  });
+</script>
+</body>
+</html>
