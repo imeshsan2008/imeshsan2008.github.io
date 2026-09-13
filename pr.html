@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -858,32 +857,6 @@
     }
 
     /* ---------- responsive ---------- */
-    @media (max-width: 900px) {
-      .reveal .slides section {
-        padding-left: 2rem;
-        padding-right: 2rem;
-      }
-      .grid-3,
-      .roadmap-grid,
-      .product-layout {
-        grid-template-columns: 1fr;
-      }
-      .service-list {
-        grid-template-columns: 1fr;
-      }
-      .orb {
-        opacity: .35;
-        right: -9rem;
-      }
-      .tap-card {
-        width: 210px;
-        height: 122px;
-      }
-      .ecosystem {
-        height: 330px;
-      }
-    }
-
     /* ---------- founder ---------- */
 
 .founder-layout {
@@ -931,8 +904,8 @@
 .founder-placeholder {
   position: relative;
   z-index: 2;
-  width: 145px;
-  height: 145px;
+  width: 200px;
+    height: 200px;
   border-radius: 50%;
   display: grid;
   place-items: center;
@@ -1213,37 +1186,44 @@
 /* ---------- responsive ---------- */
 
 @media (max-width: 900px) {
-
   .reveal .slides section {
-    padding-left: 2rem;
-    padding-right: 2rem;
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
   }
-
-  .grid-3 {
-    grid-template-columns: 1fr;
-  }
-
-  .service-list {
-    grid-template-columns: 1fr;
-  }
-
-  .founder-layout {
-    grid-template-columns: 1fr;
+  .grid-3, .service-list, .founder-layout, .vision-layout, .website-features, .browser-body, .product-layout, .roadmap-grid {
+    grid-template-columns: 1fr !important;
     gap: 1rem;
   }
-
   .founder-photo {
     min-height: 230px;
   }
-
-  .vision-layout,
-  .website-features {
-    grid-template-columns: 1fr;
-  }
-
   .orb {
     opacity: .35;
     right: -9rem;
+  }
+  .tap-card {
+    position: relative !important;
+    width: 210px !important;
+    height: 122px !important;
+    transform: rotate(0deg) !important;
+    margin: 1rem auto;
+    right: auto !important;
+    bottom: auto !important;
+  }
+  .ecosystem {
+    height: auto !important;
+    min-height: 330px;
+  }
+  .browser-body {
+    display: flex;
+    flex-direction: column;
+  }
+  .browser-copy {
+    padding: 1rem;
+  }
+  .browser-visual {
+    margin: 0.5rem;
+    min-height: 120px;
   }
 }
   </style>
@@ -1368,7 +1348,8 @@
       </div>
     </section>
 
-    <!-- 02 — The Beginning -->
+    <section>
+<!-- 02 — The Beginning -->
     <section data-transition="slide">
       <div class="section-head">
         <div class="eyebrow">01 / The Beginning</div>
@@ -1412,7 +1393,82 @@
         <span>02 <span class="dot"></span> Who We Are</span>
       </div>
     </section>
+<!-- 02.5 - The Founder -->
+    <section data-transition="slide">
+      <div class="section-head">
+        <div class="eyebrow">The Founder</div>
+        <h2 style="margin-top:.6rem;">
+          Meet the person <span class="teal">behind Vexora.</span>
+        </h2>
+        <p class="sub">
+          A creative and technology-driven journey behind the vision of Vexora IT Solutions.
+        </p>
+      </div>
 
+      <div class="founder-layout">
+        <div class="card founder-photo">
+          <div class="founder-placeholder" style="background-image: url('https://cdn.vexorait.com/avatars/wa-49171d1c-b1c5-463f-a099-c29da5e8a306-dee82108-1789335588.webp'); background-size: cover; background-position: center; border: 2px solid var(--brand-teal);">
+          </div>
+        </div>
+
+        <div class="card" style="padding:1.4rem 1.6rem; display:flex; flex-direction:column; justify-content:center;">
+          <div class="founder-role">Founder - Vexora IT Solutions</div>
+          <h3 class="founder-name">Imesh Sandeepa</h3>
+          
+          <p class="founder-description">
+            A creative-minded technology enthusiast combining graphic design, digital technology, and continuous self-learning to build practical digital experiences for modern businesses.
+          </p>
+        </div>
+      </div>
+
+      <div class="footerline">
+        <span>Vexora IT Solutions</span>
+        <span>02 <span class="dot"></span> The Founder</span>
+      </div>
+    </section>
+      
+    <!-- 02.6 - The Founder Qualifications -->
+    <section data-transition="slide">
+      <div class="section-head">
+        <div class="eyebrow">The Founder</div>
+        <h2 style="margin-top:.6rem;">
+          Qualifications & <span class="teal">Experience.</span>
+        </h2>
+      </div>
+        
+      <div class="card" style="padding: 2rem; margin-top: 1rem;">
+        <div class="profile-list" style="margin-top: 0;">
+
+          <div class="card profile-item">
+            <div class="profile-icon">GD</div>
+            <div>
+              <h4>Graphic Design - NVQ Level 4</h4>
+              <p>Maradana Technical College</p>
+            </div>
+          </div>
+
+          <div class="card profile-item">
+            <div class="profile-icon">SW</div>
+            <div>
+              <h4>Software & Digital Technology</h4>
+              <p>Online courses, self-learning & continuous practice</p>
+            </div>
+          </div>
+
+        </div> <!-- Close profile-list -->
+
+        <div class="founder-note" style="margin-top: 1.5rem; font-style: italic; color: #a0aeb2;">
+          "Turning creative ideas into practical digital solutions."
+        </div>
+      </div> <!-- Close card -->
+
+      <div class="footerline">
+        <span>Vexora IT Solutions</span>
+        <span>02 <span class="dot"></span> The Founder</span>
+      </div>
+    </section>
+    </section> <!-- THIS CLOSES THE VERTICAL STACK -->
+    
     <!-- 03 — Mission -->
     <section data-transition="slide">
       <div class="section-head">
@@ -1576,7 +1632,7 @@
 
          <div class="tap-card fragment" aria-label="VexoraTap NFC card illustration">
             
-		<img src="./activate.svg" alt="" srcset="">
+		<img src="./card.png" alt="" srcset="">
 		</div>
         </div>
 
