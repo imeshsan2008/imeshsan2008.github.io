@@ -161,6 +161,686 @@
       color: #aeb8c5;
     }
 
+    .footerline {
+      position: absolute;
+      left: 3.55rem;
+      right: 3.55rem;
+      bottom: .95rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: center;
+      color: rgba(255,255,255,.36);
+      font-size: .34em;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      z-index: 10;
+    }
+
+    .footerline .dot {
+      display: inline-block;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      margin: 0 .45rem;
+      background: var(--brand-soft);
+      vertical-align: middle;
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,.065), rgba(255,255,255,.025));
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+    }
+
+    /* ---------- title ---------- */
+    .hero {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+
+    .hero-copy {
+      max-width: 800px;
+    }
+
+    .hero-logo {
+      width: 84px;
+      height: 84px;
+      display: grid;
+      place-items: center;
+      border-radius: 22px;
+      margin-bottom: 1.5rem;
+      border: 1px solid rgba(70,220,232,.45);
+      box-shadow:
+        0 18px 60px rgba(0,150,166,.22),
+        inset 0 0 30px rgba(255,255,255,.08);
+      font: 700 2.2em "Space Grotesk", sans-serif;
+      color: #fff;
+    }
+
+    .hero h1 {
+      max-width: 760px;
+      margin-top: 1rem;
+    }
+
+    .hero .lead {
+      max-width: 660px;
+      font-size: .72em;
+      margin: 1.25rem 0 0;
+      color: #bdc7d3;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .55rem 1.2rem;
+      margin-top: 1.8rem;
+      color: rgba(255,255,255,.48);
+      font-size: .4em;
+      letter-spacing: .04em;
+    }
+
+    .orb {
+      position: absolute;
+      right: 1%;
+      top: 8%;
+      width: 27rem;
+      height: 27rem;
+      border-radius: 50%;
+      border: 1px solid rgba(70,220,232,.16);
+      box-shadow:
+        inset 0 0 90px rgba(0,150,166,.09),
+        0 0 120px rgba(0,150,166,.08);
+    }
+
+    .orb::before,
+    .orb::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(70,220,232,.10);
+    }
+
+    .orb::before { inset: 12%; }
+    .orb::after { inset: 26%; }
+
+    .orb-line {
+      position: absolute;
+      width: 72%;
+      height: 1px;
+      left: 14%;
+      top: 50%;
+      background: linear-gradient(90deg, transparent, rgba(70,220,232,.55), transparent);
+      transform: rotate(-28deg);
+    }
+
+    .orb-dot {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--brand-soft);
+      box-shadow: 0 0 30px rgba(70,220,232,.8);
+      top: 31%;
+      left: 68%;
+    }
+
+    /* ---------- values ---------- */
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: .8rem;
+    }
+
+    .value-card {
+      padding: 1rem 1.15rem;
+    }
+
+    .value-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      margin: .6rem 0 .5rem;
+      background: rgba(0,150,166,.10);
+      border: 1px solid rgba(70,220,232,.16);
+      color: var(--brand-soft);
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 700;
+      font-size: .54em;
+    }
+
+    .value-card h3 {
+      font-size: .78em;
+      margin-bottom: .3rem;
+    }
+
+    .value-card p {
+      font-size: .44em;
+      margin: 0;
+      color: #9ca8b6;
+    }
+
+    /* ---------- services ---------- */
+    .service-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .9rem;
+      margin-top: 1rem;
+    }
+
+    .service {
+      display: flex;
+      gap: .95rem;
+      padding: .9rem 1rem;
+      align-items: flex-start;
+    }
+
+    .service-badge {
+      min-width: 34px;
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(70,220,232,.18);
+      background: rgba(0,150,166,.08);
+      color: var(--brand-soft);
+      font-size: .44em;
+      font-weight: 700;
+    }
+
+    .service h3 {
+      font-size: .64em;
+      margin: 0 0 .25rem;
+    }
+
+    .service p {
+      margin: 0;
+      font-size: .42em;
+      line-height: 1.45;
+    }
+
+    /* ---------- roadmap grid (4 items) ---------- */
+    .roadmap-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: .9rem;
+      margin-top: .8rem;
+    }
+
+    .roadmap-card {
+      padding: 1rem 1.2rem;
+      display: flex;
+      gap: .9rem;
+      align-items: flex-start;
+    }
+
+    .roadmap-card h3 {
+      font-size: .7em;
+      margin: 0 0 .2rem;
+    }
+
+    .roadmap-card p {
+      font-size: .42em;
+      margin: 0;
+      color: #9ca8b6;
+      line-height: 1.5;
+    }
+
+    /* ---------- product reveal (pdf style multi-column) ---------- */
+    .product-reveal-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: .8rem;
+    }
+
+    .reveal-card {
+      padding: 1.1rem 1.2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+
+    .reveal-card h3 {
+      font-size: .74em;
+      margin: .5rem 0 .3rem;
+    }
+
+    .reveal-card p {
+      font-size: .41em;
+      margin: 0;
+      color: #9ca8b6;
+      line-height: 1.55;
+    }
+
+    /* ---------- final ---------- */
+    .closing {
+      height: 100%;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding-bottom: 2rem;
+    }
+
+    .closing h2 {
+      font-size: 2.5em;
+      max-width: 980px;
+    }
+
+    .closing h2 span {
+      display: block;
+      color: var(--brand-soft);
+      text-shadow: 0 0 30px rgba(70,220,232,.18);
+    }
+
+    .closing p {
+      margin: .75rem auto 0;
+      max-width: 610px;
+      font-size: .48em;
+    }
+
+    .contact-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: .5rem .85rem;
+      margin-top: 1.1rem;
+    }
+
+    .contact-pill {
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.03);
+      color: rgba(255,255,255,.65);
+      border-radius: 999px;
+      padding: .45rem .75rem;
+      font-size: .35em;
+    }
+
+    .s-mark {
+      width: 400px;
+      height: auto;
+      margin: 0 auto 1.6rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      filter:
+        drop-shadow(0 0 32px rgba(2,187,181,.65))
+        drop-shadow(0 14px 50px rgba(0,150,166,.45));
+    }
+    
+    .hero-logo svg {
+      width: 65%;
+      height: auto;
+    }
+
+    /* ---------- animations ---------- */
+    .reveal .slides section.present .hero-logo {
+      animation: floatLogo 5s ease-in-out infinite;
+    }
+
+    .reveal .slides section.present .orb {
+      animation: orbDrift 10s ease-in-out infinite alternate;
+    }
+
+    @keyframes floatLogo {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    @keyframes orbDrift {
+      from { transform: translate3d(0,0,0) scale(1); }
+      to { transform: translate3d(-12px,8px,0) scale(1.035); }
+    }
+
+    /* ---------- founder ---------- */
+    .founder-split-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 2rem;
+      align-items: center;
+      margin-top: .8rem;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .founder-photo-box {
+      position: relative;
+      height: 100%;
+      min-height: 320px;
+      border-radius: 20px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background:
+        radial-gradient(circle at 50% 35%, rgba(0,150,166,.20), transparent 42%),
+        linear-gradient(145deg, rgba(255,255,255,.07), rgba(255,255,255,.025));
+      border: 1px solid var(--line);
+    }
+
+    .founder-photo-box::before {
+      content: "";
+      position: absolute;
+      inset: 18px;
+      border: 1px solid rgba(70,220,232,.18);
+      border-radius: 14px;
+    }
+
+    .founder-avatar-large {
+      position: relative;
+      z-index: 2;
+      width: 190px;
+      height: 190px;
+      border-radius: 50%;
+      background-size: cover;
+      background-position: center;
+      border: 2px solid var(--brand-soft);
+      box-shadow:
+        0 20px 70px rgba(0,150,166,.28),
+        inset 0 0 35px rgba(255,255,255,.10);
+    }
+
+    .founder-content-box {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100%;
+    }
+
+    .founder-role {
+      color: var(--brand-soft);
+      font-size: .5em;
+      font-weight: 700;
+      letter-spacing: .04em;
+    }
+
+    .founder-name {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1.65em;
+      font-weight: 700;
+      line-height: 1.1;
+      margin: .2rem 0 .6rem;
+    }
+
+    .founder-bio {
+      font-size: .5em;
+      line-height: 1.65;
+      color: #b5c0cb;
+      margin: 0;
+    }
+
+    .founder-quote-card {
+      margin-top: .8rem;
+      padding: 1rem 1.2rem;
+      border-left: 3px solid var(--brand-soft);
+      background: rgba(0,150,166,.055);
+    }
+
+    .founder-quote-card p {
+      margin: 0;
+      font-size: .46em;
+      font-style: italic;
+      color: #d2e3eb;
+      line-height: 1.5;
+    }
+
+    /* ---------- responsive ---------- */
+    @media (max-width: 900px) {
+      .reveal .slides section {
+        padding-left: 1.5rem !important;
+        padding-right: 1.5rem !important;
+      }
+      .grid-3, .service-list, .founder-split-layout, .roadmap-grid, .product-reveal-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1rem;
+      }
+      .orb {
+        opacity: .35;
+        right: -9rem;
+      }
+
+    /* ---------- Qualifications & Experience slide ---------- */
+    .qual-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+      margin-top: 1.2rem;
+    }
+    .qual-card {
+      background: linear-gradient(145deg, rgba(0,150,166,.10), rgba(0,150,166,.03));
+      border: 1px solid rgba(70,220,232,.18);
+      border-radius: 16px;
+      padding: 1.5rem 1.6rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .qual-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(70,220,232,.07) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .qual-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: rgba(0,150,166,.20);
+      border: 1px solid rgba(70,220,232,.30);
+      color: #46dce8;
+      font: 700 .42em "Space Grotesk", sans-serif;
+      letter-spacing: .04em;
+      margin-bottom: .75rem;
+    }
+    .qual-card h4 {
+      margin: 0 0 .35rem;
+      font-size: .50em;
+      font-weight: 700;
+      color: #f1f6f8;
+      letter-spacing: -.01em;
+    }
+    .qual-card p {
+      margin: 0;
+      font-size: .38em;
+      color: #8f9ba9;
+      line-height: 1.55;
+    }
+    .qual-card .qual-tag {
+      display: inline-block;
+      margin-top: .6rem;
+      padding: .2rem .6rem;
+      background: rgba(70,220,232,.10);
+      border: 1px solid rgba(70,220,232,.22);
+      border-radius: 20px;
+      font-size: .32em;
+      color: #46dce8;
+      font-weight: 600;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+    .qual-quote {
+      margin-top: 1.2rem;
+      padding: .8rem 1.2rem;
+      border-left: 3px solid #46dce8;
+      background: rgba(0,150,166,.06);
+      border-radius: 0 10px 10px 0;
+      font-style: italic;
+      font-size: .40em;
+      color: #9eabb8;
+      line-height: 1.55;
+    }
+    .qual-quote span {
+      color: #46dce8;
+      font-style: normal;
+      font-weight: 700;
+    }
+    }
+  </style><style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+    :root {
+      --bg: #070b12;
+      --bg-2: #0b111a;
+      --surface: rgba(255,255,255,.045);
+      --surface-2: rgba(255,255,255,.075);
+      --line: rgba(255,255,255,.10);
+      --text: #f7fafc;
+      --muted: #97a3b2;
+      --brand: #0096a6;
+      --brand-dark: #007987;
+      --brand-soft: #46dce8;
+      --success: #42d392;
+      --shadow: 0 30px 90px rgba(0,0,0,.45);
+    }
+
+    html, body {
+      background: var(--bg);
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+
+    .reveal {
+      color: var(--text);
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 12% 15%, rgba(0,150,166,.12), transparent 25%),
+        radial-gradient(circle at 85% 80%, rgba(70,220,232,.08), transparent 22%),
+        linear-gradient(180deg, #060a11 0%, #080d15 100%);
+    }
+
+    .reveal .slides {
+      height: 100%;
+    }
+
+    .reveal .slides section {
+      box-sizing: border-box;
+      padding: 0.35rem 3.5rem 4rem;
+      text-align: left;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      overflow: hidden;
+    }
+
+    .reveal .slides section::before {
+      content: "";
+      position: absolute;
+      inset: -8%;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 52px 52px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,.72), transparent 92%);
+      z-index: -2;
+    }
+
+    .reveal .slides section::after {
+      content: "";
+      position: absolute;
+      width: 34rem;
+      height: 34rem;
+      right: -12rem;
+      top: -13rem;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,150,166,.14), transparent 68%);
+      filter: blur(12px);
+      z-index: -3;
+      pointer-events: none;
+    }
+
+    .reveal h1,
+    .reveal h2,
+    .reveal h3,
+    .reveal h4 {
+      font-family: "Space Grotesk", Inter, sans-serif;
+      text-transform: none;
+      letter-spacing: -.035em;
+      margin: 0;
+    }
+
+    .reveal h1 {
+      font-size: 2.65em;
+      font-weight: 700;
+      line-height: .98;
+    }
+
+    .reveal h2 {
+      font-size: 1.65em;
+      font-weight: 700;
+      line-height: 1.05;
+    }
+
+    .reveal p,
+    .reveal li {
+      color: var(--muted);
+      font-size: .72em;
+      line-height: 1.65;
+    }
+
+    .reveal strong {
+      color: var(--text);
+    }
+
+    .teal { color: var(--brand-soft); }
+    .white { color: var(--text); }
+    .muted { color: var(--muted); }
+
+    /* ---------- shared ---------- */
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+      padding: .42rem .72rem;
+      border: 1px solid rgba(70,220,232,.18);
+      background: rgba(0,150,166,.08);
+      color: #b9f6fb;
+      border-radius: 999px;
+      font-size: .38em;
+      font-weight: 700;
+      letter-spacing: .11em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--brand-soft);
+      box-shadow: 0 0 14px rgba(70,220,232,.7);
+    }
+
+    .section-head {
+      margin: 0 0 1rem;
+      max-width: 900px;
+    }
+
+    .section-head .sub {
+      margin: .5rem 0 0;
+      max-width: 800px;
+      font-size: .58em;
+      color: #aeb8c5;
+    }
+
     .rule {
       height: 1px;
       background: linear-gradient(90deg, rgba(70,220,232,.7), rgba(255,255,255,.08), transparent);
@@ -1226,7 +1906,145 @@
     min-height: 120px;
   }
 }
+
+  /* ============================================================
+     RESPONSIVE FONT SIZES — full cascade across all breakpoints
+     ============================================================ */
+
+  /* — Large screens (≤1280px) — gentle scale down */
+  @media (max-width: 1280px) {
+    .reveal h1 { font-size: 2.3em; }
+    .reveal h2 { font-size: 1.45em; }
+    .reveal h3 { font-size: 1.05em; }
+    .reveal h4 { font-size: 0.85em; }
+    .reveal p, .reveal li { font-size: .68em; }
+    .section-head .sub { font-size: .54em; }
+    .eyebrow { font-size: .36em; }
+    .footerline { font-size: .32em; }
+    .closing h2 { font-size: 2.1em; }
+    .closing p { font-size: .44em; }
+    .hero .lead { font-size: .66em; }
+    .value-card h3 { font-size: .72em; }
+    .value-card p { font-size: .40em; }
+    .service h3 { font-size: .60em; }
+    .service p { font-size: .39em; }
+    .roadmap-card h3 { font-size: .65em; }
+    .roadmap-card p { font-size: .39em; }
+    .reveal-card h3 { font-size: .68em; }
+    .reveal-card p { font-size: .38em; }
+    .founder-role { font-size: .46em; }
+    .founder-bio { font-size: .46em; }
+    .founder-quote-card p { font-size: .42em; }
+    .qual-card h4 { font-size: .46em; }
+    .qual-card p { font-size: .35em; }
+    .browser-copy h3 { font-size: .82em; }
+    .browser-copy p { font-size: .36em; }
+  }
+
+  /* — Medium screens (≤1024px) — moderate scale */
+  @media (max-width: 1024px) {
+    .reveal h1 { font-size: 2.0em; }
+    .reveal h2 { font-size: 1.3em; }
+    .reveal h3 { font-size: .95em; }
+    .reveal h4 { font-size: .78em; }
+    .reveal p, .reveal li { font-size: .62em; }
+    .section-head .sub { font-size: .50em; }
+    .eyebrow { font-size: .34em; }
+    .footerline { font-size: .30em; }
+    .closing h2 { font-size: 1.8em; }
+    .closing p { font-size: .40em; }
+    .hero .lead { font-size: .60em; }
+    .hero-meta { font-size: .36em; }
+    .value-card h3 { font-size: .66em; }
+    .value-card p { font-size: .37em; }
+    .service h3 { font-size: .56em; }
+    .service p { font-size: .36em; }
+    .roadmap-card h3 { font-size: .60em; }
+    .roadmap-card p { font-size: .36em; }
+    .reveal-card h3 { font-size: .62em; }
+    .reveal-card p { font-size: .35em; }
+    .founder-role { font-size: .42em; }
+    .founder-name { font-size: 1.4em; }
+    .founder-bio { font-size: .42em; }
+    .founder-quote-card p { font-size: .39em; }
+    .qual-card h4 { font-size: .42em; }
+    .qual-card p { font-size: .32em; }
+    .browser-copy h3 { font-size: .74em; }
+    .browser-copy p { font-size: .33em; }
+    .contact-pill { font-size: .32em; }
+  }
+
+  /* — Tablet (≤768px) — compact text */
+  @media (max-width: 768px) {
+    .reveal .slides section { padding: 0.35rem 1.8rem 3.5rem; }
+    .reveal h1 { font-size: 1.7em; }
+    .reveal h2 { font-size: 1.1em; }
+    .reveal h3 { font-size: .85em; }
+    .reveal h4 { font-size: .70em; }
+    .reveal p, .reveal li { font-size: .56em; }
+    .section-head .sub { font-size: .45em; }
+    .eyebrow { font-size: .30em; }
+    .footerline { font-size: .28em; left: 1.8rem; right: 1.8rem; }
+    .closing h2 { font-size: 1.4em; }
+    .closing p { font-size: .36em; }
+    .hero .lead { font-size: .54em; }
+    .hero-meta { font-size: .32em; }
+    .value-card h3 { font-size: .58em; }
+    .value-card p { font-size: .33em; }
+    .service h3 { font-size: .50em; }
+    .service p { font-size: .32em; }
+    .roadmap-card h3 { font-size: .54em; }
+    .roadmap-card p { font-size: .32em; }
+    .reveal-card h3 { font-size: .56em; }
+    .reveal-card p { font-size: .32em; }
+    .founder-role { font-size: .38em; }
+    .founder-name { font-size: 1.2em; }
+    .founder-bio { font-size: .38em; }
+    .founder-quote-card p { font-size: .35em; }
+    .qual-card h4 { font-size: .38em; }
+    .qual-card p { font-size: .30em; }
+    .browser-copy h3 { font-size: .65em; }
+    .browser-copy p { font-size: .30em; }
+    .contact-pill { font-size: .28em; }
+    .service-badge { font-size: .38em; }
+  }
+
+  /* — Mobile (≤480px) — smallest readable sizes */
+  @media (max-width: 480px) {
+    .reveal .slides section { padding: 0.25rem 1rem 3rem; }
+    .reveal h1 { font-size: 1.35em; }
+    .reveal h2 { font-size: .95em; }
+    .reveal h3 { font-size: .78em; }
+    .reveal h4 { font-size: .64em; }
+    .reveal p, .reveal li { font-size: .50em; }
+    .section-head .sub { font-size: .40em; }
+    .eyebrow { font-size: .28em; padding: .35rem .55rem; }
+    .footerline { font-size: .25em; left: 1rem; right: 1rem; }
+    .closing h2 { font-size: 1.1em; }
+    .closing p { font-size: .32em; }
+    .hero .lead { font-size: .48em; }
+    .hero-meta { font-size: .28em; }
+    .value-card h3 { font-size: .52em; }
+    .value-card p { font-size: .30em; }
+    .service h3 { font-size: .46em; }
+    .service p { font-size: .29em; }
+    .roadmap-card h3 { font-size: .48em; }
+    .roadmap-card p { font-size: .29em; }
+    .reveal-card h3 { font-size: .50em; }
+    .reveal-card p { font-size: .29em; }
+    .founder-role { font-size: .34em; }
+    .founder-name { font-size: 1.0em; }
+    .founder-bio { font-size: .34em; }
+    .founder-quote-card p { font-size: .31em; }
+    .qual-card h4 { font-size: .34em; }
+    .qual-card p { font-size: .27em; }
+    .browser-copy h3 { font-size: .56em; }
+    .browser-copy p { font-size: .27em; }
+    .contact-pill { font-size: .25em; }
+    .service-badge { font-size: .34em; }
+  }
   </style>
+
 </head>
 
 <body>
@@ -1243,37 +2061,14 @@
 <svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 270.64 158.64">
   <defs>
     <style>
-      .cls-1 {
-        fill: url(#linear-gradient-2);
-      }
-
-      .cls-2 {
-        fill: url(#linear-gradient-4);
-      }
-
-      .cls-3 {
-        fill: url(#linear-gradient-3);
-      }
-
-      .cls-4 {
-        fill: url(#linear-gradient-5);
-      }
-
-      .cls-5 {
-        fill: url(#linear-gradient-8);
-      }
-
-      .cls-6 {
-        fill: url(#linear-gradient-7);
-      }
-
-      .cls-7 {
-        fill: url(#linear-gradient-6);
-      }
-
-      .cls-8 {
-        fill: url(#linear-gradient);
-      }
+      .cls-1 { fill: url(#linear-gradient-2); }
+      .cls-2 { fill: url(#linear-gradient-4); }
+      .cls-3 { fill: url(#linear-gradient-3); }
+      .cls-4 { fill: url(#linear-gradient-5); }
+      .cls-5 { fill: url(#linear-gradient-8); }
+      .cls-6 { fill: url(#linear-gradient-7); }
+      .cls-7 { fill: url(#linear-gradient-6); }
+      .cls-8 { fill: url(#linear-gradient); }
     </style>
     <linearGradient id="linear-gradient" x1="35.35" y1="-20.41" x2="128.47" y2="140.89" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#02bbb5"/>
@@ -1319,7 +2114,7 @@
           <h1>
             Vexora IT Solutions
             <br />
-            <span class="teal">Building the Digital Future.</span>
+            <span class="teal">Shaping Your Digital Future</span>
           </h1>
 
           <p class="lead">
@@ -1341,62 +2136,11 @@
           <div class="orb-dot"></div>
         </div>
       </div>
-
-      <div class="footerline">
-        <!-- <span>Vexora IT Solutions</span> -->
-        <!-- <span>01 <span class="dot"></span> The Beginning</span> -->
-      </div>
     </section>
 
-    <section>
-<!-- 02 — The Beginning -->
-    <section data-transition="slide">
+   <section data-transition="slide">
       <div class="section-head">
-        <div class="eyebrow">01 / The Beginning</div>
-        <h2 style="margin-top:.6rem;">
-          More than an IT company.
-          <span class="teal">A digital ecosystem.</span>
-        </h2>
-        <p class="sub">
-          Vexora is being built around one simple idea:
-          technology should be useful, connected, and designed to move businesses forward.
-        </p>
-      </div>
-
-      <div class="rule"></div>
-
-      <div class="grid-3">
-        <div class="card value-card fragment">
-          <div class="value-no">01</div>
-          <div class="value-icon">I</div>
-          <h3>Innovation</h3>
-          <p>Turning ideas into modern digital products with purpose, clarity, and measurable value.</p>
-        </div>
-
-        <div class="card value-card fragment">
-          <div class="value-no">02</div>
-          <div class="value-icon">R</div>
-          <h3>Reliability</h3>
-          <p>Building dependable solutions that businesses can trust every day, at every scale.</p>
-        </div>
-
-        <div class="card value-card fragment">
-          <div class="value-no">03</div>
-          <div class="value-icon">S</div>
-          <h3>Scalability</h3>
-          <p>Designing foundations that can evolve from a first launch into a long-term platform.</p>
-        </div>
-      </div>
-
-      <div class="footerline">
-        <span>Vexora IT Solutions</span>
-        <span>02 <span class="dot"></span> Who We Are</span>
-      </div>
-    </section>
-<!-- 02.5 - The Founder -->
-    <section data-transition="slide">
-      <div class="section-head">
-        <div class="eyebrow">The Founder</div>
+        <div class="eyebrow">02 / Credentials &amp; Background</div>
         <h2 style="margin-top:.6rem;">
           Meet the person <span class="teal">behind Vexora.</span>
         </h2>
@@ -1423,14 +2167,14 @@
 
       <div class="footerline">
         <span>Vexora IT Solutions</span>
-        <span>02 <span class="dot"></span> The Founder</span>
+        <span>02 <span class="dot"></span> Credentials &amp; Background</span>
       </div>
     </section>
       
-    <!-- 02.6 - The Founder Qualifications -->
+    <!-- 02.6 - Credentials & Background - Qualifications -->
     <section data-transition="slide">
       <div class="section-head">
-        <div class="eyebrow">The Founder</div>
+        <div class="eyebrow">02 / Credentials &amp; Background</div>
         <h2 style="margin-top:.6rem;">
           Qualifications & <span class="teal">Experience.</span>
         </h2>
@@ -1453,7 +2197,20 @@
               <h4>Software & Digital Technology</h4>
               <p>Online courses, self-learning & continuous practice</p>
             </div>
+
+          
+
+
+
           </div>
+<div class="card profile-item">
+            <div class="profile-icon">PB</div>
+            <div>
+              <h4>Professional Benchmarking Certification</h4>
+              <p>ASIAN PRODUCTIVITY ORGANIZATION</p>
+            </div>
+          </div>
+
 
         </div> <!-- Close profile-list -->
 
@@ -1464,15 +2221,15 @@
 
       <div class="footerline">
         <span>Vexora IT Solutions</span>
-        <span>02 <span class="dot"></span> The Founder</span>
+        <span>02 <span class="dot"></span> Credentials &amp; Background</span>
       </div>
     </section>
-    </section> <!-- THIS CLOSES THE VERTICAL STACK -->
-    
-    <!-- 03 — Mission -->
+    </section>
+
+    <!-- 04 — Mission -->
     <section data-transition="slide">
       <div class="section-head">
-        <div class="eyebrow">02 / Our Mission</div>
+        <div class="eyebrow">03 / Our Mission</div>
         <h2 style="margin-top:.6rem;">Make digital technology <span class="teal">work better.</span></h2>
       </div>
 
@@ -1483,40 +2240,24 @@
         </p>
       </div>
 
-      <div class="grid-3" style="margin-top:.8rem;">
-        <div class="card value-card fragment">
-          <div class="value-icon">01</div>
-          <h3>Build</h3>
-          <p>Useful products with clean foundations and strong user experiences.</p>
-        </div>
-        <div class="card value-card fragment">
-          <div class="value-icon">02</div>
-          <h3>Connect</h3>
-          <p>Bring services, customers, teams, and workflows into one experience.</p>
-        </div>
-        <div class="card value-card fragment">
-          <div class="value-icon">03</div>
-          <h3>Scale</h3>
-          <p>Keep technology ready for the next customer, product, and opportunity.</p>
-        </div>
-      </div>
+      
 
       <div class="footerline">
         <span>Vexora IT Solutions</span>
-        <span>03 <span class="dot"></span> Mission</span>
+        <span>04 <span class="dot"></span> Mission</span>
       </div>
     </section>
 
-    <!-- 04 — Services -->
+    <!-- 05 — Services -->
     <section data-transition="slide">
       <div class="section-head">
-        <div class="eyebrow">03 / What We Build</div>
+        <div class="eyebrow">04 / What We Build</div>
         <h2 style="margin-top:.6rem;">Core services. <span class="teal">Built for momentum.</span></h2>
         <p class="sub">A focused service stack for businesses that want to move from idea to execution.</p>
       </div>
 
       <div class="service-list">
-        <div class="card service fragment">
+        <div class="card service">
           <div class="service-badge">01</div>
           <div>
             <h3>Web Development</h3>
@@ -1524,7 +2265,7 @@
           </div>
         </div>
 
-        <div class="card service fragment">
+        <div class="card service">
           <div class="service-badge">02</div>
           <div>
             <h3>Web Hosting</h3>
@@ -1532,7 +2273,7 @@
           </div>
         </div>
 
-        <div class="card service fragment">
+        <div class="card service">
           <div class="service-badge">03</div>
           <div>
             <h3>Graphic & Brand Design</h3>
@@ -1540,7 +2281,7 @@
           </div>
         </div>
 
-        <div class="card service fragment">
+        <div class="card service">
           <div class="service-badge">04</div>
           <div>
             <h3>Digital Products</h3>
@@ -1551,65 +2292,55 @@
 
       <div class="footerline">
         <span>Vexora IT Solutions</span>
-        <span>04 <span class="dot"></span> Services</span>
+        <span>05 <span class="dot"></span> Services</span>
       </div>
     </section>
 
-    <!-- 05 — Reveal -->
-    <!-- <section data-transition="fade">
-      <div class="reveal-title">
-        <div>
-          <div class="tiny">The moment</div>
-          <h2>Our digital home<br /><span class="glow-word">is ready.</span></h2>
-          <div class="mini-rule"></div>
-        </div>
-      </div>
-
-      <div class="footerline">
-        <span>Vexora IT Solutions</span>
-        <span>05 <span class="dot"></span> The Reveal</span>
-      </div>
-    </section> -->
-
-    <!-- 06 — Website -->
+    <!-- 06 — Further Roadmaps -->
     <section data-transition="slide">
       <div class="section-head">
-        <div class="eyebrow">04 / The Flagship Launch</div>
-        <h2 style="margin-top:.6rem;">Meet the new <span class="teal">Vexora web platform.</span></h2>
-        <p class="sub">Our public-facing digital home — designed to represent the brand, products, and ecosystem.</p>
+        <div class="eyebrow">05 / Future Roadmaps</div>
+        <h2 style="margin-top:.6rem;">Expanding the <span class="teal">Vexora Ecosystem.</span></h2>
+        <p class="sub">Upcoming platforms and specialized digital solutions currently under development.</p>
       </div>
 
-      <div class="browser fragment">
-        <div class="browser-top">
-          <span class="browser-dot"></span>
-          <span class="browser-dot"></span>
-          <span class="browser-dot"></span>
-          <span class="browser-url">https://www.vexorait.com</span>
+      <div class="roadmap-grid">
+        <div class="card roadmap-card">
+          <div class="service-badge">01</div>
+          <div>
+            <h3>VexoraQR</h3>
+            <p style="font-size:0.75rem;">Dynamic QR code management platform featuring custom branding, real-time analytics, and high-performance routing.</p>
+          </div>
         </div>
 
-        <div class="browser-body">
-          <div class="browser-copy">
-            <div class="mini">Vexora IT Solutions</div>
-            <h3>Technology with purpose.</h3>
-            <p>
-              A modern digital presence designed around trust, clarity,
-              performance, and the next generation of Vexora products.
-            </p>
-            <a class="launch-link" href="https://www.vexorait.com" target="_blank" rel="noopener">
-              Open vexorait.com ↗
-            </a>
+        <div class="card roadmap-card">
+          <div class="service-badge">02</div>
+          <div>
+            <h3>File Sphere</h3>
+            <p style="font-size:0.75rem;">Secure file management and collaboration workspace equipped with document approval workflows and role-based access.</p>
           </div>
+        </div>
 
-          <div class="browser-visual" aria-hidden="true">
-            <div class="ring"></div>
-            <div class="center-mark">V</div>
+        <div class="card roadmap-card">
+          <div class="service-badge">03</div>
+          <div>
+            <h3>Storixa</h3>
+            <p style="font-size:0.75rem;">Next-generation digital storage and asset management utility built for streamlined organization and fast retrieval.</p>
+          </div>
+        </div>
+
+        <div class="card roadmap-card">
+          <div class="service-badge">04</div>
+          <div>
+            <h3>VexoraClass</h3>
+            <p style="font-size:0.75rem;">Comprehensive tuition class management system designed to handle student enrollment, attendance tracking, and fee workflows.</p>
           </div>
         </div>
       </div>
 
       <div class="footerline">
         <span>Vexora IT Solutions</span>
-        <span>06 <span class="dot"></span> Website Launch</span>
+        <span>06 <span class="dot"></span> Future Roadmaps</span>
       </div>
     </section>
 
@@ -1630,22 +2361,21 @@
             that is easier to share, easier to update, and built for modern networking.
           </p>
 
-         <div class="tap-card fragment" aria-label="VexoraTap NFC card illustration">
+         <div class="tap-card " aria-label="VexoraTap NFC card illustration">
             
-		<img src="./card.png" alt="" srcset="">
 		</div>
         </div>
 
         <div class="feature-stack">
-          <div class="card feature-item fragment">
+          <div class="card feature-item ">
             <h4>Instant sharing</h4>
             <p>Share your profile, contacts, links, and professional information with a simple tap.</p>
           </div>
-          <div class="card feature-item fragment">
+          <div class="card feature-item ">
             <h4>Always up to date</h4>
             <p>Update your digital profile without replacing the physical card.</p>
           </div>
-          <div class="card feature-item fragment">
+          <div class="card feature-item ">
             <h4>Available Today</h4>
             <p>The flagship physical and digital release featured at today's launch event.</p>
           </div>
@@ -1657,140 +2387,46 @@
         <span>07 <span class="dot"></span> Smart Networking</span>
       </div>
     </section>
-
-    <!-- 08 — VexoraQR -->
-    <section data-transition="slide">
+    <!-- 07 — VexoraTap Product Reveal (Updated with PDF Content) -->
+ <section data-transition="slide">
       <div class="section-head">
-        <div class="eyebrow">06 / Future Product Roadmap</div>
-        <h2 style="margin-top:.6rem;"><span class="teal">VexoraQR</span> — coming next.</h2>
-        <p class="sub">A flexible QR platform designed around modular business and event needs (upcoming release).</p>
+        <div class="eyebrow">06 / Product Reveal</div>
+        <h2 style="margin-top:.4rem;">Why hand over a card when you can connect in a minute?</h2>
+        <p class="sub">How to make your business meetings a success? Capture more customer connections and turn every meeting into a lead.</p>
       </div>
 
-      <div class="grid-3">
-        <div class="card value-card fragment">
-          <div class="value-icon">01</div>
-          <h3>Custom Plugins</h3>
-          <p>Enable only the capabilities a business or event actually needs.</p>
-        </div>
-        <div class="card value-card fragment">
-          <div class="value-icon">02</div>
-          <h3>Flexible Pricing</h3>
-          <p>Modular pricing based on selected functionality instead of fixed bundles.</p>
-        </div>
-        <div class="card value-card fragment">
-          <div class="value-icon">03</div>
-          <h3>Unified Identity</h3>
-          <p>Connect a VexoraTap profile with QR-based experiences in one seamless system.</p>
-        </div>
-      </div>
-
-      <div class="card fragment" style="margin-top:.8rem; padding:.8rem 1.2rem;">
-        <p style="margin:0; font-size:.44em; color:#c2ccd5;">
-          <strong>Upcoming Expansion:</strong> Scheduled for future rollout following the initial VexoraTap and Web platform release.
-        </p>
-      </div>
-
-      <div class="footerline">
-        <span>VexoraQR</span>
-        <span>08 <span class="dot"></span> Future Roadmap</span>
-      </div>
-    </section>
-
-    <!-- 09 — Ecosystem -->
-    <section data-transition="slide">
-      <div class="section-head">
-        <div class="eyebrow">07 / One Ecosystem</div>
-        <h2 style="margin-top:.6rem;">Products that <span class="teal">work together.</span></h2>
-        <p class="sub">The long-term vision: connecting today's launch with tomorrow's expanding solutions.</p>
-      </div>
-
-      <div class="ecosystem">
-        <div class="card eco-center">VEXORA<br /><span style="font-size:.55em;color:#8ca1ab;">ECOSYSTEM</span></div>
-
-        <div class="eco-line line-a"></div>
-        <div class="eco-line line-b"></div>
-        <div class="eco-line line-c"></div>
-        <div class="eco-line line-d"></div>
-
-        <div class="card eco-node eco-a fragment">
-          <strong>Vexora Web</strong>
-          <span>Live Today</span>
+      <div class="product-reveal-grid">
+        <div class="card reveal-card">
+          <div class="service-badge">01</div>
+          <h3>Lightning Fast</h3>
+          <p style="font-size:0.75rem;">Primarily, when the VexoraTap card is tapped, the web profile is accessed instantly. No app is required for the recipient's phone.</p>
         </div>
 
-        <div class="card eco-node eco-b fragment">
-          <strong>VexoraTap</strong>
-          <span>Live Today</span>
+        <div class="card reveal-card">
+          <div class="service-badge">02</div>
+          <h3>Say Goodbye to Paper Costs</h3>
+          <p style="font-size:0.75rem;">Forget printing maintenance cards. Use the exact same card for a lifetime.</p>
         </div>
 
-        <div class="card eco-node eco-c fragment">
-          <strong>VexoraQR</strong>
-          <span>Coming Next</span>
-        </div>
-
-        <div class="card eco-node eco-d fragment">
-          <strong>Future Products</strong>
-          <span>In Development</span>
+        <div class="card reveal-card">
+          <div class="service-badge">03</div>
+          <h3>Update Anytime</h3>
+          <p style="font-size:0.75rem;">Did your mobile number or other details change? Simply update and fix it right from the Dashboard.</p>
         </div>
       </div>
 
       <div class="footerline">
-        <span>Vexora IT Solutions</span>
-        <span>09 <span class="dot"></span> The Ecosystem</span>
+        <span>VexoraTap</span>
+        <span>07 <span class="dot"></span> Product Reveal</span>
       </div>
     </section>
 
-    <!-- 10 — Roadmap -->
-    <section data-transition="slide">
-      <div class="section-head">
-        <div class="eyebrow">08 / The Road Ahead</div>
-        <h2 style="margin-top:.6rem;">Today is the launch.<br /><span class="teal">Tomorrow is the expansion.</span></h2>
-      </div>
-
-      <div class="roadmap">
-        <div class="roadmap-line"></div>
-
-        <div class="roadmap-grid">
-          <div class="card road-card fragment">
-            <div class="road-dot">01</div>
-            <div class="phase">TODAY</div>
-            <h3>Vexora Web + VexoraTap</h3>
-            <p>Official public release of the core web platform and flagship VexoraTap smart cards.</p>
-          </div>
-
-          <div class="card road-card fragment">
-            <div class="road-dot">02</div>
-            <div class="phase">NEXT</div>
-            <h3>VexoraQR Ecosystem</h3>
-            <p>Expanding the identity network with advanced modular QR codes and analytics tracking.</p>
-          </div>
-
-          <div class="card road-card fragment">
-            <div class="road-dot">03</div>
-            <div class="phase">FUTURE</div>
-            <h3>File Sphere + Storixa</h3>
-            <p>Rolling out secure file management workflows and dedicated specialized platforms.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="card fragment" style="margin-top:.8rem; padding:.8rem 1.2rem;">
-        <p style="margin:0; font-size:.44em; color:#bcc6d1;">
-          <strong>Strategy:</strong> Deliver a polished, robust core release today, then scale into an interconnected suite of tools.
-        </p>
-      </div>
-
-      <div class="footerline">
-        <span>Vexora IT Solutions</span>
-        <span>10 <span class="dot"></span> Roadmap</span>
-      </div>
-    </section>
-
-    <!-- 11 — Closing -->
+    <!-- 08 — Closing -->
     <section data-transition="fade">
       <div class="closing">
         <div>
-          <div class="s-mark">
-<svg id="Layer_2_s" data-name="Layer 2 s" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 270.64 158.64" style="width: 70%; height: auto;">
+          <div class="s-mark" style="scale: 2;">
+<svg id="Layer_2_s" data-name="Layer 2 s" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 270.64 158.64" style="width: 100%; height: auto; display: block;">
   <defs>
     <style>
       .cls-s-1 { fill: url(#lg-s-2); }
@@ -1862,7 +2498,7 @@
 
       <div class="footerline">
         <span>Vexora IT Solutions</span>
-        <span>11 <span class="dot"></span> Thank You</span>
+        <span>08 <span class="dot"></span> Thank You</span>
       </div>
     </section>
 
