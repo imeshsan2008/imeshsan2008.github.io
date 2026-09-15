@@ -611,85 +611,7 @@
       }
 
     /* ---------- Qualifications & Experience slide ---------- */
-    .qual-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.2rem;
-      margin-top: 1.2rem;
-    }
-    .qual-card {
-      background: linear-gradient(145deg, rgba(0,150,166,.10), rgba(0,150,166,.03));
-      border: 1px solid rgba(70,220,232,.18);
-      border-radius: 16px;
-      padding: 1.5rem 1.6rem;
-      position: relative;
-      overflow: hidden;
-      transition: transform .25s ease, box-shadow .25s ease;
-    }
-    .qual-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: 16px;
-      background: linear-gradient(135deg, rgba(70,220,232,.07) 0%, transparent 60%);
-      pointer-events: none;
-    }
-    .qual-badge {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
-      background: rgba(0,150,166,.20);
-      border: 1px solid rgba(70,220,232,.30);
-      color: #46dce8;
-      font: 700 .42em "Space Grotesk", sans-serif;
-      letter-spacing: .04em;
-      margin-bottom: .75rem;
-    }
-    .qual-card h4 {
-      margin: 0 0 .35rem;
-      font-size: .50em;
-      font-weight: 700;
-      color: #f1f6f8;
-      letter-spacing: -.01em;
-    }
-    .qual-card p {
-      margin: 0;
-      font-size: .38em;
-      color: #8f9ba9;
-      line-height: 1.55;
-    }
-    .qual-card .qual-tag {
-      display: inline-block;
-      margin-top: .6rem;
-      padding: .2rem .6rem;
-      background: rgba(70,220,232,.10);
-      border: 1px solid rgba(70,220,232,.22);
-      border-radius: 20px;
-      font-size: .32em;
-      color: #46dce8;
-      font-weight: 600;
-      letter-spacing: .05em;
-      text-transform: uppercase;
-    }
-    .qual-quote {
-      margin-top: 1.2rem;
-      padding: .8rem 1.2rem;
-      border-left: 3px solid #46dce8;
-      background: rgba(0,150,166,.06);
-      border-radius: 0 10px 10px 0;
-      font-style: italic;
-      font-size: .40em;
-      color: #9eabb8;
-      line-height: 1.55;
-    }
-    .qual-quote span {
-      color: #46dce8;
-      font-style: normal;
-      font-weight: 700;
-    }
+   
     }
   </style><style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
@@ -2043,6 +1965,55 @@
     .contact-pill { font-size: .25em; }
     .service-badge { font-size: .34em; }
   }
+
+
+/* ---------- Qualifications & Certificates Grid Styles ---------- */
+    .qual-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: .8rem;
+    }
+
+    .qual-card {
+      padding: 1.1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .cert-placeholder {
+      width: 100%;
+      height: 230px;
+      background: rgba(0, 150, 166, 0.08);
+      border: 1px dashed rgba(70, 220, 232, 0.35);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      color: var(--brand-soft);
+      font-size: 0.35em;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+      /* පසුව සැබෑ පින්තූරයක් දැමීමට අවශ්‍ය නම් මෙහි background-image භාවිතා කළ හැක */
+      background-size: cover;
+      background-position: center;
+    }
+
+    .qual-card h4 {
+      font-size: 0.6em;
+      margin: 0 0 0.2rem;
+      color: #fff;
+    }
+
+    .qual-card p {
+      font-size: 0.38em;
+      margin: 0;
+      color: #9ca8b6;
+    }
   </style>
 
 </head>
@@ -2171,53 +2142,54 @@
       </div>
     </section>
       
-    <!-- 02.6 - Credentials & Background - Qualifications -->
+     <!-- 03 — Qualifications & Experience (Updated with Certificate Placeholders) -->
     <section data-transition="slide">
       <div class="section-head">
         <div class="eyebrow">02 / Credentials &amp; Background</div>
         <h2 style="margin-top:.6rem;">
-          Qualifications & <span class="teal">Experience.</span>
+          Qualifications &amp; <span class="teal">Experience.</span>
         </h2>
       </div>
         
-      <div class="card" style="padding: 2rem; margin-top: 1rem;">
-        <div class="profile-list" style="margin-top: 0;">
-
-          <div class="card profile-item">
-            <div class="profile-icon">GD</div>
-            <div>
-              <h4>Graphic Design - NVQ Level 4</h4>
-              <p>Maradana Technical College</p>
+      <div class="qual-grid">
+        <!-- Certificate 1 -->
+        <div class="card qual-card">
+          <div>
+            <div class="cert-placeholder" style="background-image: url('nvq.jpeg');">
             </div>
+            <h4>Graphic Design - NVQ Level 4</h4>
+            <p>Maradana Technical College</p>
           </div>
-
-          <div class="card profile-item">
-            <div class="profile-icon">SW</div>
-            <div>
-              <h4>Software & Digital Technology</h4>
-              <p>Online courses, self-learning & continuous practice</p>
-            </div>
-
-          
-
-
-
-          </div>
-<div class="card profile-item">
-            <div class="profile-icon">PB</div>
-            <div>
-              <h4>Professional Benchmarking Certification</h4>
-              <p>ASIAN PRODUCTIVITY ORGANIZATION</p>
-            </div>
-          </div>
-
-
-        </div> <!-- Close profile-list -->
-
-        <div class="founder-note" style="margin-top: 1.5rem; font-style: italic; color: #a0aeb2;">
-          "Turning creative ideas into practical digital solutions."
+          <div style="margin-top: 0.5rem; color: var(--brand-soft); font-size: 0.32em; font-weight: 700; text-transform: uppercase;">Verified Qualification</div>
         </div>
-      </div> <!-- Close card -->
+
+        <!-- Certificate 2 -->
+        <div class="card qual-card">
+          <div>
+            <div class="cert-placeholder" style="background-image: url('placeholder-sw.jpg');">
+            </div>
+            <h4>Software &amp; Digital Tech</h4>
+            <p>Online courses, self-learning &amp; continuous practice</p>
+          </div>
+          <div style="margin-top: 0.5rem; color: var(--brand-soft); font-size: 0.32em; font-weight: 700; text-transform: uppercase;">Practical Mastery</div>
+        </div>
+
+        <!-- Certificate 3 -->
+        <div class="card qual-card">
+          <div>
+            <div class="cert-placeholder" style="background-image: url('APO_CERT.png');">
+            
+            </div>
+            <h4>Professional Benchmarking</h4>
+            <p>ASIAN PRODUCTIVITY ORGANIZATION</p>
+          </div>
+          <div style="margin-top: 0.5rem; color: var(--brand-soft); font-size: 0.32em; font-weight: 700; text-transform: uppercase;">International Standard</div>
+        </div>
+      </div>
+
+      <div class="founder-note">
+        “Shaping Your Digital Future”
+      </div>
 
       <div class="footerline">
         <span>Vexora IT Solutions</span>
@@ -2325,7 +2297,7 @@
           <div class="service-badge">03</div>
           <div>
             <h3>Storixa</h3>
-            <p style="font-size:0.75rem;">A comprehensive store management system designed for tracking and organizing physical inventory in companies, such as office supplies, pens, pencils, and other material assets.</p>
+            <p style="font-size:0.75rem;">Next-generation digital storage and asset management utility built for streamlined organization and fast retrieval.</p>
           </div>
         </div>
 
@@ -2420,7 +2392,65 @@
         <span>07 <span class="dot"></span> Product Reveal</span>
       </div>
     </section>
+<!-- Vexora IT Solutions - Official Business Registration Slide (Placed Before Last Slide) -->
+<!-- Vexora IT Solutions - Official Business Registration Slide (Cleaned) -->
+    <section data-transition="slide">
+      <div style="margin: 0 0 0.8rem 0;">
+        <div style="display: inline-flex; align-items: center; gap: .5rem; padding: .3rem .6rem; border: 1px solid rgba(70,220,232,.18); background: rgba(0,150,166,.08); color: #b9f6fb; border-radius: 999px; font-size: .35em; font-weight: 700; text-transform: uppercase;">Legal &amp; Compliance / Trust</div>
+        <h2 style="margin: .4rem 0 0 0; font-size: 1.5em; font-family: 'Space Grotesk', sans-serif; color: #fff;">
+          Registered &amp; <span style="color: #46dce8;">Legally Recognized.</span>
+        </h2>
+      </div>
+        
+      <div style="display: grid; grid-template-columns: 1fr 1.3fr; gap: 1rem; align-items: stretch; margin-top: 0.5rem;">
+        
+        <!-- Left Box: Certificate Image -->
+        <div style="background: rgba(255,255,255,0.045); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 1rem; display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="width: 100%; height: 160px; background: rgba(0,150,166,0.05); border: 1px solid rgba(70,220,232,0.25); border-radius: 10px; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 0.6rem;">
+              <img src="br-certificate.png" alt="Vexora IT BR Certificate" style="width:100%; height:100%; object-fit: cover;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+              <div style="display:none; width:100%; height:100%; background:rgba(0,150,166,0.1); align-items:center; justify-content:center; color:#46dce8; font-size:0.32em; text-align:center; padding:10px;">
+                [ Place image as: images/br-certificate.jpg ]
+              </div>
+            </div>
+            <h4 style="font-size: 0.52em; margin: 0 0 0.2rem 0; color: #fff; font-family: 'Space Grotesk', sans-serif;">Official Business Registration</h4>
+            <p style="font-size: 0.36em; margin: 0; color: #97a3b2;">WP/GAM/BI/2026/00290</p>
+          </div>
+          <div style="margin-top: 0.5rem; color: #46dce8; font-size: 0.3em; font-weight: 700; text-transform: uppercase;">Western Province, Sri Lanka</div>
+        </div>
 
+        <!-- Right Box: Details -->
+        <div style="background: rgba(255,255,255,0.045); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 1.2rem; display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="font-size: 0.55em; font-family: 'Space Grotesk', sans-serif; font-weight: 700; color: #fff; margin-bottom: 0.3rem;">
+              VEXORA IT SOLUTIONS
+            </div>
+            <div style="font-size: 0.34em; color: #94a3b8; line-height: 1.4; margin-bottom: 0.8rem;">
+              Business Names Statute of the Western Province (No. 05 of 2011)
+            </div>
+            <div style="font-size: 0.36em; color: #e2e8f0; line-height: 1.7;">
+              • <strong style="color:#fff;">Owner:</strong> W. Imesh Sandeepa Kumara<br>
+              • <strong style="color:#fff;">Nature:</strong> Software Development, System Development, Web Solutions<br>
+              • <strong style="color:#fff;">Address:</strong> No. 143/12, Mabima, Heiyanthuduwa
+            </div>
+          </div>
+          <div style="margin-top: 0.8rem; padding-top: 0.5rem; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-size: 0.34em; color: #46dce8; font-weight: 700;">Issued Date: 15-07-2026</span>
+            <span style="font-size: 0.3em; color: #97a3b2; text-transform: uppercase; font-weight: 700;">Verified Entity</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div style="margin-top: 0.6rem; padding: 0.5rem 0.9rem; border-left: 2px solid #46dce8; background: rgba(0,150,166,.055); color: #9eabb8; font-size: 0.36em; font-style: italic;">
+        “A certified technology partner committed to legal standards, trust, and excellence.”
+      </div>
+
+      <div style="position: absolute; left: 3.55rem; right: 3.55rem; bottom: .95rem; display: flex; justify-content: space-between; align-items: center; color: rgba(255,255,255,.36); font-size: .34em; letter-spacing: .06em; text-transform: uppercase;">
+        <span>Vexora IT Solutions</span>
+        <span>Legal Compliance &amp; Trust</span>
+      </div>
+    </section>
     <!-- 08 — Closing -->
     <section data-transition="fade">
       <div class="closing">
