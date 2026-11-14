@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Support, Feedback &amp; FAQ — MySLT Tracker</title>
+  <link rel="icon" type="image/png" href="assets/icon128.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="index.html">
+        <img src="assets/icon128.png" alt="MySLT Tracker Icon">
+        <div>
+          <div class="brand-title">MySLT Tracker</div>
+          <div class="brand-sub">Support &amp; Feedback • Version V1.0.0</div>
+        </div>
+      </a>
+      <nav class="nav" aria-label="Main navigation">
+        <a href="index.html">Overview</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="support.html" class="active">Support &amp; FAQ</a>
+        <a href="https://github.com/imeshsan2008/MySLT_Tracker" target="_blank" rel="noreferrer">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <span class="badge">Tested on SLT Fibre Only</span>
+      <h1>Notice, Support &amp; Feedback</h1>
+      <p>
+        This extension is currently tested on <strong>SLT Fibre</strong> connections only. If it works on
+        <strong>ADSL</strong> or <strong>4G</strong>, or if you find any bugs or have feedback, please send a message!
+      </p>
+      <div class="actions">
+        <a class="btn btn-whatsapp" href="https://wa.me/94768902513" target="_blank" rel="noreferrer">
+          WhatsApp (+94 76 890 2513)
+        </a>
+        <a class="btn" href="https://github.com/imeshsan2008/MySLT_Tracker/issues" target="_blank" rel="noreferrer">
+          Open GitHub Issue
+        </a>
+        <a class="btn btn-secondary" href="privacy.html">Privacy Policy</a>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Frequently Asked Questions</h2>
+
+      <h3>How do I connect my MySLT account automatically?</h3>
+      <p>
+        Open <a href="https://myslt.slt.lk/" target="_blank" rel="noreferrer">https://myslt.slt.lk/</a> and sign in.
+        MySLT Tracker reads <code>slt_accessToken</code> and <code>selectedAcc</code> directly in your browser and
+        displays a top summary banner with a quick <strong>Copy Token</strong> button.
+      </p>
+
+      <h3>Why do I see an HTTP 401 or 403 / expired token error?</h3>
+      <p>
+        MySLT Bearer tokens expire periodically. Simply visit
+        <a href="https://myslt.slt.lk/" target="_blank" rel="noreferrer">myslt.slt.lk</a> while signed in so the
+        extension refreshes your local token automatically, or paste a fresh token inside settings (<code>⚙</code>).
+      </p>
+
+      <h3>How do I clear saved credentials or test auto-detection?</h3>
+      <p>
+        Click the settings gear (<code>⚙</code>) in the extension header and click <strong>Reset Settings</strong>.
+        All saved credentials in <code>chrome.storage.local</code> are wiped immediately.
+      </p>
+
+      <h3>Does this work with SLT ADSL or 4G LTE packages?</h3>
+      <p>
+        Package detection is built to dynamically parse every quota bucket returned by SLT's APIs, though only
+        <strong>SLT Fibre</strong> has been tested directly so far. ADSL and 4G user reports via WhatsApp or GitHub
+        are very welcome!
+      </p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>Developed by <a href="https://imeshsan2008.is-a.dev/" target="_blank" rel="noreferrer">imeshsan2008</a></span>
+    <div class="footer-links">
+      <a href="index.html">Overview</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="https://github.com/imeshsan2008/MySLT_Tracker" target="_blank" rel="noreferrer">GitHub Repo</a>
+    </div>
+  </footer>
+</body>
+</html>

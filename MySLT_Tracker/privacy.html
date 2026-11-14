@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — MySLT Tracker (Unofficial)</title>
+  <link rel="icon" type="image/png" href="assets/icon128.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="index.html">
+        <img src="assets/icon128.png" alt="MySLT Tracker Icon">
+        <div>
+          <div class="brand-title">MySLT Tracker</div>
+          <div class="brand-sub">Privacy Policy • Version V1.0.0</div>
+        </div>
+      </a>
+      <nav class="nav" aria-label="Main navigation">
+        <a href="index.html">Overview</a>
+        <a href="privacy.html" class="active">Privacy Policy</a>
+        <a href="support.html">Support &amp; FAQ</a>
+        <a href="https://github.com/imeshsan2008/MySLT_Tracker" target="_blank" rel="noreferrer">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <span class="badge">Effective Date: November 15, 2026</span>
+      <h1>Privacy Policy for MySLT Tracker</h1>
+      <p>
+        <strong>MySLT Tracker</strong> (<code>MySLT Direct Background Tracker</code>, Version V1.0.0) is an unofficial,
+        open-source browser extension developed by
+        <a href="https://imeshsan2008.is-a.dev/" target="_blank" rel="noreferrer">imeshsan2008</a>.
+        Your privacy is protected by design: <strong>we collect zero personal data and run no external servers.</strong>
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>1. Data Accessed &amp; Local-Only Storage</h2>
+      <p>
+        To fetch your own broadband usage and billing summary directly from official SLT APIs, the extension handles
+        only the following session values on your local device:
+      </p>
+      <ul>
+        <li><code>sltToken</code> — Your MySLT Bearer access token read from <code>https://myslt.slt.lk/</code> session storage or entered manually by you.</li>
+        <li><code>sltPhone</code> — Your SLT telephone / subscriber number used strictly as the query parameter when requesting your usage and bill.</li>
+        <li><code>sltAcc</code> — Your SLT account number used strictly to query your account billing details.</li>
+        <li><code>sltNoticeDismissed</code> / banner dismiss state — Simple UI preference flags stored locally.</li>
+      </ul>
+      <p>
+        All of these values are stored strictly on your computer via Chrome's <code>chrome.storage.local</code> API.
+        Nothing is ever transmitted to the developer, analytics providers, ad networks, or any third-party backend.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>2. Direct Network Communication</h2>
+      <p>
+        Every API request made by MySLT Tracker goes directly over HTTPS from your browser to official Sri Lanka Telecom
+        (SLT) endpoints under <code>https://omniscapp.slt.lk/slt/ext/api/*</code>. No proxy server or intermediary is used.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>3. Permissions &amp; Host Access Justification</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Permission / Host</th>
+            <th>Why It Is Required</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>storage</code></td>
+            <td>Stores your token, telephone number, account number, and notice dismissal flag locally in <code>chrome.storage.local</code>.</td>
+          </tr>
+          <tr>
+            <td><code>scripting</code></td>
+            <td>Injects the portal sync &amp; banner scripts into already-open <code>https://myslt.slt.lk/*</code> tabs when installed or started.</td>
+          </tr>
+          <tr>
+            <td><code>declarativeNetRequestWithHostAccess</code></td>
+            <td>Applies static header rules (<code>rules.json</code>) to set the required <code>Origin</code> and <code>Referer</code> headers on direct API calls to <code>https://omniscapp.slt.lk/slt/ext/api/</code>.</td>
+          </tr>
+          <tr>
+            <td><code>https://myslt.slt.lk/*</code></td>
+            <td>Reads active MySLT portal session storage (<code>slt_accessToken</code>, <code>selectedAcc</code>) when you visit the portal and renders the optional top summary banner.</td>
+          </tr>
+          <tr>
+            <td><code>https://omniscapp.slt.lk/*</code></td>
+            <td>Allows direct read-only requests to SLT's UsageSummary, ExtraGB, VAS Bundles, and BillPaymentRequest APIs.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="card">
+      <h2>4. How We Use Information &amp; Limited Use Compliance</h2>
+      <p>
+        Information accessed by the extension is used exclusively inside your browser to display your SLT broadband
+        usage and billing information. We <strong>never</strong> sell, rent, transfer, monetize, or use user data for
+        advertising or tracking.
+      </p>
+      <div class="compliance-quote">
+        The use of information received from Google APIs will adhere to the Chrome Web Store User Data Policy,
+        including the Limited Use requirements.
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>5. Deleting Your Data</h2>
+      <p>
+        You remain in full control of your stored data at all times:
+      </p>
+      <ul>
+        <li>Open the extension settings (<code>⚙</code>) and click <strong>Reset Settings</strong> to immediately erase <code>sltToken</code>, <code>sltPhone</code>, and <code>sltAcc</code> from <code>chrome.storage.local</code>.</li>
+        <li>Uninstalling the extension from Chrome permanently deletes all locally stored extension data.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>6. Contact &amp; Source Audit</h2>
+      <p>
+        Because the project is 100% open-source, anyone can audit the entire codebase before installing. If you have
+        questions regarding this Privacy Policy or find a security/privacy issue:
+      </p>
+      <div class="actions">
+        <a class="btn btn-whatsapp" href="https://wa.me/94768902513" target="_blank" rel="noreferrer">
+          WhatsApp (+94 76 890 2513)
+        </a>
+        <a class="btn btn-secondary" href="https://github.com/imeshsan2008/MySLT_Tracker/issues" target="_blank" rel="noreferrer">
+          GitHub Issues
+        </a>
+        <a class="btn btn-secondary" href="support.html">Support &amp; FAQ</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>Developed by <a href="https://imeshsan2008.is-a.dev/" target="_blank" rel="noreferrer">imeshsan2008</a></span>
+    <div class="footer-links">
+      <a href="index.html">Overview</a>
+      <a href="support.html">Support &amp; FAQ</a>
+      <a href="https://github.com/imeshsan2008/MySLT_Tracker" target="_blank" rel="noreferrer">GitHub Repo</a>
+    </div>
+  </footer>
+</body>
+</html>
