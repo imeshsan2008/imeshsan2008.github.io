@@ -135,7 +135,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: opacity 0.45s ease-out, visibility 0.45s ease-out;
+            transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
         }
         .loader-text {
             font-family: 'Plus Jakarta Sans', sans-serif;
@@ -149,7 +149,7 @@
         .loader-text span {
             display: inline-block;
             color: #ffffff;
-            animation: loaderBounce 0.75s infinite alternate;
+            animation: loaderBounce 1s infinite alternate;
         }
         .loader-text span:nth-child(1) { animation-delay: 0.0s; }
         .loader-text span:nth-child(2) { animation-delay: 0.1s; }
@@ -796,11 +796,11 @@
 
     // Initialize Scroll Animations
     AOS.init({
-        duration: 450,
-        easing: 'ease-out-cubic',
+        duration: 800,
+        easing: 'ease-in-out',
         once: false,
         mirror: true,
-        offset: 40
+        offset: 50
     });
 
     // Mobile Menu Toggle Logic
@@ -1134,50 +1134,30 @@ ${message}`;
         });
     });
 
-    function hidePreloader() {
-        const preloader = document.getElementById('preloader');
-        if (!preloader || preloader.dataset.hidden) return;
-        preloader.dataset.hidden = '1';
-        preloader.style.opacity = '0';
-        preloader.style.visibility = 'hidden';
-        setTimeout(() => {
-            preloader.remove();
-            if (typeof AOS !== 'undefined') AOS.refresh();
-        }, 450);
-    }
-
-    function waitForCriticalImages() {
-        const criticalUrls = [
-            'https://uploads.vexorait.com/1787166666068-504967753-ChatGPT_Image_Aug_18__2026__05_33_34_PM.png',
+    window.addEventListener('load', () => {
+        const bgImages = [
+            'https://github.com/imeshsan2008/AdobeShield/blob/main/ui.png?raw=true',
             'assets/images/SLTTRACKER.png',
             'assets/images/Qr.png',
             'assets/images/Trainify.png',
-            'assets/images/ai_1.png',
-            'https://github.com/imeshsan2008/AdobeShield/blob/main/ui.png?raw=true'
+            'assets/images/ai_1.png'
         ];
-        const minDisplay = new Promise(res => setTimeout(res, 700));
-        const preloadAll = Promise.all(criticalUrls.map(url => new Promise(res => {
+        Promise.all(bgImages.map(url => new Promise(res => {
             const img = new Image();
             img.onload = img.onerror = res;
             img.src = url;
-        })));
-        const maxTimeout = new Promise(res => setTimeout(res, 2200));
-
-        Promise.all([minDisplay, Promise.race([preloadAll, maxTimeout])]).then(hidePreloader);
-    }
-
-    // Lazy-load below-the-fold gallery images so critical hero/project images load first
-    document.querySelectorAll('#creations img').forEach(img => {
-        img.setAttribute('loading', 'lazy');
-        img.setAttribute('decoding', 'async');
+        }))).then(() => {
+            const preloader = document.getElementById('preloader');
+            if (preloader) {
+                preloader.style.opacity = '0';
+                preloader.style.visibility = 'hidden';
+                setTimeout(() => {
+                    preloader.remove();
+                    if (typeof AOS !== 'undefined') AOS.refresh();
+                }, 500);
+            }
+        });
     });
-
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', waitForCriticalImages);
-    } else {
-        waitForCriticalImages();
-    }
-    window.addEventListener('load', hidePreloader);
 
     // Disable right-click (Context Menu)
     document.addEventListener('contextmenu', event => event.preventDefault());
