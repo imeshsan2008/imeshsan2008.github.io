@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>IMESH Arcade</title>
+  <title>Arcade</title>
   <style>
     :root {
       --bg: #0D1117;
@@ -54,6 +54,7 @@
       padding: 0;
       min-height: auto;
       background-image: none;
+      overflow: hidden;
     }
 
     .shell {
@@ -69,6 +70,21 @@
     body.embedded .shell {
       max-width: 100%;
       border-radius: 8px;
+    }
+
+    .show-embed { display: none !important; }
+    body.embedded .show-embed { display: inline-flex !important; }
+
+    kbd {
+      display: inline-block;
+      padding: 1px 5px;
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 800;
+      color: var(--ink);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 3px;
     }
 
     .topbar {
@@ -287,11 +303,13 @@
     <header class="topbar">
       <div class="brand">
         <span class="grille"><i></i><i></i><i></i><i></i><i></i><i></i></span>
-        <span>IMESH ARCADE</span>
+        <span>ARCADE</span>
       </div>
       <div class="nav-actions">
+        <button id="pauseBtn" class="btn" type="button">PAUSE (P)</button>
         <button id="soundBtn" class="btn" type="button">SFX: ON</button>
         <button id="themeBtn" class="btn" type="button">THEME: DARK</button>
+        <a class="btn show-embed" href="arcade.html" target="_blank" rel="noopener">FULLSCREEN ↗</a>
         <a class="btn hide-embed" href="https://github.com/imeshsan2008" target="_blank" rel="noopener">GITHUB ↗</a>
         <a class="btn primary hide-embed" href="./index.html">← BACK TO PORTFOLIO</a>
       </div>
@@ -332,17 +350,17 @@
     </section>
 
     <main class="stage-wrap">
-      <canvas id="screen" width="900" height="460"></canvas>
+      <canvas id="screen" width="900" height="460" tabindex="0"></canvas>
 
       <div id="mobilePad" class="mobile-pad">
         <button id="mLeft" class="btn" type="button">◄ LEFT</button>
-        <button id="mAction" class="btn primary" type="button">LAUNCH / JUMP</button>
+        <button id="mAction" class="btn primary" type="button">LAUNCH / DROP</button>
         <button id="mRight" class="btn" type="button">RIGHT ►</button>
       </div>
 
       <div class="controls-bar">
-        <span id="hintText">MOUSE / TOUCH / ← → MOVE PADDLE · CLICK OR SPACE TO LAUNCH</span>
-        <span>PURE JAVASCRIPT · ZERO GLOW · 60FPS</span>
+        <span id="hintText"></span>
+        <span><kbd>R</kbd> RESTART · <kbd>P</kbd> PAUSE · <kbd>M</kbd> SFX · <kbd>T</kbd> THEME</span>
       </div>
     </main>
   </div>
@@ -350,8 +368,20 @@
   <script>
   (() => {
     const params = new URLSearchParams(window.location.search);
-    if (params.get('embed') === '1') {
+    const isEmbedded = params.get('embed') === '1';
+    if (isEmbedded) {
       document.body.classList.add('embedded');
+      const reportHeight = () => {
+        const shell = document.querySelector('.shell');
+        if (shell) {
+          window.parent.postMessage({ type: 'arcade-height', height: shell.getBoundingClientRect().height + 2 }, '*');
+        }
+      };
+      if (typeof ResizeObserver !== 'undefined') {
+        new ResizeObserver(reportHeight).observe(document.querySelector('.shell'));
+      }
+      window.addEventListener('load', reportHeight);
+      setTimeout(reportHeight, 60);
     }
 
     const canvas = document.getElementById('screen');
@@ -364,9 +394,13 @@
     const hintText = document.getElementById('hintText');
     const c4Controls = document.getElementById('c4Controls');
     const aiDiffEl = document.getElementById('aiDiff');
+    const pauseBtn = document.getElementById('pauseBtn');
+    const soundBtn = document.getElementById('soundBtn');
+    const themeBtn = document.getElementById('themeBtn');
 
     let activeGame = 'breakout';
     let sfxEnabled = true;
+    let paused = false;
     let audioCtx = null;
 
     function tone(freq, dur = 0.05, type = 'square', vol = 0.04) {
@@ -412,14 +446,60 @@
 
     const keys = {};
     let mouseX = W / 2;
+    let inputMode = 'mouse';
+
+    function togglePause() {
+      paused = !paused;
+      pauseBtn.textContent = paused ? 'RESUME (P)' : 'PAUSE (P)';
+      tone(paused ? 260 : 480, 0.04);
+    }
+
+    function toggleSound() {
+      sfxEnabled = !sfxEnabled;
+      soundBtn.textContent = `SFX: ${sfxEnabled ? 'ON' : 'OFF'}`;
+    }
+
+    function toggleTheme() {
+      const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      themeBtn.textContent = `THEME: ${next.toUpperCase()}`;
+    }
 
     window.addEventListener('keydown', e => {
+      if (document.activeElement && document.activeElement.tagName === 'SELECT') return;
       keys[e.code] = true;
-      if (['Space', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.code)) {
-        if (document.activeElement.tagName !== 'SELECT') e.preventDefault();
+
+      if (['Space', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Tab'].includes(e.code)) {
+        e.preventDefault();
       }
-      if (activeGame === 'breakout' && e.code === 'Space') breakout.launch();
-      if (activeGame === 'runner' && (e.code === 'Space' || e.code === 'ArrowUp')) runner.jump();
+
+      if (e.code === 'ArrowLeft' || e.code === 'ArrowRight' || e.code === 'KeyA' || e.code === 'KeyD') {
+        inputMode = 'keyboard';
+      }
+
+      // Global arcade shortcuts
+      if (e.code === 'KeyP' && !e.repeat) { togglePause(); return; }
+      if (e.code === 'KeyR' && !e.repeat) { paused = false; pauseBtn.textContent = 'PAUSE (P)'; games[activeGame].init(); return; }
+      if (e.code === 'KeyM' && !e.repeat) { toggleSound(); return; }
+      if (e.code === 'KeyT' && !e.repeat) { toggleTheme(); return; }
+      if (e.code === 'Tab' && !e.repeat) {
+        const order = ['breakout', 'runner', 'connect4'];
+        switchGame(order[(order.indexOf(activeGame) + 1) % order.length]);
+        return;
+      }
+
+      if (paused) return;
+
+      if (activeGame === 'breakout') {
+        if (['Space', 'Enter', 'ArrowUp', 'KeyW'].includes(e.code)) breakout.launch();
+      } else if (activeGame === 'runner') {
+        if (['Space', 'ArrowUp', 'KeyW'].includes(e.code)) runner.jump();
+      } else if (activeGame === 'connect4' && !e.repeat) {
+        if (e.code === 'ArrowLeft' || e.code === 'KeyA') c4.moveSelector(-1);
+        else if (e.code === 'ArrowRight' || e.code === 'KeyD') c4.moveSelector(1);
+        else if (['Space', 'Enter', 'ArrowDown', 'KeyS'].includes(e.code)) c4.dropSelected();
+        else if (e.key >= '1' && e.key <= '7') c4.dropCol(Number(e.key) - 1);
+      }
     });
     window.addEventListener('keyup', e => { keys[e.code] = false; });
 
@@ -434,12 +514,16 @@
     canvas.addEventListener('mousemove', e => {
       const p = canvasPos(e.clientX, e.clientY);
       mouseX = p.x;
-      if (activeGame === 'connect4') c4.hoverX = p.x;
+      inputMode = 'mouse';
+      if (activeGame === 'connect4') c4.setHoverX(p.x);
     });
 
     canvas.addEventListener('pointerdown', e => {
+      canvas.focus();
       const p = canvasPos(e.clientX, e.clientY);
       mouseX = p.x;
+      inputMode = 'mouse';
+      if (paused) { togglePause(); return; }
       if (activeGame === 'breakout') breakout.launch();
       else if (activeGame === 'runner') runner.jump();
       else if (activeGame === 'connect4') c4.click(p.x);
@@ -449,25 +533,31 @@
       if (e.pointerType === 'touch') {
         const p = canvasPos(e.clientX, e.clientY);
         mouseX = p.x;
+        inputMode = 'mouse';
       }
     });
 
     const holdKey = (id, code) => {
       const el = document.getElementById(id);
-      el.addEventListener('pointerdown', () => { keys[code] = true; });
+      el.addEventListener('pointerdown', () => {
+        keys[code] = true;
+        inputMode = 'keyboard';
+        if (activeGame === 'connect4') c4.moveSelector(code === 'ArrowLeft' ? -1 : 1);
+      });
       el.addEventListener('pointerup', () => { keys[code] = false; });
       el.addEventListener('pointerleave', () => { keys[code] = false; });
     };
     holdKey('mLeft', 'ArrowLeft');
     holdKey('mRight', 'ArrowRight');
     document.getElementById('mAction').addEventListener('pointerdown', () => {
+      if (paused) { togglePause(); return; }
       if (activeGame === 'breakout') breakout.launch();
       else if (activeGame === 'runner') runner.jump();
-      else if (activeGame === 'connect4') c4.init();
+      else if (activeGame === 'connect4') c4.dropSelected();
     });
 
     // =========================================================================
-    // GAME 01: COMMIT BREAKOUT (Matches IMESH-ARCADE // UNIT-01 aesthetics!)
+    // GAME 01: COMMIT BREAKOUT
     // =========================================================================
     const breakout = {
       bricks: [], ghostSlots: [], balls: [], drops: [], particles: [],
@@ -563,9 +653,9 @@
       },
 
       update() {
-        if (keys['ArrowLeft'] || keys['KeyA']) this.paddle.x -= 9.5;
-        else if (keys['ArrowRight'] || keys['KeyD']) this.paddle.x += 9.5;
-        else this.paddle.x += ((mouseX - this.paddle.w / 2) - this.paddle.x) * 0.36;
+        if (keys['ArrowLeft'] || keys['KeyA']) this.paddle.x -= 10;
+        else if (keys['ArrowRight'] || keys['KeyD']) this.paddle.x += 10;
+        else if (inputMode === 'mouse') this.paddle.x += ((mouseX - this.paddle.w / 2) - this.paddle.x) * 0.36;
         this.paddle.x = Math.max(12, Math.min(W - this.paddle.w - 12, this.paddle.x));
 
         const pal = palette();
@@ -921,15 +1011,41 @@
     const c4 = {
       ROWS: 6, COLS: 7,
       board: [], turn: 1, state: 'playing', winCells: [],
-      hoverX: W / 2, anim: null,
+      selectedCol: 3, anim: null,
       wins: Number(localStorage.getItem('imesh_c4_wins') || 0),
       aiWins: Number(localStorage.getItem('imesh_c4_ai') || 0),
-      bx0: 212, by0: 66, cw: 68, ch: 60,
+      bx0: 212, by0: 76, cw: 68, ch: 58,
 
       init() {
         this.board = Array.from({ length: 6 }, () => Array(7).fill(0));
         this.turn = 1; this.state = 'playing'; this.winCells = []; this.anim = null;
+        this.selectedCol = 3;
         this.syncHud();
+      },
+
+      setHoverX(x) {
+        const col = Math.floor((x - this.bx0) / this.cw);
+        if (col >= 0 && col < 7) this.selectedCol = col;
+      },
+
+      moveSelector(delta) {
+        this.selectedCol = (this.selectedCol + delta + 7) % 7;
+        tone(340, 0.025);
+      },
+
+      dropSelected() {
+        if (this.state !== 'playing') { this.init(); return; }
+        this.dropCol(this.selectedCol);
+      },
+
+      dropCol(col) {
+        if (this.state !== 'playing') { this.init(); return; }
+        if (this.turn !== 1 || this.anim) return;
+        if (col < 0 || col > 6) return;
+        this.selectedCol = col;
+        const row = this.dropRow(this.board, col);
+        if (row < 0) return;
+        this.startDrop(row, col, 1);
       },
 
       dropRow(b, col) {
@@ -1011,12 +1127,8 @@
 
       click(x) {
         if (this.state !== 'playing') { this.init(); return; }
-        if (this.turn !== 1 || this.anim) return;
         const col = Math.floor((x - this.bx0) / this.cw);
-        if (col < 0 || col > 6) return;
-        const row = this.dropRow(this.board, col);
-        if (row < 0) return;
-        this.startDrop(row, col, 1);
+        this.dropCol(col);
       },
 
       startDrop(row, col, piece) {
@@ -1058,7 +1170,7 @@
 
       syncHud() {
         lbl1.textContent = 'YOU'; val1.textContent = this.wins;
-        lbl2.textContent = 'IMESH AI'; val2.textContent = this.aiWins;
+        lbl2.textContent = 'AI'; val2.textContent = this.aiWins;
         lbl3.textContent = 'TURN';
         val3.textContent = this.state === 'win' ? 'YOU WIN!' :
           this.state === 'lose' ? 'AI WINS' :
@@ -1072,14 +1184,24 @@
         ctx.fillRect(0, 0, W, H);
 
         const bw = this.COLS * this.cw, bh = this.ROWS * this.ch;
+        // Column number keycap markers (1..7)
+        ctx.font = '800 11px monospace';
+        ctx.textAlign = 'center';
+        for (let c = 0; c < 7; c++) {
+          const cx = this.bx0 + c * this.cw + this.cw / 2;
+          const active = c === this.selectedCol && this.state === 'playing';
+          ctx.fillStyle = active ? pal.accent : pal.muted;
+          ctx.fillText(String(c + 1), cx, this.by0 - 44);
+        }
+
         if (this.state === 'playing' && this.turn === 1 && !this.anim) {
-          const hc = Math.floor((this.hoverX - this.bx0) / this.cw);
+          const hc = this.selectedCol;
           if (hc >= 0 && hc < 7 && this.board[0][hc] === 0) {
             ctx.fillStyle = pal.soft;
             ctx.fillRect(this.bx0 + hc * this.cw, this.by0, this.cw, bh);
             ctx.fillStyle = pal.accent;
             ctx.beginPath();
-            ctx.arc(this.bx0 + hc * this.cw + this.cw / 2, this.by0 - 22, 15, 0, Math.PI * 2);
+            ctx.arc(this.bx0 + hc * this.cw + this.cw / 2, this.by0 - 22, 14, 0, Math.PI * 2);
             ctx.fill();
           }
         }
@@ -1128,7 +1250,7 @@
           ctx.fillStyle = pal.ink;
           ctx.font = '800 12.5px monospace';
           ctx.textAlign = 'center';
-          ctx.fillText('CLICK BOARD TO PLAY AGAIN', W / 2, this.by0 - 18);
+          ctx.fillText('CLICK OR PRESS SPACE / ENTER TO PLAY AGAIN', W / 2, this.by0 - 22);
         }
       }
     };
@@ -1137,35 +1259,56 @@
 
     function switchGame(name) {
       activeGame = name;
+      paused = false;
+      pauseBtn.textContent = 'PAUSE (P)';
       document.querySelectorAll('.tab').forEach(btn => btn.classList.toggle('active', btn.dataset.game === name));
       c4Controls.classList.toggle('show', name === 'connect4');
-      hintText.textContent = name === 'breakout'
-        ? 'MOUSE / TOUCH / ← → MOVE PADDLE · CLICK OR SPACE TO LAUNCH'
+      hintText.innerHTML = name === 'breakout'
+        ? '<kbd>←</kbd> <kbd>→</kbd> / <kbd>A</kbd> <kbd>D</kbd> / MOUSE MOVE · <kbd>SPACE</kbd> / <kbd>↑</kbd> LAUNCH · <kbd>TAB</kbd> SWITCH'
         : name === 'runner'
-        ? 'SPACE / ↑ / TAP TO JUMP · ↓ TO DUCK OR FAST-DROP'
-        : 'CLICK ANY COLUMN TO DROP CRIMSON DISC · INSTANT MINIMAX AI';
+        ? '<kbd>SPACE</kbd> / <kbd>↑</kbd> / <kbd>W</kbd> JUMP · <kbd>↓</kbd> / <kbd>S</kbd> DUCK · <kbd>TAB</kbd> SWITCH'
+        : '<kbd>←</kbd> <kbd>→</kbd> / <kbd>A</kbd> <kbd>D</kbd> MOVE · <kbd>SPACE</kbd> / <kbd>ENTER</kbd> DROP · <kbd>1</kbd>–<kbd>7</kbd> QUICK DROP';
       games[name].init();
+      canvas.focus();
     }
 
     document.querySelectorAll('.tab').forEach(btn => btn.addEventListener('click', () => switchGame(btn.dataset.game)));
-    document.getElementById('restartBtn').addEventListener('click', () => games[activeGame].init());
-    document.getElementById('soundBtn').addEventListener('click', e => {
-      sfxEnabled = !sfxEnabled;
-      e.target.textContent = `SFX: ${sfxEnabled ? 'ON' : 'OFF'}`;
+    document.getElementById('restartBtn').addEventListener('click', () => {
+      paused = false;
+      pauseBtn.textContent = 'PAUSE (P)';
+      games[activeGame].init();
+      canvas.focus();
     });
-    document.getElementById('themeBtn').addEventListener('click', e => {
-      const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', next);
-      e.target.textContent = `THEME: ${next.toUpperCase()}`;
-    });
+    pauseBtn.addEventListener('click', () => { togglePause(); canvas.focus(); });
+    soundBtn.addEventListener('click', () => { toggleSound(); canvas.focus(); });
+    themeBtn.addEventListener('click', () => { toggleTheme(); canvas.focus(); });
 
-    breakout.init();
     runner.init();
     c4.init();
+    switchGame('breakout');
+
+    function drawPauseOverlay() {
+      const pal = palette();
+      ctx.fillStyle = pal.surface;
+      ctx.strokeStyle = pal.border;
+      ctx.lineWidth = 1.5;
+      ctx.fillRect(W / 2 - 140, H / 2 - 34, 280, 68);
+      ctx.strokeRect(W / 2 - 140, H / 2 - 34, 280, 68);
+      ctx.fillStyle = pal.accent;
+      ctx.fillRect(W / 2 - 140, H / 2 - 34, 4, 68);
+      ctx.fillStyle = pal.ink;
+      ctx.font = '800 15px monospace';
+      ctx.textAlign = 'center';
+      ctx.fillText('PAUSED', W / 2, H / 2 - 4);
+      ctx.fillStyle = pal.muted;
+      ctx.font = '600 10.5px monospace';
+      ctx.fillText('PRESS P OR CLICK TO RESUME', W / 2, H / 2 + 18);
+    }
 
     function loop() {
-      games[activeGame].update();
+      if (!paused) games[activeGame].update();
       games[activeGame].draw();
+      if (paused) drawPauseOverlay();
       requestAnimationFrame(loop);
     }
     loop();
