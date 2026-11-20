@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IMESH Arcade</title>
+  <style>
+    :root {
+      --bg: #0D1117;
+      --surface: #161B22;
+      --inset: #090C10;
+      --border: #30363D;
+      --border-soft: #21262D;
+      --ink: #E6EDF3;
+      --muted: #8B949E;
+      --subtle: #6E7681;
+      --accent: #DC2626;
+      --accent-dark: #991B1B;
+      --mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+      --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    }
+
+    [data-theme="light"] {
+      --bg: #FFFFFF;
+      --surface: #F6F8FA;
+      --inset: #F0F3F6;
+      --border: #D0D7DE;
+      --border-soft: #E5E9EE;
+      --ink: #1F2328;
+      --muted: #57606A;
+      --subtle: #656D76;
+      --accent: #CC0000;
+      --accent-dark: #991B1B;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px 14px 36px;
+      background-image:
+        linear-gradient(var(--border-soft) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border-soft) 1px, transparent 1px);
+      background-size: 28px 28px;
+    }
+
+    body.embedded {
+      padding: 0;
+      min-height: auto;
+      background-image: none;
+    }
+
+    .shell {
+      width: 100%;
+      max-width: 960px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-left: 5px solid var(--accent);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    body.embedded .shell {
+      max-width: 100%;
+      border-radius: 8px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 12px 18px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1.1px;
+    }
+
+    .grille {
+      display: inline-flex;
+      gap: 3px;
+      align-items: center;
+    }
+
+    .grille i {
+      display: block;
+      width: 2px;
+      height: 14px;
+      background: var(--border);
+      border-radius: 1px;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      appearance: none;
+      background: var(--bg);
+      color: var(--ink);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 6px 11px;
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.7px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn:hover { border-color: var(--accent); }
+    .btn.primary {
+      background: var(--accent);
+      border-color: var(--accent-dark);
+      color: #FFFFFF;
+    }
+
+    body.embedded .hide-embed { display: none !important; }
+
+    .tabs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .tab {
+      appearance: none;
+      background: transparent;
+      border: none;
+      border-right: 1px solid var(--border);
+      border-bottom: 3px solid transparent;
+      color: var(--muted);
+      padding: 12px 14px;
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.9px;
+      cursor: pointer;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .tab:last-child { border-right: none; }
+    .tab span { font-size: 10px; font-weight: 600; color: var(--subtle); letter-spacing: 0.5px; }
+    .tab.active {
+      background: var(--bg);
+      color: var(--ink);
+      border-bottom-color: var(--accent);
+    }
+
+    .hud {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding: 11px 18px;
+      border-bottom: 1px solid var(--border-soft);
+      background: var(--bg);
+    }
+
+    .hud-stats {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      font-family: var(--mono);
+    }
+
+    .stat-pill {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 5px 10px;
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+
+    .stat-pill .k { font-size: 9.5px; font-weight: 700; color: var(--subtle); letter-spacing: 0.8px; }
+    .stat-pill .v { font-size: 14px; font-weight: 800; color: var(--ink); }
+    .stat-pill .v.accent { color: var(--accent); }
+
+    .stage-wrap {
+      padding: 16px 18px;
+      background: var(--inset);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    canvas {
+      width: 100%;
+      max-width: 900px;
+      aspect-ratio: 900 / 460;
+      display: block;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      touch-action: none;
+      cursor: crosshair;
+    }
+
+    .controls-bar {
+      width: 100%;
+      max-width: 900px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-family: var(--mono);
+      font-size: 10.5px;
+      color: var(--muted);
+    }
+
+    .c4-controls {
+      display: none;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .c4-controls.show { display: flex; }
+
+    select {
+      background: var(--surface);
+      color: var(--ink);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 5px 8px;
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .mobile-pad {
+      display: none;
+      width: 100%;
+      max-width: 900px;
+      gap: 8px;
+    }
+
+    .mobile-pad button {
+      flex: 1;
+      padding: 11px;
+      font-size: 12px;
+      justify-content: center;
+    }
+
+    @media (max-width: 720px) {
+      .tabs { grid-template-columns: 1fr; }
+      .tab { border-right: none; border-bottom: 1px solid var(--border); }
+      .tab.active { border-left: 3px solid var(--accent); border-bottom-color: var(--border); }
+      .mobile-pad { display: flex; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <div class="brand">
+        <span class="grille"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+        <span>IMESH ARCADE</span>
+      </div>
+      <div class="nav-actions">
+        <button id="soundBtn" class="btn" type="button">SFX: ON</button>
+        <button id="themeBtn" class="btn" type="button">THEME: DARK</button>
+        <a class="btn hide-embed" href="https://github.com/imeshsan2008" target="_blank" rel="noopener">GITHUB ↗</a>
+        <a class="btn primary hide-embed" href="./index.html">← BACK TO PORTFOLIO</a>
+      </div>
+    </header>
+
+    <nav class="tabs" role="tablist">
+      <button class="tab active" data-game="breakout" type="button">
+        01 // COMMIT BREAKOUT
+        <span>Live GitHub commits · 60FPS Physics</span>
+      </button>
+      <button class="tab" data-game="runner" type="button">
+        02 // GRAVITY RUNNER
+        <span>Endless mechanical obstacle sprint</span>
+      </button>
+      <button class="tab" data-game="connect4" type="button">
+        03 // TACTICAL CONNECT-4 AI
+        <span>Minimax Depth-6 · Instant Play</span>
+      </button>
+    </nav>
+
+    <section class="hud">
+      <div class="hud-stats">
+        <div class="stat-pill"><span class="k" id="lbl1">SCORE</span><span class="v accent" id="val1">0</span></div>
+        <div class="stat-pill"><span class="k" id="lbl2">BEST</span><span class="v" id="val2">0</span></div>
+        <div class="stat-pill"><span class="k" id="lbl3">WAVE / LIVES</span><span class="v" id="val3">W1 · ■■■</span></div>
+      </div>
+      <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+        <div id="c4Controls" class="c4-controls">
+          <label for="aiDiff" style="font-family:var(--mono);font-size:10.5px;color:var(--muted);font-weight:700;">AI:</label>
+          <select id="aiDiff">
+            <option value="2">STANDARD</option>
+            <option value="4" selected>HARD (D4)</option>
+            <option value="6">GRANDMASTER (D6)</option>
+          </select>
+        </div>
+        <button id="restartBtn" class="btn primary" type="button">↻ RESTART</button>
+      </div>
+    </section>
+
+    <main class="stage-wrap">
+      <canvas id="screen" width="900" height="460"></canvas>
+
+      <div id="mobilePad" class="mobile-pad">
+        <button id="mLeft" class="btn" type="button">◄ LEFT</button>
+        <button id="mAction" class="btn primary" type="button">LAUNCH / JUMP</button>
+        <button id="mRight" class="btn" type="button">RIGHT ►</button>
+      </div>
+
+      <div class="controls-bar">
+        <span id="hintText">MOUSE / TOUCH / ← → MOVE PADDLE · CLICK OR SPACE TO LAUNCH</span>
+        <span>PURE JAVASCRIPT · ZERO GLOW · 60FPS</span>
+      </div>
+    </main>
+  </div>
+
+  <script>
+  (() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('embed') === '1') {
+      document.body.classList.add('embedded');
+    }
+
+    const canvas = document.getElementById('screen');
+    const ctx = canvas.getContext('2d');
+    const W = 900, H = 460;
+
+    const lbl1 = document.getElementById('lbl1'), val1 = document.getElementById('val1');
+    const lbl2 = document.getElementById('lbl2'), val2 = document.getElementById('val2');
+    const lbl3 = document.getElementById('lbl3'), val3 = document.getElementById('val3');
+    const hintText = document.getElementById('hintText');
+    const c4Controls = document.getElementById('c4Controls');
+    const aiDiffEl = document.getElementById('aiDiff');
+
+    let activeGame = 'breakout';
+    let sfxEnabled = true;
+    let audioCtx = null;
+
+    function tone(freq, dur = 0.05, type = 'square', vol = 0.04) {
+      if (!sfxEnabled) return;
+      try {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const o = audioCtx.createOscillator();
+        const g = audioCtx.createGain();
+        o.type = type;
+        o.frequency.value = freq;
+        g.gain.setValueAtTime(vol, audioCtx.currentTime);
+        g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + dur);
+        o.connect(g); g.connect(audioCtx.destination);
+        o.start(); o.stop(audioCtx.currentTime + dur);
+      } catch (_) {}
+    }
+
+    function palette() {
+      const dark = document.documentElement.getAttribute('data-theme') !== 'light';
+      return dark ? {
+        bg: '#090C10', surface: '#161B22', border: '#30363D', soft: '#1E252E',
+        ink: '#E6EDF3', muted: '#8B949E', accent: '#DC2626',
+        levels: ['#141920', '#30363D', '#6E7681', '#C9D1D9', '#DC2626']
+      } : {
+        bg: '#FFFFFF', surface: '#F6F8FA', border: '#D0D7DE', soft: '#E5E9EE',
+        ink: '#1F2328', muted: '#57606A', accent: '#CC0000',
+        levels: ['#F3F5F7', '#C9D1D9', '#8C959F', '#24292F', '#CC0000']
+      };
+    }
+
+    // Fetch live GitHub contribution map from imeshsan2008 repo (auto-updated daily via Node.js Actions)
+    let contribData = null;
+    fetch('https://raw.githubusercontent.com/imeshsan2008/imeshsan2008/main/assets/contrib.json')
+      .then(r => r.ok ? r.json() : null)
+      .then(data => {
+        if (data && Array.isArray(data.grid)) {
+          contribData = data;
+          if (activeGame === 'breakout' && breakout.state === 'ready') breakout.init();
+        }
+      })
+      .catch(() => {});
+
+    const keys = {};
+    let mouseX = W / 2;
+
+    window.addEventListener('keydown', e => {
+      keys[e.code] = true;
+      if (['Space', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.code)) {
+        if (document.activeElement.tagName !== 'SELECT') e.preventDefault();
+      }
+      if (activeGame === 'breakout' && e.code === 'Space') breakout.launch();
+      if (activeGame === 'runner' && (e.code === 'Space' || e.code === 'ArrowUp')) runner.jump();
+    });
+    window.addEventListener('keyup', e => { keys[e.code] = false; });
+
+    function canvasPos(clientX, clientY) {
+      const rect = canvas.getBoundingClientRect();
+      return {
+        x: ((clientX - rect.left) / rect.width) * W,
+        y: ((clientY - rect.top) / rect.height) * H
+      };
+    }
+
+    canvas.addEventListener('mousemove', e => {
+      const p = canvasPos(e.clientX, e.clientY);
+      mouseX = p.x;
+      if (activeGame === 'connect4') c4.hoverX = p.x;
+    });
+
+    canvas.addEventListener('pointerdown', e => {
+      const p = canvasPos(e.clientX, e.clientY);
+      mouseX = p.x;
+      if (activeGame === 'breakout') breakout.launch();
+      else if (activeGame === 'runner') runner.jump();
+      else if (activeGame === 'connect4') c4.click(p.x);
+    });
+
+    canvas.addEventListener('pointermove', e => {
+      if (e.pointerType === 'touch') {
+        const p = canvasPos(e.clientX, e.clientY);
+        mouseX = p.x;
+      }
+    });
+
+    const holdKey = (id, code) => {
+      const el = document.getElementById(id);
+      el.addEventListener('pointerdown', () => { keys[code] = true; });
+      el.addEventListener('pointerup', () => { keys[code] = false; });
+      el.addEventListener('pointerleave', () => { keys[code] = false; });
+    };
+    holdKey('mLeft', 'ArrowLeft');
+    holdKey('mRight', 'ArrowRight');
+    document.getElementById('mAction').addEventListener('pointerdown', () => {
+      if (activeGame === 'breakout') breakout.launch();
+      else if (activeGame === 'runner') runner.jump();
+      else if (activeGame === 'connect4') c4.init();
+    });
+
+    // =========================================================================
+    // GAME 01: COMMIT BREAKOUT (Matches IMESH-ARCADE // UNIT-01 aesthetics!)
+    // =========================================================================
+    const breakout = {
+      bricks: [], ghostSlots: [], balls: [], drops: [], particles: [],
+      paddle: { x: W / 2 - 58, w: 116, h: 10, y: H - 34 },
+      score: 0, best: Number(localStorage.getItem('imesh_brk_best') || 0),
+      lives: 3, combo: 0, wave: 1, state: 'ready',
+
+      init(keepScore = false) {
+        if (!keepScore) { this.score = 0; this.lives = 3; this.wave = 1; }
+        this.combo = 0;
+        this.drops = [];
+        this.particles = [];
+        this.paddle.w = 116;
+        this.paddle.x = W / 2 - this.paddle.w / 2;
+        this.resetBall();
+        this.buildBricks();
+        this.state = 'ready';
+        this.syncHud();
+      },
+
+      resetBall() {
+        this.balls = [{
+          x: this.paddle.x + this.paddle.w / 2,
+          y: this.paddle.y - 8,
+          vx: 0, vy: 0, r: 6, stuck: true, trail: []
+        }];
+      },
+
+      buildBricks() {
+        this.bricks = [];
+        this.ghostSlots = [];
+        const cols = 30, rows = 7;
+        const bw = 25, bh = 16, gap = 3;
+        const totalW = cols * bw + (cols - 1) * gap;
+        const x0 = (W - totalW) / 2, y0 = 36;
+
+        for (let r = 0; r < rows; r++) {
+          for (let c = 0; c < cols; c++) {
+            const x = x0 + c * (bw + gap);
+            const y = y0 + r * (bh + gap);
+            this.ghostSlots.push({ x, y, w: bw, h: bh });
+
+            let lvl = 0;
+            if (contribData && contribData.grid && contribData.grid[r]) {
+              const srcCol = Math.floor((c / cols) * contribData.cols);
+              const nextCol = Math.max(srcCol + 1, Math.floor(((c + 1) / cols) * contribData.cols));
+              for (let sc = srcCol; sc < Math.min(nextCol, contribData.cols); sc++) {
+                lvl = Math.max(lvl, contribData.grid[r][sc] || 0);
+              }
+            }
+            if (this.wave > 1 && lvl === 0 && (r + c + this.wave) % 3 === 0) lvl = 1 + ((r + c) % 3);
+            if (!contribData && r >= 1 && r <= 5 && ((r + c) % 2 === 0 || c % 5 === 0)) {
+              lvl = 1 + ((r * 3 + c) % 4);
+            }
+            if (lvl > 0) {
+              this.bricks.push({ x, y, w: bw, h: bh, level: lvl, hp: lvl >= 4 ? 2 : 1 });
+            }
+          }
+        }
+        if (this.bricks.length < 18) {
+          for (let r = 1; r < 6; r++) {
+            for (let c = 3; c < cols - 3; c += 2) {
+              this.bricks.push({
+                x: x0 + c * (bw + gap), y: y0 + r * (bh + gap),
+                w: bw, h: bh, level: 2 + ((r + c) % 3), hp: 1
+              });
+            }
+          }
+        }
+      },
+
+      launch() {
+        if (this.state === 'over') { this.init(false); return; }
+        this.state = 'playing';
+        this.balls.forEach(b => {
+          if (b.stuck) {
+            b.stuck = false;
+            const spd = 6.2 + this.wave * 0.35;
+            b.vx = (Math.random() > 0.5 ? 1 : -1) * spd * 0.55;
+            b.vy = -spd * 0.85;
+            tone(520, 0.05);
+          }
+        });
+        this.syncHud();
+      },
+
+      spawnDebris(x, y, color) {
+        for (let i = 0; i < 6; i++) {
+          const a = (Math.PI * 2 * i) / 6 + Math.random() * 0.35;
+          const sp = 1.6 + Math.random() * 2.8;
+          this.particles.push({ x, y, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp, life: 22, color });
+        }
+      },
+
+      update() {
+        if (keys['ArrowLeft'] || keys['KeyA']) this.paddle.x -= 9.5;
+        else if (keys['ArrowRight'] || keys['KeyD']) this.paddle.x += 9.5;
+        else this.paddle.x += ((mouseX - this.paddle.w / 2) - this.paddle.x) * 0.36;
+        this.paddle.x = Math.max(12, Math.min(W - this.paddle.w - 12, this.paddle.x));
+
+        const pal = palette();
+        for (let i = this.balls.length - 1; i >= 0; i--) {
+          const b = this.balls[i];
+          if (b.stuck) {
+            b.x = this.paddle.x + this.paddle.w / 2;
+            b.y = this.paddle.y - b.r - 1;
+            b.trail = [];
+            continue;
+          }
+          b.trail.push([b.x, b.y]);
+          if (b.trail.length > 5) b.trail.shift();
+
+          b.x += b.vx; b.y += b.vy;
+          if (b.x - b.r <= 8) { b.x = 8 + b.r; b.vx = Math.abs(b.vx); tone(260, 0.03); }
+          if (b.x + b.r >= W - 8) { b.x = W - 8 - b.r; b.vx = -Math.abs(b.vx); tone(260, 0.03); }
+          if (b.y - b.r <= 8) { b.y = 8 + b.r; b.vy = Math.abs(b.vy); tone(300, 0.03); }
+
+          if (b.vy > 0 && b.y + b.r >= this.paddle.y && b.y - b.r <= this.paddle.y + this.paddle.h &&
+              b.x >= this.paddle.x - 4 && b.x <= this.paddle.x + this.paddle.w + 4) {
+            const rel = (b.x - (this.paddle.x + this.paddle.w / 2)) / (this.paddle.w / 2);
+            const spd = Math.min(10.5, Math.hypot(b.vx, b.vy) * 1.015);
+            const ang = Math.max(-1.12, Math.min(1.12, rel * 1.1));
+            b.vx = spd * Math.sin(ang);
+            b.vy = -Math.abs(spd * Math.cos(ang));
+            b.y = this.paddle.y - b.r;
+            this.combo = 0;
+            tone(420, 0.045);
+          }
+
+          for (let j = this.bricks.length - 1; j >= 0; j--) {
+            const br = this.bricks[j];
+            const cx = Math.max(br.x, Math.min(b.x, br.x + br.w));
+            const cy = Math.max(br.y, Math.min(b.y, br.y + br.h));
+            const dx = b.x - cx, dy = b.y - cy;
+            if (dx * dx + dy * dy <= b.r * b.r) {
+              const ox = (br.w / 2 + b.r) - Math.abs(b.x - (br.x + br.w / 2));
+              const oy = (br.h / 2 + b.r) - Math.abs(b.y - (br.y + br.h / 2));
+              if (ox < oy) b.vx = -b.vx; else b.vy = -b.vy;
+
+              br.hp--;
+              this.combo++;
+              if (br.hp <= 0) {
+                this.score += (10 * br.level) + Math.min(40, this.combo * 5);
+                this.spawnDebris(br.x + br.w / 2, br.y + br.h / 2, pal.levels[br.level]);
+                if (Math.random() < 0.14) {
+                  this.drops.push({ x: br.x + br.w / 2, y: br.y + br.h, kind: Math.random() < 0.5 ? 'MULTI' : 'WIDE', vy: 2.6 });
+                }
+                this.bricks.splice(j, 1);
+                tone(540 + Math.min(400, this.combo * 30), 0.05);
+              } else {
+                this.score += 10;
+                tone(340, 0.04);
+              }
+              if (this.score > this.best) {
+                this.best = this.score;
+                localStorage.setItem('imesh_brk_best', String(this.best));
+              }
+              this.syncHud();
+              break;
+            }
+          }
+
+          if (b.y - b.r > H + 12) this.balls.splice(i, 1);
+        }
+
+        for (let i = this.drops.length - 1; i >= 0; i--) {
+          const d = this.drops[i];
+          d.y += d.vy;
+          if (d.y + 10 >= this.paddle.y && d.y <= this.paddle.y + 16 &&
+              d.x >= this.paddle.x - 18 && d.x <= this.paddle.x + this.paddle.w + 18) {
+            if (d.kind === 'WIDE') this.paddle.w = Math.min(180, this.paddle.w + 26);
+            else if (d.kind === 'MULTI' && this.balls.length < 4 && this.balls[0]) {
+              const ref = this.balls[0];
+              this.balls.push({ x: ref.x, y: ref.y, vx: -ref.vx || 4, vy: -Math.abs(ref.vy || 5), r: 6, stuck: false, trail: [] });
+            }
+            tone(780, 0.08, 'triangle');
+            this.drops.splice(i, 1);
+          } else if (d.y > H + 20) this.drops.splice(i, 1);
+        }
+
+        for (let i = this.particles.length - 1; i >= 0; i--) {
+          const p = this.particles[i];
+          p.x += p.vx; p.y += p.vy; p.life--;
+          if (p.life <= 0) this.particles.splice(i, 1);
+        }
+
+        if (this.balls.length === 0 && this.state === 'playing') {
+          this.lives--;
+          tone(160, 0.18, 'sawtooth');
+          if (this.lives <= 0) this.state = 'over';
+          else { this.paddle.w = 116; this.resetBall(); this.state = 'ready'; }
+          this.syncHud();
+        }
+
+        if (this.bricks.length === 0 && this.state === 'playing') {
+          this.wave++;
+          this.score += 250;
+          tone(880, 0.14, 'triangle');
+          this.init(true);
+        }
+      },
+
+      syncHud() {
+        lbl1.textContent = 'SCORE'; val1.textContent = this.score;
+        lbl2.textContent = 'BEST'; val2.textContent = this.best;
+        lbl3.textContent = 'WAVE / LIVES';
+        val3.textContent = this.state === 'over' ? 'GAME OVER' : `W${this.wave} · ${'■'.repeat(this.lives)}`;
+      },
+
+      draw() {
+        const pal = palette();
+        ctx.fillStyle = pal.bg;
+        ctx.fillRect(0, 0, W, H);
+
+        // Ghost calendar grid slots (matches the README Breakout console!)
+        for (const s of this.ghostSlots) {
+          ctx.fillStyle = pal.levels[0];
+          ctx.strokeStyle = pal.soft;
+          ctx.lineWidth = 0.8;
+          ctx.fillRect(s.x, s.y, s.w, s.h);
+          ctx.strokeRect(s.x, s.y, s.w, s.h);
+        }
+
+        // Paddle guide rail
+        ctx.strokeStyle = pal.soft;
+        ctx.setLineDash([4, 6]);
+        ctx.beginPath();
+        ctx.moveTo(16, this.paddle.y + 5);
+        ctx.lineTo(W - 16, this.paddle.y + 5);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        // Active commit bricks
+        for (const br of this.bricks) {
+          ctx.fillStyle = pal.levels[br.level];
+          ctx.fillRect(br.x, br.y, br.w, br.h);
+          if (br.hp > 1) {
+            ctx.strokeStyle = pal.bg;
+            ctx.lineWidth = 1.5;
+            ctx.strokeRect(br.x + 3, br.y + 3, br.w - 6, br.h - 6);
+          }
+        }
+
+        // Power-up capsules
+        ctx.font = '700 9px monospace';
+        ctx.textAlign = 'center';
+        for (const d of this.drops) {
+          ctx.fillStyle = d.kind === 'MULTI' ? pal.accent : pal.ink;
+          ctx.fillRect(d.x - 20, d.y - 7, 40, 14);
+          ctx.fillStyle = d.kind === 'MULTI' ? '#FFFFFF' : pal.bg;
+          ctx.fillText(d.kind, d.x, d.y + 3);
+        }
+
+        // Flat pixel debris
+        for (const p of this.particles) {
+          ctx.fillStyle = p.color;
+          ctx.globalAlpha = Math.max(0, p.life / 22);
+          ctx.fillRect(p.x - 2, p.y - 2, 4, 4);
+        }
+        ctx.globalAlpha = 1;
+
+        // Paddle
+        ctx.fillStyle = pal.ink;
+        ctx.fillRect(this.paddle.x, this.paddle.y, this.paddle.w, this.paddle.h);
+        ctx.fillStyle = pal.accent;
+        ctx.fillRect(this.paddle.x + this.paddle.w / 2 - 14, this.paddle.y, 28, this.paddle.h);
+
+        // Balls + flat geometric trail
+        for (const b of this.balls) {
+          b.trail.forEach((pt, idx) => {
+            ctx.fillStyle = pal.muted;
+            ctx.globalAlpha = (idx + 1) / 14;
+            ctx.beginPath();
+            ctx.arc(pt[0], pt[1], 2 + idx * 0.5, 0, Math.PI * 2);
+            ctx.fill();
+          });
+          ctx.globalAlpha = 1;
+          ctx.fillStyle = pal.accent;
+          ctx.beginPath();
+          ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.fillStyle = '#FFFFFF';
+          ctx.beginPath();
+          ctx.arc(b.x, b.y, 2, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        if (this.state === 'ready' || this.state === 'over') {
+          ctx.fillStyle = pal.surface;
+          ctx.strokeStyle = pal.border;
+          ctx.lineWidth = 1;
+          ctx.fillRect(W / 2 - 195, H / 2 + 26, 390, 62);
+          ctx.strokeRect(W / 2 - 195, H / 2 + 26, 390, 62);
+          ctx.fillStyle = pal.accent;
+          ctx.fillRect(W / 2 - 195, H / 2 + 26, 4, 62);
+          ctx.fillStyle = pal.ink;
+          ctx.font = '800 13.5px monospace';
+          ctx.textAlign = 'center';
+          ctx.fillText(this.state === 'over' ? 'GAME OVER // CLICK OR SPACE TO RETRY' : 'CLICK OR PRESS SPACE TO LAUNCH', W / 2, H / 2 + 53);
+          ctx.fillStyle = pal.muted;
+          ctx.font = '600 10.5px monospace';
+          const info = contribData ? `SYNCED ${contribData.total_contributions} REAL GITHUB COMMITS` : 'LIVE GITHUB CONTRIBUTION BREAKOUT';
+          ctx.fillText(info, W / 2, H / 2 + 73);
+        }
+      }
+    };
+
+    // =========================================================================
+    // GAME 02: GRAVITY RUNNER
+    // =========================================================================
+    const runner = {
+      groundY: H - 68,
+      player: { x: 110, y: 0, w: 30, h: 42, vy: 0, onGround: true },
+      obstacles: [], ticks: [],
+      speed: 6.4, dist: 0, best: Number(localStorage.getItem('imesh_run_best') || 0),
+      spawnIn: 50, state: 'ready',
+
+      init() {
+        this.player = { x: 110, y: this.groundY - 42, w: 30, h: 42, vy: 0, onGround: true };
+        this.obstacles = [];
+        this.speed = 6.4; this.dist = 0; this.spawnIn = 45; this.state = 'ready';
+        this.ticks = Array.from({ length: 24 }, (_, i) => i * 42);
+        this.syncHud();
+      },
+
+      jump() {
+        if (this.state === 'over') { this.init(); this.state = 'playing'; return; }
+        if (this.state === 'ready') this.state = 'playing';
+        if (this.player.onGround) {
+          this.player.vy = -13.6;
+          this.player.onGround = false;
+          tone(580, 0.06);
+        }
+        this.syncHud();
+      },
+
+      update() {
+        if (this.state !== 'playing') return;
+        const duck = keys['ArrowDown'] || keys['KeyS'];
+        this.player.h = duck && this.player.onGround ? 22 : 42;
+        if (!this.player.onGround) {
+          this.player.vy += duck ? 1.35 : 0.72;
+          this.player.y += this.player.vy;
+          if (this.player.y + this.player.h >= this.groundY) {
+            this.player.y = this.groundY - this.player.h;
+            this.player.vy = 0;
+            this.player.onGround = true;
+          }
+        } else this.player.y = this.groundY - this.player.h;
+
+        this.speed = Math.min(13.5, 6.4 + this.dist * 0.0022);
+        this.dist += 0.25 * (this.speed / 6.4);
+        const score = Math.floor(this.dist);
+        if (score > this.best) { this.best = score; localStorage.setItem('imesh_run_best', String(this.best)); }
+
+        for (let i = 0; i < this.ticks.length; i++) {
+          this.ticks[i] -= this.speed;
+          if (this.ticks[i] < -10) this.ticks[i] += 24 * 42;
+        }
+
+        this.spawnIn--;
+        if (this.spawnIn <= 0) {
+          const flying = this.dist > 140 && Math.random() < 0.28;
+          if (flying) this.obstacles.push({ x: W + 20, y: this.groundY - 58, w: 38, h: 18, tag: 'DRONE' });
+          else {
+            const tall = Math.random() < 0.45;
+            this.obstacles.push({
+              x: W + 20, y: this.groundY - (tall ? 52 : 34),
+              w: tall ? 22 : 34, h: tall ? 52 : 34, tag: tall ? 'BUG' : 'ERR'
+            });
+          }
+          this.spawnIn = Math.max(36, Math.floor(78 - this.speed * 2.4 + Math.random() * 44));
+        }
+
+        for (let i = this.obstacles.length - 1; i >= 0; i--) {
+          const o = this.obstacles[i];
+          o.x -= this.speed;
+          if (o.x + o.w < -20) { this.obstacles.splice(i, 1); continue; }
+          if (this.player.x + 4 < o.x + o.w - 3 && this.player.x + this.player.w - 4 > o.x + 3 &&
+              this.player.y + 4 < o.y + o.h - 3 && this.player.y + this.player.h - 2 > o.y + 3) {
+            this.state = 'over';
+            tone(140, 0.2, 'sawtooth');
+          }
+        }
+        this.syncHud();
+      },
+
+      syncHud() {
+        lbl1.textContent = 'DISTANCE'; val1.textContent = `${Math.floor(this.dist)}M`;
+        lbl2.textContent = 'BEST'; val2.textContent = `${this.best}M`;
+        lbl3.textContent = 'SPEED'; val3.textContent = this.state === 'over' ? 'CRASHED' : `${this.speed.toFixed(1)}X`;
+      },
+
+      draw() {
+        const pal = palette();
+        ctx.fillStyle = pal.bg;
+        ctx.fillRect(0, 0, W, H);
+
+        ctx.strokeStyle = pal.soft;
+        ctx.lineWidth = 1;
+        for (let y = 76; y < this.groundY; y += 68) {
+          ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+        }
+
+        ctx.strokeStyle = pal.border;
+        ctx.lineWidth = 2;
+        ctx.beginPath(); ctx.moveTo(0, this.groundY); ctx.lineTo(W, this.groundY); ctx.stroke();
+
+        ctx.fillStyle = pal.muted;
+        for (const tx of this.ticks) ctx.fillRect(tx, this.groundY + 10, 12, 2);
+
+        ctx.font = '700 9px monospace';
+        ctx.textAlign = 'center';
+        for (const o of this.obstacles) {
+          ctx.fillStyle = pal.accent;
+          ctx.fillRect(o.x, o.y, o.w, o.h);
+          ctx.fillStyle = '#FFFFFF';
+          ctx.fillText(o.tag, o.x + o.w / 2, o.y + o.h / 2 + 3);
+        }
+
+        const p = this.player;
+        ctx.fillStyle = pal.ink;
+        ctx.fillRect(p.x, p.y, p.w, p.h);
+        ctx.fillStyle = pal.accent;
+        ctx.fillRect(p.x + p.w - 9, p.y + 6, 6, 6);
+        ctx.fillStyle = pal.bg;
+        ctx.fillRect(p.x + 5, p.y + p.h - 8, 8, 4);
+
+        if (this.state !== 'playing') {
+          ctx.fillStyle = pal.surface;
+          ctx.strokeStyle = pal.border;
+          ctx.lineWidth = 1;
+          ctx.fillRect(W / 2 - 195, 126, 390, 62);
+          ctx.strokeRect(W / 2 - 195, 126, 390, 62);
+          ctx.fillStyle = pal.accent;
+          ctx.fillRect(W / 2 - 195, 126, 4, 62);
+          ctx.fillStyle = pal.ink;
+          ctx.font = '800 13.5px monospace';
+          ctx.textAlign = 'center';
+          ctx.fillText(this.state === 'over' ? 'RUN TERMINATED // SPACE TO RETRY' : 'GRAVITY RUNNER // SPACE OR CLICK', W / 2, 153);
+          ctx.fillStyle = pal.muted;
+          ctx.font = '600 10.5px monospace';
+          ctx.fillText('SPACE / ↑ JUMP   ·   ↓ DUCK / FAST-DROP', W / 2, 173);
+        }
+      }
+    };
+
+    // =========================================================================
+    // GAME 03: TACTICAL CONNECT-4 AI (60FPS Minimax Depth-6)
+    // =========================================================================
+    const c4 = {
+      ROWS: 6, COLS: 7,
+      board: [], turn: 1, state: 'playing', winCells: [],
+      hoverX: W / 2, anim: null,
+      wins: Number(localStorage.getItem('imesh_c4_wins') || 0),
+      aiWins: Number(localStorage.getItem('imesh_c4_ai') || 0),
+      bx0: 212, by0: 66, cw: 68, ch: 60,
+
+      init() {
+        this.board = Array.from({ length: 6 }, () => Array(7).fill(0));
+        this.turn = 1; this.state = 'playing'; this.winCells = []; this.anim = null;
+        this.syncHud();
+      },
+
+      dropRow(b, col) {
+        for (let r = 5; r >= 0; r--) if (b[r][col] === 0) return r;
+        return -1;
+      },
+
+      findWin(b, p) {
+        for (let r = 0; r < 6; r++) for (let c = 0; c < 4; c++)
+          if ([0,1,2,3].every(i => b[r][c+i] === p)) return [0,1,2,3].map(i => [r, c+i]);
+        for (let c = 0; c < 7; c++) for (let r = 0; r < 3; r++)
+          if ([0,1,2,3].every(i => b[r+i][c] === p)) return [0,1,2,3].map(i => [r+i, c]);
+        for (let r = 0; r < 3; r++) for (let c = 0; c < 4; c++)
+          if ([0,1,2,3].every(i => b[r+i][c+i] === p)) return [0,1,2,3].map(i => [r+i, c+i]);
+        for (let r = 3; r < 6; r++) for (let c = 0; c < 4; c++)
+          if ([0,1,2,3].every(i => b[r-i][c+i] === p)) return [0,1,2,3].map(i => [r-i, c+i]);
+        return null;
+      },
+
+      evalWin(w) {
+        const a = w.filter(x => x === 2).length, h = w.filter(x => x === 1).length, e = 4 - a - h;
+        if (a === 4) return 1000;
+        if (a === 3 && e === 1) return 14;
+        if (a === 2 && e === 2) return 4;
+        if (h === 3 && e === 1) return -18;
+        if (h === 2 && e === 2) return -3;
+        return 0;
+      },
+
+      scoreBoard(b) {
+        let s = 0;
+        for (let r = 0; r < 6; r++) { if (b[r][3] === 2) s += 4; else if (b[r][3] === 1) s -= 3; }
+        for (let r = 0; r < 6; r++) for (let c = 0; c < 4; c++) s += this.evalWin([b[r][c],b[r][c+1],b[r][c+2],b[r][c+3]]);
+        for (let c = 0; c < 7; c++) for (let r = 0; r < 3; r++) s += this.evalWin([b[r][c],b[r+1][c],b[r+2][c],b[r+3][c]]);
+        for (let r = 0; r < 3; r++) for (let c = 0; c < 4; c++) s += this.evalWin([b[r][c],b[r+1][c+1],b[r+2][c+2],b[r+3][c+3]]);
+        for (let r = 3; r < 6; r++) for (let c = 0; c < 4; c++) s += this.evalWin([b[r][c],b[r-1][c+1],b[r-2][c+2],b[r-3][c+3]]);
+        return s;
+      },
+
+      minimax(b, depth, alpha, beta, maxing) {
+        const order = [3,2,4,1,5,0,6].filter(c => b[0][c] === 0);
+        if (this.findWin(b, 2)) return [null, 1e6 + depth];
+        if (this.findWin(b, 1)) return [null, -1e6 - depth];
+        if (!order.length) return [null, 0];
+        if (depth === 0) return [null, this.scoreBoard(b)];
+
+        let bestCol = order[0];
+        if (maxing) {
+          let best = -Infinity;
+          for (const c of order) {
+            const r = this.dropRow(b, c); b[r][c] = 2;
+            const [, v] = this.minimax(b, depth - 1, alpha, beta, false);
+            b[r][c] = 0;
+            if (v > best) { best = v; bestCol = c; }
+            alpha = Math.max(alpha, best);
+            if (alpha >= beta) break;
+          }
+          return [bestCol, best];
+        } else {
+          let best = Infinity;
+          for (const c of order) {
+            const r = this.dropRow(b, c); b[r][c] = 1;
+            const [, v] = this.minimax(b, depth - 1, alpha, beta, true);
+            b[r][c] = 0;
+            if (v < best) { best = v; bestCol = c; }
+            beta = Math.min(beta, best);
+            if (alpha >= beta) break;
+          }
+          return [bestCol, best];
+        }
+      },
+
+      bestAiCol() {
+        const valid = [3,2,4,1,5,0,6].filter(c => this.board[0][c] === 0);
+        for (const c of valid) { const r = this.dropRow(this.board, c); this.board[r][c] = 2; const w = this.findWin(this.board, 2); this.board[r][c] = 0; if (w) return c; }
+        for (const c of valid) { const r = this.dropRow(this.board, c); this.board[r][c] = 1; const w = this.findWin(this.board, 1); this.board[r][c] = 0; if (w) return c; }
+        return this.minimax(this.board, Number(aiDiffEl.value || 4), -Infinity, Infinity, true)[0];
+      },
+
+      click(x) {
+        if (this.state !== 'playing') { this.init(); return; }
+        if (this.turn !== 1 || this.anim) return;
+        const col = Math.floor((x - this.bx0) / this.cw);
+        if (col < 0 || col > 6) return;
+        const row = this.dropRow(this.board, col);
+        if (row < 0) return;
+        this.startDrop(row, col, 1);
+      },
+
+      startDrop(row, col, piece) {
+        this.anim = { row, col, piece, y: this.by0 - 28, targetY: this.by0 + row * this.ch + this.ch / 2, vy: 2 };
+      },
+
+      finishDrop(row, col, piece) {
+        this.board[row][col] = piece;
+        tone(piece === 1 ? 460 : 320, 0.055);
+        const w = this.findWin(this.board, piece);
+        if (w) {
+          this.winCells = w;
+          this.state = piece === 1 ? 'win' : 'lose';
+          if (piece === 1) { this.wins++; localStorage.setItem('imesh_c4_wins', String(this.wins)); tone(820, 0.16, 'triangle'); }
+          else { this.aiWins++; localStorage.setItem('imesh_c4_ai', String(this.aiWins)); tone(180, 0.2, 'sawtooth'); }
+          this.syncHud(); return;
+        }
+        if (this.board[0].every(v => v !== 0)) { this.state = 'draw'; this.syncHud(); return; }
+        if (piece === 1) {
+          this.turn = 2; this.syncHud();
+          setTimeout(() => {
+            if (this.state !== 'playing' || activeGame !== 'connect4') return;
+            const c = this.bestAiCol();
+            if (c !== null && c !== undefined) this.startDrop(this.dropRow(this.board, c), c, 2);
+          }, 85);
+        } else { this.turn = 1; this.syncHud(); }
+      },
+
+      update() {
+        if (!this.anim) return;
+        this.anim.vy += 2.2;
+        this.anim.y += this.anim.vy;
+        if (this.anim.y >= this.anim.targetY) {
+          const { row, col, piece } = this.anim;
+          this.anim = null;
+          this.finishDrop(row, col, piece);
+        }
+      },
+
+      syncHud() {
+        lbl1.textContent = 'YOU'; val1.textContent = this.wins;
+        lbl2.textContent = 'IMESH AI'; val2.textContent = this.aiWins;
+        lbl3.textContent = 'TURN';
+        val3.textContent = this.state === 'win' ? 'YOU WIN!' :
+          this.state === 'lose' ? 'AI WINS' :
+          this.state === 'draw' ? 'DRAW' :
+          this.turn === 1 ? 'YOUR MOVE' : 'THINKING...';
+      },
+
+      draw() {
+        const pal = palette();
+        ctx.fillStyle = pal.bg;
+        ctx.fillRect(0, 0, W, H);
+
+        const bw = this.COLS * this.cw, bh = this.ROWS * this.ch;
+        if (this.state === 'playing' && this.turn === 1 && !this.anim) {
+          const hc = Math.floor((this.hoverX - this.bx0) / this.cw);
+          if (hc >= 0 && hc < 7 && this.board[0][hc] === 0) {
+            ctx.fillStyle = pal.soft;
+            ctx.fillRect(this.bx0 + hc * this.cw, this.by0, this.cw, bh);
+            ctx.fillStyle = pal.accent;
+            ctx.beginPath();
+            ctx.arc(this.bx0 + hc * this.cw + this.cw / 2, this.by0 - 22, 15, 0, Math.PI * 2);
+            ctx.fill();
+          }
+        }
+
+        ctx.fillStyle = pal.surface;
+        ctx.strokeStyle = pal.border;
+        ctx.lineWidth = 1.5;
+        ctx.fillRect(this.bx0 - 12, this.by0 - 8, bw + 24, bh + 16);
+        ctx.strokeRect(this.bx0 - 12, this.by0 - 8, bw + 24, bh + 16);
+
+        for (let r = 0; r < 6; r++) {
+          for (let c = 0; c < 7; c++) {
+            const cx = this.bx0 + c * this.cw + this.cw / 2;
+            const cy = this.by0 + r * this.ch + this.ch / 2;
+            ctx.fillStyle = pal.bg;
+            ctx.strokeStyle = pal.border;
+            ctx.lineWidth = 1;
+            ctx.beginPath(); ctx.arc(cx, cy, 21, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+
+            const v = this.board[r][c];
+            if (v) {
+              ctx.fillStyle = v === 1 ? pal.accent : pal.ink;
+              ctx.beginPath(); ctx.arc(cx, cy, 19, 0, Math.PI * 2); ctx.fill();
+              ctx.strokeStyle = v === 1 ? '#FCA5A5' : pal.muted;
+              ctx.lineWidth = 1;
+              ctx.beginPath(); ctx.arc(cx, cy, 13, 0, Math.PI * 2); ctx.stroke();
+            }
+          }
+        }
+
+        if (this.anim) {
+          const cx = this.bx0 + this.anim.col * this.cw + this.cw / 2;
+          ctx.fillStyle = this.anim.piece === 1 ? pal.accent : pal.ink;
+          ctx.beginPath(); ctx.arc(cx, this.anim.y, 19, 0, Math.PI * 2); ctx.fill();
+        }
+
+        if (this.winCells.length === 4) {
+          const [r0, c0] = this.winCells[0], [r3, c3] = this.winCells[3];
+          ctx.strokeStyle = pal.accent;
+          ctx.lineWidth = 3;
+          ctx.beginPath();
+          ctx.moveTo(this.bx0 + c0 * this.cw + this.cw / 2, this.by0 + r0 * this.ch + this.ch / 2);
+          ctx.lineTo(this.bx0 + c3 * this.cw + this.cw / 2, this.by0 + r3 * this.ch + this.ch / 2);
+          ctx.stroke();
+
+          ctx.fillStyle = pal.ink;
+          ctx.font = '800 12.5px monospace';
+          ctx.textAlign = 'center';
+          ctx.fillText('CLICK BOARD TO PLAY AGAIN', W / 2, this.by0 - 18);
+        }
+      }
+    };
+
+    const games = { breakout, runner, connect4: c4 };
+
+    function switchGame(name) {
+      activeGame = name;
+      document.querySelectorAll('.tab').forEach(btn => btn.classList.toggle('active', btn.dataset.game === name));
+      c4Controls.classList.toggle('show', name === 'connect4');
+      hintText.textContent = name === 'breakout'
+        ? 'MOUSE / TOUCH / ← → MOVE PADDLE · CLICK OR SPACE TO LAUNCH'
+        : name === 'runner'
+        ? 'SPACE / ↑ / TAP TO JUMP · ↓ TO DUCK OR FAST-DROP'
+        : 'CLICK ANY COLUMN TO DROP CRIMSON DISC · INSTANT MINIMAX AI';
+      games[name].init();
+    }
+
+    document.querySelectorAll('.tab').forEach(btn => btn.addEventListener('click', () => switchGame(btn.dataset.game)));
+    document.getElementById('restartBtn').addEventListener('click', () => games[activeGame].init());
+    document.getElementById('soundBtn').addEventListener('click', e => {
+      sfxEnabled = !sfxEnabled;
+      e.target.textContent = `SFX: ${sfxEnabled ? 'ON' : 'OFF'}`;
+    });
+    document.getElementById('themeBtn').addEventListener('click', e => {
+      const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      e.target.textContent = `THEME: ${next.toUpperCase()}`;
+    });
+
+    breakout.init();
+    runner.init();
+    c4.init();
+
+    function loop() {
+      games[activeGame].update();
+      games[activeGame].draw();
+      requestAnimationFrame(loop);
+    }
+    loop();
+  })();
+  </script>
+</body>
+</html>

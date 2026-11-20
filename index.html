@@ -194,6 +194,7 @@
             <li><a href="#skills" class="hover:text-[#CC0000] transition">Skills</a></li>
             <li><a href="#projects" class="hover:text-[#CC0000] transition">Projects</a></li>
             <li><a href="#creations" class="hover:text-[#CC0000] transition">Creations</a></li>
+            <li><a href="#arcade" class="hover:text-[#CC0000] transition">Arcade</a></li>
             <li><a href="#contact" class="hover:text-[#CC0000] transition">Contact</a></li>
         </ul>
 
@@ -211,6 +212,7 @@
             <a href="#skills" class="mobile-link hover:text-[#CC0000] transition">Skills</a>
             <a href="#projects" class="mobile-link hover:text-[#CC0000] transition">Projects</a>
             <a href="#creations" class="mobile-link hover:text-[#CC0000] transition">Creations</a>
+            <a href="#arcade" class="mobile-link hover:text-[#CC0000] transition">Arcade</a>
             <a href="#contact" class="mobile-link hover:text-[#CC0000] transition">Contact</a>
             <button class="px-6 py-2.5 rounded-full bg-gradient-to-r from-red-500 to-[#CC0000] font-semibold text-white">
                 Hire Me →
@@ -729,6 +731,61 @@
         </div>
     </div>
 </section>
+
+<section id="arcade" class="py-24 px-8 relative">
+    <div class="max-w-5xl mx-auto">
+        <div class="text-center mb-12" data-aos="fade-up">
+            <h2 class="text-4xl md:text-6xl font-bold font-jakarta">
+                <span class="brand-text">IMESH Arcade</span>
+            </h2>
+        </div>
+
+        <div id="arcade-shell" class="rounded-lg border border-[#30363D] border-l-[5px] border-l-[#DC2626] bg-[#0D1117] overflow-hidden" data-aos="fade-up">
+            <div class="flex flex-wrap items-center justify-between gap-4 px-5 py-3.5 bg-[#161B22] border-b border-[#30363D]">
+                <div class="flex items-center gap-3 font-mono text-xs font-extrabold tracking-widest text-[#E6EDF3]">
+                    <span class="inline-flex gap-[3px]">
+                        <span class="w-[2px] h-3.5 bg-[#30363D]"></span>
+                        <span class="w-[2px] h-3.5 bg-[#30363D]"></span>
+                        <span class="w-[2px] h-3.5 bg-[#30363D]"></span>
+                        <span class="w-[2px] h-3.5 bg-[#30363D]"></span>
+                    </span>
+                    IMESH ARCADE
+                </div>
+                <div class="flex items-center gap-2.5">
+                    <a href="arcade.html" target="_blank" rel="noopener" class="px-3.5 py-1.5 rounded bg-[#0D1117] border border-[#30363D] hover:border-[#DC2626] font-mono text-[11px] font-bold tracking-wider text-[#E6EDF3] transition">
+                        FULLSCREEN ↗
+                    </a>
+                </div>
+            </div>
+
+            <div id="arcade-mount" class="p-8 md:p-12 text-center bg-[#090C10]">
+                <h3 class="font-mono text-lg md:text-xl font-extrabold tracking-wide text-[#E6EDF3] mb-3">
+                    COMMIT BREAKOUT · GRAVITY RUNNER · CONNECT-4 AI
+                </h3>
+                <p class="font-mono text-xs text-[#8B949E] max-w-lg mx-auto mb-7">
+                    Click to play directly here or open in fullscreen mode.
+                </p>
+                <div class="flex flex-wrap items-center justify-center gap-3">
+                    <button type="button" onclick="launchInlineArcade()" class="px-6 py-3 rounded bg-[#CC0000] hover:bg-[#DC2626] border border-[#991B1B] font-mono text-xs font-extrabold tracking-widest text-white transition cursor-pointer">
+                        ▶ PLAY NOW
+                    </button>
+                    <a href="arcade.html" class="px-6 py-3 rounded bg-[#161B22] hover:border-[#DC2626] border border-[#30363D] font-mono text-xs font-bold tracking-widest text-[#E6EDF3] transition">
+                        OPEN FULLSCREEN ↗
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    function launchInlineArcade() {
+        const mount = document.getElementById('arcade-mount');
+        if (!mount) return;
+        mount.className = 'bg-[#090C10]';
+        mount.innerHTML = '<iframe src="arcade.html?embed=1" title="IMESH-ARCADE UNIT-01" class="w-full h-[690px] md:h-[670px] border-0 block" loading="lazy"></iframe>';
+    }
+</script>
 
 <section id="contact" class="py-32 px-8 relative">
     <div class="max-w-7xl mx-auto">
